@@ -4,3 +4,8 @@ I projektet avser gruppen att utveckla en webbapplikation som presenterar en onl
 En medveten begränsning är att webbapplikationen ska förbli en webbapplikation och inte en mobilapplikation. Ytterligare finns det begränsningar gällande projektets resursallokering då det finns en bestämd tidsram. Även projektgruppens kompetencer medför begränsningar då medlemmarna ännu inte har all kunskap för projektets omfattning.
 Projektet ska resultera i att hela projektgruppen ökar sina kunskaper inom diverse områden inom skapandet av en webbapplikation. Under projektets arbetsgång kommer projektgruppens kunskaper inom webbutveckling (HTML, CSS, JavaScript), programmering (Python) och databashantering (PostgreSQL) och öka. Projektgruppen kommer lära sig att lösa problem som kommer dyka upp unde projektets gång och målet med detta är att lära sig hur man ska ta sig an dessa problem och hur man ska lösa de. 
 Projektet som ska skapas är en webbapplikation som ska lagra bilder på kläder i den databas i en form av en interaktiv garderob. Detta är den huvudsakliga funktionen som webbapplikationen ska erbjuda. Det som projektgruppen vill uppnå är att de “MUST” krav som finns ska kunnas implementeras i webbapplikationen. Det finns andra krav som kommer dyka upp under projektets gång men som inte kommer ha en lika stor vikt som “MUST” kraven men projektgruppen ser gärna att detta kan implementeras senare under projektets gång. 
+
+
+<h3> Köra produkten <h3>
+
+Den här produkten körs genom att ladda ner filerna och köra vilket av html-dokumenten i valfri webbläsare
