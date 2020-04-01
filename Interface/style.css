@@ -1,57 +1,98 @@
+/*HELA SIDAN*/
 body{
-    font-family: sans-serif;
+    margin: auto;
+    font-family: 'Francois One', sans-serif;
+    background-color: whitesmoke;
 }
 
-a{
+/*UPP KNAPP*/
+#content > .gotopbtn{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: lightgray;
+    border-radius: 10px;
+    bottom: 40px;
+    right: 50px;
     text-decoration: none;
-    color: black;
+    text-align: center; line-height: 50px;
 }
 
-/* header */
-header{
-    grid-area: header;
+#content > #first-page{
+    background-image: url(artflow_202003312041.jpg);
+    height: 4000px;
+    width: 1300px;
 }
 
-h1 > a{
+/*HEADER*/
+#content > header{
+    background-color: whitesmoke;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+#content > header > #mainlogo{
     color: orangered;
-    font-weight: bolder;
-    padding:1em;
+    font-size: 100px;
+    text-decoration-line: none;
 }
 
-/* nav */
-
-nav{
-    grid-area: nav;
-    margin: auto;
+/*NAV*/
+#content > nav{
+    background-color: whitesmoke;
+    padding-bottom: 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: lightgrey;
+    border-width: thin;
 }
 
-ul{
-    padding: 0;
+#content > nav > .navitem{
+    text-decoration-line: none;
+    color: dimgrey;
+    padding-left: 10px;
 }
 
-ul > li{
-    list-style-type: none;
-    display: inline-block;
-    margin: auto;
-    padding: 1em;
-    
+#content > nav > .navitem:hover{
+    color: orangered;
 }
 
-/* main */
-
-main{
-    grid-area: main;
+#content > nav > .navitem:ngthär{
+    color: orangered;
 }
 
-/* grid system */
+#content > #first-page{
+    background-color: whitesmoke;
+    padding: 1px;
+}
 
-#content {
-    width: 99vw;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-areas: 
-        "header header"
-        "nav nav"
-        "aside main";
+/*INDEX*/
+#content > #about-info{
+    background-color: whitesmoke;
+    padding: 1px;
+    font-size: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+#content > #about-info > h4{
+    color: orangered;
+}
+
+/*FOOTER*/
+#content > footer{
+    background-color: whitesmoke;
+    border-top-style: solid;
+    border-color: lightgrey;
+    border-width: thin;
+    padding-bottom: 1px;
+}
+
+#content > footer > p{
+    text-align: center;
+    color: orangered;
 }
