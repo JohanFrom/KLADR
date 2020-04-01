@@ -13,6 +13,6 @@ Under projektets arbetsgång kommer projektgruppens kunskaper inom webbutvecklin
 Projektet som ska skapas är en webbapplikation som ska lagra bilder på kläder i den databas i en form av en interaktiv garderob. Detta är den huvudsakliga funktionen som webbapplikationen ska erbjuda. Det som projektgruppen vill uppnå är att de “MUST” krav som finns ska kunnas implementeras i webbapplikationen. Det finns andra krav som kommer dyka upp under projektets gång men som inte kommer ha en lika stor vikt som “MUST” kraven men projektgruppen ser gärna att detta kan implementeras senare under projektets gång. 
 
 
-<h3> Köra produkten <h3>
+<h3> Köra produkten </h3>
 
 Den här produkten körs genom att ladda ned filerna och köra vilket av html-dokumenten som helst i valfri webbläsare.
