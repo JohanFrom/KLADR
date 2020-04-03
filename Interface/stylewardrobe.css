@@ -78,13 +78,11 @@ body{
 }
 
 #filter-menu{
-    flex-direction: row;
-}
-
-#filter-menu{
     height: 0px;
     overflow: hidden;
     transition: 0.5s all;
+    flex-direction: row;
+    justify-content: center;
 }
 
 #filter-btn:focus + #filter-menu, #filter-menu:hover {
