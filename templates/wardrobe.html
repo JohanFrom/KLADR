@@ -63,11 +63,11 @@
                 </div>
             </div>
             <div id="wardrobe">
-                %for image in wardrobe:
+                {%for image in wardrobe%}
                     <div class="article">
                         <p>{{image}}</p>
                     </div>
-                %end
+                {%endfor%}
             </div>
             <footer>
                 <p>KLÄDR © 2020</p>
@@ -80,6 +80,6 @@
             
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript"></script>
-    <script src="script.js"></script>
+    <script src="/static/script.js/" defer></script>
     </body>
 </html>
