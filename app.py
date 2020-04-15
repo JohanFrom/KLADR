@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, send_from_directory
 import psycopg2
 import os
+import smtplib
 
 app = Flask(__name__)
 

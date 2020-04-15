@@ -63,11 +63,6 @@
                 </div>
             </div>
             <div id="wardrobe">
-                <!-- {%for image in wardrobe%}
-                    <div class="article">
-                        <p>{{image}}</p>
-                    </div>
-                {%endfor%} -->
                 {% for name in path %}
                     <div >
                         <img src="{{url_for('send_image', filename=name)}}">
