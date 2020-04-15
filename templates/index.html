@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
+        <link href="/static/styles.css" rel=stylesheet>
         <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
         <title>KLÄDR</title>
@@ -10,13 +10,14 @@
     <body>
         <div id="content">
             <header>
-                <a id="mainlogo" href="index.html">KLÄDR</a>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
             </header>
             <nav>
-                <a class="navitem" href="wardrobe.html">Garderob</a>
-                <a class="navitem" href="trends.html">Trender & Tips</a>
-                <a class="navitem" href="about.html">Om oss</a>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
+
             <div id="first-page">
                 <div id="first-section">
                     <p>Garderob</p>
@@ -58,6 +59,6 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript"></script>
-    <script src="script.js"></script>
+    <script src="/static/script.js/"></script>
     </body>
 </html>
