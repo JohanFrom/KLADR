@@ -1,0 +1,95 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/stylewardrobe.css">
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+        <title>KLÄDR</title>
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="index.html">KLÄDR</a>
+            </header>
+            <nav>
+                <a class="navitem" href="wardrobe.html">Garderob</a>
+                <a class="navitem" href="trends.html">Trender & Tips</a>
+                <a class="navitem" href="about.html">Om oss</a>
+            </nav>
+
+
+
+            <form id="upload-form" action="{{ url_for('edit') }}" method="POST" enctype="multipart/form-data">
+                    
+                <label for="file"> Bildfil:</label>
+                <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple>
+                <label for="type">Välj en typ</label>
+                    <select value="{{ value }}" id="type" name="type">
+                        <option value="{{ value }}">{{ value }}</option>
+                        <option value="other">Annat</option>
+
+                        <option value="Överdel" disabled>Överdel</option>
+
+                        <option value="t-shirt">T-shirts</option>
+                        <option value="linne" >Linne</option>
+                        <option value="skjorta">Skjorta</option>
+                        <option value="other">Stickat</option>
+                        <option value="hoodie">Hoodie</option>
+                        <option value="kofta">Kofta</option>
+
+                        <option value="nederdel" disabled>Nederdel</option>
+
+                        <option value="byxor">Byxor</option>
+                        <option value="jeans">Jeans</option>
+                        <option value="shorts">Shorts</option>
+                        <option value="sweatpants" >Sweatpants</option>
+                        <option value="kjol">Kjol</option>
+
+                        <option value="helkropp" disabled>Helkropp</option>
+
+                        <option value="klanning">Klänning</option>
+                        <option value="jumpsuit">Jumpsuit</option>
+                        <option value="playsuit">Playsuit</option>
+                        
+                        <option value="skor" disabled>Skor</option>
+
+                        <option value="sneakers" >Sneakers</option>
+                        <option value="klackar">Klackar</option>
+                        <option value="kangor">Kängor</option>
+                        <option value="stovlar" >Stövlar</option>
+                        <option value="sandaler">Sandaler</option>
+                        
+                        <option value="ytterplagg" disabled>Ytterplagg</option>
+
+                        <option value="langjacka" >Lång jacka</option>
+                        <option value="kortjacka">Kort jacka</option>
+                        <option value="kappa">Kappa/Rock</option>
+                        <option value="regnjacka" >Regnjacka</option>
+                        <option value="termobyxor">Termobyxor</option>
+                    </select>
+                    <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{ comment }}</textarea>
+                <input type="submit" value="Upload" id="upload-button">
+            </form>
+            
+            <!-- <div id="wardrobe">
+                {% for name in path %}
+                    <div >
+                        <img src="{{url_for('send_image', filename=name)}}">
+                    </div>
+                {% endfor %}
+            </div> -->
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+    
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js"></script>
+    </body>
+</html>
