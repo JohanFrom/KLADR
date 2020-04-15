@@ -23,51 +23,56 @@
             <div id="filter-menu">
                 <div>
                     <p>Överdel</p>
-                    <a href="#">T-Shirts</a>
-                    <a href="#">Linnen</a>
-                    <a href="#">Skjorta</a>
-                    <a href="#">Stickat</a>
-                    <a href="#">Hoodie</a>
-                    <a href="#">Kofta</a>
+                    <a href="wardrobe/t-shirt">T-Shirts</a>
+                    <a href="wardrobe/linnen">Linnen</a>
+                    <a href="wardrobe/skjorta">Skjorta</a>
+                    <a href="wardrobe/stickat">Stickat</a>
+                    <a href="wardrobe/hoodie">Hoodie</a>
+                    <a href="wardrobe/kofta">Kofta</a>
                 </div>
                 <div> 
                     <p>Nederdel</p>
-                    <a href="#">Byxor</a>
-                    <a href="#">Jeans</a>
-                    <a href="#">Shorts</a>
-                    <a href="#">Sweatpants</a>
-                    <a href="#">Kjol</a>
-                    <a href="#">Leggings</a>
+                    <a href="wardrobe/byxor">Byxor</a>
+                    <a href="wardrobe/jeans">Jeans</a>
+                    <a href="wardrobe/shorts">Shorts</a>
+                    <a href="wardrobe/sweatpants">Sweatpants</a>
+                    <a href="wardrobe/kjol">Kjol</a>
+                    <a href="wardrobe/leggings">Leggings</a>
                 </div>
                 <div>
                     <p>Helkropp</p>
-                    <a href="#">Klänning</a>
-                    <a href="#">Jumpsuit</a>
-                    <a href="#">Playsuit</a>
+                    <a href="wardrobe/klanning">Klänning</a>
+                    <a href="wardrobe/jumpsuit">Jumpsuit</a>
+                    <a href="wardrobe/playsuit">Playsuit</a>
                 </div>
                 <div>
                     <p>Skor</p>
-                    <a href="#">Sneaker</a>
-                    <a href="#">Klackar</a>
-                    <a href="#">Kängor</a>
-                    <a href="#">Stövlar</a>
-                    <a href="#">Sandaler</a>
+                    <a href="wardrobe/sneakers">Sneaker</a>
+                    <a href="wardrobe/klackar">Klackar</a>
+                    <a href="wardrobe/kangor">Kängor</a>
+                    <a href="wardrobe/stovlar">Stövlar</a>
+                    <a href="wardrobe/sandaler">Sandaler</a>
                 </div>
                 <div>  
                     <p>Ytterkläder</p>
-                    <a href="#">Lång jacka</a>
-                    <a href="#">Kort jacka</a>
-                    <a href="#">Kappa/Rock</a>
-                    <a href="#">Regnjacka</a>
-                    <a href="#">Termobyxor</a>
+                    <a href="wardrobe/langjacka">Lång jacka</a>
+                    <a href="wardrobe/kortjacka">Kort jacka</a>
+                    <a href="wardrobe/kappa">Kappa/Rock</a>
+                    <a href="wardrobe/regnjacka">Regnjacka</a>
+                    <a href="wardrobe/termobyxor">Termobyxor</a>
                 </div>
             </div>
             <div id="wardrobe">
-                {%for image in wardrobe%}
+                <!-- {%for image in wardrobe%}
                     <div class="article">
                         <p>{{image}}</p>
                     </div>
-                {%endfor%}
+                {%endfor%} -->
+                {% for name in path %}
+                    <div >
+                        <img src="{{url_for('send_image', filename=name)}}">
+                    </div>
+                {% endfor %}
             </div>
             <footer>
                 <p>KLÄDR © 2020</p>

@@ -18,21 +18,57 @@
             </nav>
             <main>
                 <h2>Lägg in nytt plagg</h2>
-                <form method="post">
-                    <p>Typ av plagg</p>
-                    <input type="radio" id="top" value="top">
-                    <label for="top">Överdel</label>
+
+                <form id="upload-form" action="{{ url_for('insert') }}" method="POST" enctype="multipart/form-data">
+                    
+                    <label for="file"> Bildfil:</label>
                     <br>
-                    <input type="radio" id="bottom" value="bottom">
-                    <label for="bottom">Nederdel</label>
+                    <input id="file-picker" type="file" name="file" accept="image/*" multiple>
                     <br>
-                    <input type="radio" id="other" value="other">
-                    <label for="other">Annat</label>
-                    <br>
-                    <input type= "file" id="picture">
-                    <br>
-                    <br>
-                    <input type = "submit">
+                    <label for="type">Välj en typ</label>
+                        <select id="type" name="type">
+                            <option value="other" selected>Annat</option>
+
+                            <option value="Överdel" disabled>Överdel</option>
+
+                            <option value="t-shirt">T-shirts</option>
+                            <option value="linne" >Linne</option>
+                            <option value="skjorta">Skjorta</option>
+                            <option value="other">Stickat</option>
+                            <option value="hoodie">Hoodie</option>
+                            <option value="kofta">Kofta</option>
+
+                            <option value="nederdel" disabled>Nederdel</option>
+
+                            <option value="byxor">Byxor</option>
+                            <option value="jeans">Jeans</option>
+                            <option value="shorts">Shorts</option>
+                            <option value="sweatpants" >Sweatpants</option>
+                            <option value="kjol">Kjol</option>
+
+                            <option value="helkropp" disabled>Helkropp</option>
+
+                            <option value="klanning">Klänning</option>
+                            <option value="jumpsuit">Jumpsuit</option>
+                            <option value="playsuit">Playsuit</option>
+                            
+                            <option value="skor" disabled>Skor</option>
+
+                            <option value="sneakers" >Sneakers</option>
+                            <option value="klackar">Klackar</option>
+                            <option value="kangor">Kängor</option>
+                            <option value="stovlar" >Stövlar</option>
+                            <option value="sandaler">Sandaler</option>
+                            
+                            <option value="ytterplagg" disabled>Ytterplagg</option>
+
+                            <option value="langjacka" >Lång jacka</option>
+                            <option value="kortjacka">Kort jacka</option>
+                            <option value="kappa">Kappa/Rock</option>
+                            <option value="regnjacka" >Regnjacka</option>
+                            <option value="termobyxor">Termobyxor</option>
+                        </select>
+                    <input type="submit" value="Upload!" id="upload-button">
                 </form>
             </main>
         </div>
