@@ -22,7 +22,7 @@ def wardrobe():
     cursor.execute("""
     SELECT filename from wardrobe;
     """)
-    stuff=[]
+    stuff=[] 
     for data in cursor:
         stuff.append(data[0])
     
@@ -51,9 +51,7 @@ def insert():
         print ("Accept incoming file:", filename)
         print ("Save it to:", destination)
         upload.save(destination)
-        # with open (destination,'rb') as f:
-        #     blob = f.read()
-        # binary = psycopg2.Binary(blob)
+
         value = request.form.get("type")
         comment = request.form.get("comment")
         cursor.execute("INSERT INTO wardrobe (filename,type,comment) values ('%s','%s', '%s');"% (filename,value,comment) )
@@ -61,9 +59,9 @@ def insert():
         conn.close()
 
     # return send_from_directory("images", filename, as_attachment=True)
-    # return render_template("complete.html", image_name=filename)
     return render_template('insert.html')
 
+@app.route('/edit/<filename>')
 @app.route('/insert/<filename>')
 def send_image(filename):
     return send_from_directory("images", filename)
@@ -119,10 +117,6 @@ def edit(filename):
     print(image, value, comment)
 
     return render_template('edit.html', image = image, value = value, comment = comment)
-
-@app.route('/edit/<filename>')
-def update_image(filename):
-    return send_from_directory("images", filename)
 
 @app.route('/trends.html')
 def trends():
