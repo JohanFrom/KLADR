@@ -61,12 +61,13 @@ def list_outfits():
             where outfit_name = '%s';
          """ % (outfit_name))
         temp = []
+        #temp.append(outfit_name)
         for article in cursor:
             temp.append(article[0])
-        all_outfits.append([outfit_name,temp])
+        all_outfits.append(temp)
     print(all_outfits)
-    return render_template("list.html", outfits = all_outfits)
-
+    return render_template("list.html", outfits = all_outfits, names=outfit_names)
+#prova att ha två listor, en med namn och en med outfits
     
 @app.route('/add_outfit', methods=["POST","GET"])
 def add_outfit():

@@ -97,12 +97,18 @@
             <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFIT</a></button>
 
             <div id="wardrobe">
+                {% set i = 0 %}
                 {% for outfit in outfits %}
-                    {% for outfit in outfits %}
-                        <div >
-                            <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
-                        </div>
-                    {% endfor %}
+                    <div>
+                        <h2>{{names[i]}}</h2>
+                        {% set i = i+1 %}
+                        {% for article in outfit %}
+                            
+                                <a href="/edit.html/{{article}}"><img src="{{url_for('send_image', filename=article)}}"></a>
+                            
+                        {% endfor %}
+                    </div>
+                   
                 {% endfor %}
                     <input type="submit">
             </div>
