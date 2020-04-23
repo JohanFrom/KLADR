@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, url_for
+from flask import Flask, render_template, request, send_from_directory, url_for, redirect
 import psycopg2
 import os
 import smtplib
@@ -60,6 +60,7 @@ def insert():
         cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour) values ('%s','%s', '%s','%s');"% (filename,value,comment,colour) )
         conn.commit()
         # conn.close()
+        return redirect(request.args.get("next") or url_for("wardrobe"))
 
     # return send_from_directory("images", filename, as_attachment=True)
     return render_template('insert.html')
@@ -140,9 +141,12 @@ def edit(filename):
         cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s';"% (file,newvalue,newcomment,newcolour,image))
         conn.commit()
         # conn.close()
+        return redirect(request.args.get("next") or url_for("wardrobe"))
+
     print(image, value, comment)
 
     return render_template('edit.html', image = image, value = value, comment = comment, colour = colour)
+
 
 @app.route('/trends.html')
 def trends():

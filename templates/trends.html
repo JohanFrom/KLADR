@@ -14,12 +14,12 @@
 <body>
     <div id="content">
         <header>
-            <a id="mainlogo" href="index.html">KLÄDR</a>
+            <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
         </header>
         <nav>
-            <a class="navitem" href="wardrobe.html">Garderob</a>
-            <a class="navitem" href="trends.html">Trender & Tips</a>
-            <a class="navitem" href="about.html">Om oss</a>
+            <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+            <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+            <a class="navitem" href="{{url_for('about')}}">Om oss</a>
         </nav>
         <div id="trend-page">
             <div id="first-section-trend">
