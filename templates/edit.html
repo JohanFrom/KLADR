@@ -20,12 +20,12 @@
 
 
 
-            <form id="upload-form" action="{{ url_for('edit', filename= image) }}" method="POST" enctype="multipart/form-data">
+            <form id="upload-form" action="{{ url_for('edit', filename= image, next = url_for('wardrobe')) }}" method="POST" enctype="multipart/form-data">
                     
                 <label for="file"> Bildfil:</label>
-                <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple>
+                <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple required>
                 <label for="type">Välj en typ</label>
-                    <select id="type" name="type">
+                    <select id="type" name="type" required>
                         <option value="{{ value }}">{{ value }}</option>
                         <option value="other">Annat</option>
 
@@ -70,8 +70,34 @@
                         <option value="Regnjacka" >Regnjacka</option>
                         <option value="Termobyxor">Termobyxor</option>
                     </select>
+
+                    <label for="colour">Välj en färg</label>
+                    <select id="colour" name="colour" required>
+                        <option value="{{ colour }}">{{ colour }}</option>
+                        <option disabled>Välj en färg</option>                            
+                        <option value="Svart">Svart</option>
+                        <option value="Brun">Brun</option>
+                        <option value="Beige">Beige</option>
+                        <option value="Grå">Grå</option>
+                        <option value="Vit">Vit</option>
+                        <option value="Blå">Blå</option>
+                        <option value="Grön">Grön</option>
+                        <option value="Gul">Gul</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Röd">Röd</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Lila">Lila</option>
+                        <option value="Guld">Guld</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Flerfärgad">Flerfärgad</option>
+                    </select>
+
                     <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{ comment }}</textarea>
                 <input type="submit" value="Upload" id="upload-button">
+                
+            </form>
+           <form id="remove-form" action="{{ url_for('remove', filename= image) }}" method="POST">
+                <input type="submit" value="Remove" id="remove-button">
             </form>
             <footer>
                 <p>KLÄDR © 2020</p>

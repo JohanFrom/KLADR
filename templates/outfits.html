@@ -92,18 +92,20 @@
 
 
 
-            <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFIT</a></button>
+            <form id="upload-form" action="{{ url_for('add_outfit') }}" method="POST"  >
+                <div id="wardrobe">
+                    {% for name in path %}
+                        <div >
+                            <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
+                            <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
 
-            <div id="wardrobe">
-                {% for name in path %}
-                    <div >
-                        <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
-                    </div>
-                {% endfor %}
-                    <input type="submit">
-            </div>
+                        </div>
+                    {% endfor %}
+                    <label for="name">Döp din outfit!:</label><br>
+                    <input type="text" id="name" name="name" required><br>
+                    <input type="submit" value="Lägg till outfit!" id="upload-button">
+                </div>
+            </form>
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>
