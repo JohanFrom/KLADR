@@ -48,13 +48,13 @@ def list_outfits():
     cursor.execute("""
         select name from outfit;
     """)
-    outfit_names = []
+    outfit_names = [] #lista på alla outfit namn
 
     for name in cursor:
         outfit_names.append(name[0])
-    
 
     all_outfits = []
+
     for outfit_name in outfit_names:
         cursor.execute("""
             select article_name from outfit_article
@@ -66,6 +66,7 @@ def list_outfits():
             temp.append(article[0])
         all_outfits.append(temp)
     print(all_outfits)
+    print(outfit_names)
     return render_template("list.html", outfits = all_outfits, names=outfit_names)
 #prova att ha två listor, en med namn och en med outfits
     
@@ -74,8 +75,10 @@ def add_outfit():
     article_names = request.form.getlist("article")
 
     outfit_name = request.form.get("name")
-
-    cursor.execute("""insert into outfit (name) values('%s')""" % (outfit_name))
+    outfit_comment = request.form.get("comment")
+    cursor.execute("""insert into outfit values('%s','%s')""" % (outfit_name, outfit_comment))
+    
+    
     for name in article_names:
         cursor.execute("""
             insert into outfit_article
