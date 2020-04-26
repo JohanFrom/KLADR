@@ -1,0 +1,89 @@
+  
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/stylewardrobe.css">
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+        <title>KLÄDR</title>
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+            </header>
+            <nav>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+            </nav>
+
+            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/images/iconfinder_test.png" alt=""></a>
+            
+            <div id="filter-menu">
+                <div>
+                    <p>Överdel</p>
+                    <a href="{{url_for('filter',value = 'T-shirt')}}">T-Shirts</a>
+                    <a href="{{url_for('filter', value = 'Linne')}}">Linnen</a>
+                    <a href="{{url_for('filter', value = 'Skjorta')}}">Skjorta</a>
+                    <a href="{{url_for('filter', value = 'Stickat')}}">Stickat</a>
+                    <a href="{{url_for('filter', value = 'Hoodie')}}">Hoodie</a>
+                    <a href="{{url_for('filter', value = 'Kofta')}}">Kofta</a>
+                </div>
+                <div> 
+                    <p>Nederdel</p>
+                    <a href="{{url_for('filter', value = 'Byxor')}}">Byxor</a>
+                    <a href="{{url_for('filter', value = 'Jeans')}}">Jeans</a>
+                    <a href="{{url_for('filter', value = 'Shorts')}}">Shorts</a>
+                    <a href="{{url_for('filter', value = 'Sweatpants')}}">Sweatpants</a>
+                    <a href="{{url_for('filter', value = 'Kjol')}}">Kjol</a>
+                    <a href="{{url_for('filter', value = 'Leggings')}}">Leggings</a>
+                </div>
+                <div>
+                    <p>Helkropp</p>
+                    <a href="{{url_for('filter', value = 'Klänning')}}">Klänning</a>
+                    <a href="{{url_for('filter', value = 'Jumpsuit')}}">Jumpsuit</a>
+                    <a href="{{url_for('filter', value = 'Playsuit')}}">Playsuit</a>
+                </div>
+                <div>
+                    <p>Skor</p>
+                    <a href="{{url_for('filter', value = 'Sneakers')}}">Sneaker</a>
+                    <a href="{{url_for('filter', value = 'Klackar')}}">Klackar</a>
+                    <a href="{{url_for('filter', value = 'Kängor')}}">Kängor</a>
+                    <a href="{{url_for('filter', value = 'Stövlar')}}">Stövlar</a>
+                    <a href="{{url_for('filter', value = 'Sandaler')}}">Sandaler</a>
+                </div>
+                <div>  
+                    <p>Ytterkläder</p>
+                    <a href="{{url_for('filter', value = 'Lång jacka')}}">Lång jacka</a>
+                    <a href="{{url_for('filter', value = 'Kort Jacka')}}">Kort jacka</a>
+                    <a href="{{url_for('filter', value = 'Kappa/Rock')}}">Kappa/Rock</a>
+                    <a href="{{url_for('filter', value = 'Regnjacka')}}">Regnjacka</a>
+                    <a href="{{url_for('filter', value = 'Termobyxor')}}">Termobyxor</a>
+                </div>
+            </div>
+
+            <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+
+            <div id="wardrobe">
+                {% for name in path %}
+                    <div >
+                        <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+    
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js"></script>
+    </body>
+</html>
