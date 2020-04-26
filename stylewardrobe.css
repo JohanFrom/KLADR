@@ -1,0 +1,135 @@
+body{
+    margin: auto;
+    font-family: 'Francois One', sans-serif;
+    background-color: whitesmoke;
+}
+
+/*HEADER*/
+#content > header{
+    background-color: whitesmoke;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+#content > header > #mainlogo{
+    color: orangered;
+    font-size: 100px;
+    text-decoration-line: none;
+}
+
+/*NAV*/
+#content > nav{
+    background-color: whitesmoke;
+    padding-bottom: 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: lightgrey;
+    border-width: thin;
+}
+
+#content > nav > .navitem{
+    text-decoration-line: none;
+    color: dimgrey;
+    padding-left: 10px;
+}
+
+#content > nav > .navitem:hover, .navitem:focus{
+    color: orangered;
+}
+
+#content > #filter-menu{
+    display: flex;
+    margin: auto;
+    text-align: center;
+}
+
+#content > #filter-menu > div{
+    margin-right: 20px;
+}
+
+#content > #filter-menu > div > p{
+    color: orangered;
+}
+
+#content > #filter-menu > div > a{
+    display: block;
+    text-decoration: none;
+    color: dimgrey;
+}
+
+#content > #filter-menu > div > a:hover{
+    color: orangered;
+}
+
+.filter-only{
+    display: block;
+}
+
+
+#filter-btn{
+    text-align: center;
+    text-decoration: none;
+    color: dimgrey;
+    font-size: 25px;
+}
+
+#filter-menu{
+    height: 0px;
+    overflow: hidden;
+    transition: 0.5s all;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#filter-btn:focus + #filter-menu, #filter-menu:hover {
+    height: 200px;
+}
+#add-article{
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 30px;
+    font-size: 15px;
+    background-color: orangered;
+    border-radius: 15px;
+    border-style: none;
+}
+
+#add-article:hover{
+    background-color:#666;
+}
+
+#add-article-text{
+    text-decoration-line: none;
+    font-size: 20px;
+    font-family: 'Francois One', sans-serif;
+    color: whitesmoke;
+    text-align: center;
+}
+/*CONTENT*/
+#content > #wardrobe{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    object-fit: cover;
+    margin: 5px;
+}
+/*FOOTER*/
+footer{
+    background-color: whitesmoke;
+    border-top-style: solid;
+    border-color: lightgrey;
+    border-width: thin;
+    padding-bottom: 1px;
+    display: block;
+}
+
+footer > p{
+    text-align: center;
+    color: orangered;
+}
