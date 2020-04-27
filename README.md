@@ -15,12 +15,12 @@ Projektet som ska skapas är en webbapplikation som ska lagra bilder på kläder
 
 <h3> Köra produkten </h3>
 
-För att köra produkten måste du ha installerat python 3 eller högre samt ha Flask installerat. 
+För att köra produkten måste du ha installerat Python 3 eller högre samt ha Flask installerat. 
 
 Om Flask inte är installerat kör 
-pip install Flask
+"pip install Flask"
 i terminalen
 
-Kör app.py. Vi använder Microsoft Visual Studio Code, så vi vet att det fungerar. Dock bode valfri programmeringsmiljö med utskriftsfönster fungera lika bra. When in doubt, använd terminalen. 
+Kör app.py. Vi använder Microsoft Visual Studio Code, så vi vet att det fungerar. Dock borde valfri programmeringsmiljö med utskriftsfönster fungera lika bra. When in doubt, använd terminalen. 
 
-När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till prodkten!
+När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till produkten!
