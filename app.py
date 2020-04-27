@@ -104,6 +104,65 @@ def filter(value):
 
     return render_template('wardrobe.html',path = stuff)
 
+@app.route('/outfits.html')
+def outfits():
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
+    cursor.execute("""
+    SELECT filename from wardrobe;
+    """)
+    stuff=[] 
+    for data in cursor:
+        stuff.append(data[0])
+
+    return render_template('outfits.html',path = stuff)   
+
+
+@app.route("/list_outfits")
+def list_outfits():
+    cursor.execute("""
+        select name from outfit;
+    """)
+    outfit_names = [] #lista på alla outfit namn
+
+    for name in cursor:
+        outfit_names.append(name[0])
+
+    all_outfits = []
+
+    for outfit_name in outfit_names:
+        cursor.execute("""
+            select article_name from outfit_article
+            where outfit_name = '%s';
+         """ % (outfit_name))
+        temp = []
+        #temp.append(outfit_name)
+        for article in cursor:
+            temp.append(article[0])
+        all_outfits.append(temp)
+    print(all_outfits)
+    print(outfit_names)
+    return render_template("list.html", outfits = all_outfits, names=outfit_names)
+#prova att ha två listor, en med namn och en med outfits
+    
+@app.route('/add_outfit', methods=["POST","GET"])
+def add_outfit():
+    article_names = request.form.getlist("article")
+
+    outfit_name = request.form.get("name")
+    outfit_comment = request.form.get("comment")
+    cursor.execute("""insert into outfit values('%s','%s')""" % (outfit_name, outfit_comment))
+    
+    
+    for name in article_names:
+        cursor.execute("""
+            insert into outfit_article
+            values ('%s','%s')
+        """ % (outfit_name,name))
+    print (article_names)
+    conn.commit()
+    return redirect(url_for("wardrobe"))
+
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
     # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")

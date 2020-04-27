@@ -54,6 +54,7 @@
                     <a href="{{url_for('filter', value = 'Stövlar')}}">Stövlar</a>
                     <a href="{{url_for('filter', value = 'Sandaler')}}">Sandaler</a>
                 </div>
+                
                 <div>  
                     <p>Ytterkläder</p>
                     <a href="{{url_for('filter', value = 'Lång jacka')}}">Lång jacka</a>
@@ -62,9 +63,38 @@
                     <a href="{{url_for('filter', value = 'Regnjacka')}}">Regnjacka</a>
                     <a href="{{url_for('filter', value = 'Termobyxor')}}">Termobyxor</a>
                 </div>
+                
+                
+                <div>
+                    <p>..</p>
+                    <a href="{{url_for('filter', value = 'Svart')}}">Svart</a>
+                    <a href="{{url_for('filter', value = 'Brun')}}">Brun</a>
+                    <a href="{{url_for('filter', value = 'Beige')}}">Beige</a>
+                    <a href="{{url_for('filter', value = 'Grå')}}">Grå</a>
+                    <a href="{{url_for('filter', value = 'Vit')}}">Vit</a>
+            </div>
+                
+                 <div>
+                    <p>Färg</p>
+                    <a href="{{url_for('filter', value = 'Blå')}}">Blå </a>
+                    <a href="{{url_for('filter', value = 'Grön')}}">Grön</a>
+                    <a href="{{url_for('filter', value = 'Gul')}}">Gul</a>
+                    <a href="{{url_for('filter', value = 'Orange')}}">Orange</a>
+                    <a href="{{url_for('filter', value = 'Röd')}}">Röd</a>
+                </div>
+                <div>  
+                    <p>..</p>
+                    <a href="{{url_for('filter', value = 'Rosa')}}">Rosa</a>
+                    <a href="{{url_for('filter', value = 'Lila')}}">Lila</a>
+                    <a href="{{url_for('filter', value = 'Guld')}}">Guld</a>
+                    <a href="{{url_for('filter', value = 'Silver')}}">Silver</a>
+                    <a href="{{url_for('filter', value = 'Flerfärgad')}}">Flerfärgad</a>
+                </div>
             </div>
 
             <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
+            <button id="list-outfit"><a id="list-article-text" href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
 
             <div id="wardrobe">
                 {% for name in path %}
