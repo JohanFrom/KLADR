@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, url_for
+from flask import Flask, render_template, request, send_from_directory, url_for, redirect
 import psycopg2
 import os
 import smtplib
@@ -6,7 +6,8 @@ import smtplib
 app = Flask(__name__)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
+conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+cursor = conn.cursor()
 
 @app.route('/')
 @app.route('/index.html')
@@ -16,8 +17,8 @@ def index():
 
 @app.route('/wardrobe.html')
 def wardrobe():
-    conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    cursor = conn.cursor()
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
 
     cursor.execute("""
     SELECT filename from wardrobe;
@@ -27,14 +28,14 @@ def wardrobe():
         stuff.append(data[0])
     
     return render_template('wardrobe.html',path = stuff)
-    conn.close()
+    # conn.close()
     
     
 
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
-    conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    cursor = conn.cursor()
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
 
     target = os.path.join(APP_ROOT, 'images/')
     print(target)
@@ -52,14 +53,38 @@ def insert():
         print ("Save it to:", destination)
         upload.save(destination)
 
+
         value = request.form.get("type")
         comment = request.form.get("comment")
-        cursor.execute("INSERT INTO wardrobe (filename,type,comment) values ('%s','%s', '%s');"% (filename,value,comment) )
+        colour = request.form.get("colour")
+        cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour) values ('%s','%s', '%s','%s');"% (filename,value,comment,colour) )
         conn.commit()
-        conn.close()
+        # conn.close()
+        return redirect(request.args.get("next") or url_for("wardrobe"))
 
     # return send_from_directory("images", filename, as_attachment=True)
     return render_template('insert.html')
+
+@app.route('/remove/<filename>', methods=["POST","GET"])
+def remove(filename):
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
+    
+    target = os.path.join(APP_ROOT, 'images/')
+    destination = "/".join([target, filename])
+    print ("Remove", destination)
+    os.remove(destination)
+
+    cursor.execute("""
+        DELETE from wardrobe
+        WHERE filename = '%s';
+    """ % (filename))
+
+    conn.commit()
+    # conn.close()
+    
+    return wardrobe()
+
 
 @app.route('/edit/<filename>')
 @app.route('/insert/<filename>')
@@ -68,27 +93,28 @@ def send_image(filename):
 
 @app.route('/wardrobe/<value>')
 def filter(value):
-    conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    cursor = conn.cursor()
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
 
-    cursor.execute("""select filename from wardrobe WHERE type ='%s';"""%(value))
+    cursor.execute("""select filename from wardrobe WHERE type ='%s' OR colour='%s';"""%(value, value))
     stuff=[]
     for data in cursor:
         stuff.append(data[0])
-    conn.close()
+    # conn.close()
 
     return render_template('wardrobe.html',path = stuff)
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
-    conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    cursor = conn.cursor()
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
 
-    cursor.execute("""SELECT filename, type, comment from wardrobe where filename = '%s';"""%(filename))
+    cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s';"""%(filename))
     for data in cursor:
         image = data[0]
         value = data[1]
         comment = data[2]
+        colour = data[3]
 
     target = os.path.join(APP_ROOT, 'images/')
     print(target)
@@ -111,12 +137,16 @@ def edit(filename):
         # binary = psycopg2.Binary(blob)
         newvalue = request.form.get("type")
         newcomment = request.form.get("comment")
-        cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s' WHERE filename = '%s';"% (file,newvalue,newcomment,image))
+        newcolour = request.form.get("colour")
+        cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s';"% (file,newvalue,newcomment,newcolour,image))
         conn.commit()
-        conn.close()
+        # conn.close()
+        return redirect(request.args.get("next") or url_for("wardrobe"))
+
     print(image, value, comment)
 
-    return render_template('edit.html', image = image, value = value, comment = comment)
+    return render_template('edit.html', image = image, value = value, comment = comment, colour = colour)
+
 
 @app.route('/trends.html')
 def trends():
