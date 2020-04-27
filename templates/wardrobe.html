@@ -91,12 +91,11 @@
                 </div>
             </div>
 
-
-
-            <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
-            <button id="list-outfit"><a id="list-article-text" href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
-
+            <div id="buttons">
+                <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+                <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
+                <button id="list-outfit"><a id="list-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+             </div>
             <div id="wardrobe">
                 {% for name in path %}
                     <div >

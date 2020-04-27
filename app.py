@@ -151,13 +151,14 @@ def add_outfit():
 
     outfit_name = request.form.get("name")
     outfit_comment = request.form.get("comment")
-    cursor.execute("""insert into outfit values('%s','%s')""" % (outfit_name, outfit_comment))
+    cursor.execute("""insert into outfit (name,comment) values('%s','%s');""" % (outfit_name, outfit_comment))
     
+
     
     for name in article_names:
         cursor.execute("""
-            insert into outfit_article
-            values ('%s','%s')
+            insert into outfit_article 
+            values ('%s','%s');
         """ % (outfit_name,name))
     print (article_names)
     conn.commit()

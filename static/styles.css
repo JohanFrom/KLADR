@@ -430,7 +430,7 @@ button:after{
     align-items: center;
     padding: 20px;
 }
-#content > main > #upload-form > #type {
+#content > main > #upload-form > placeholder ,#type, #colour {
     background-color: orangered;
     font-family: 'Francois One', sans-serif; 
     color: whitesmoke; 
@@ -443,8 +443,8 @@ button:after{
     font-size: 12px; 
     color: #666;
 }
-#content > main > #upload-form > #file-picker, #comment-clothes, #type{
-    margin-top: 20px;
+#content > main > #upload-form > #file-picker, #comment-clothes, #type, #colour{
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 #content > main > #upload-form > #upload-button{
@@ -455,6 +455,6 @@ button:after{
     border-radius: 5px; 
     border: none; 
 }
-#content > main > #upload-form > #upload-button:hover{
+#content > main > #upload-form > #upload-button:hover, #remove-button:hover{
     background-color: grey;
 }

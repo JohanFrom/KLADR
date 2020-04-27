@@ -88,7 +88,8 @@ body{
 #filter-btn:focus + #filter-menu, #filter-menu:hover {
     height: 200px;
 }
-#add-article{
+
+#add-article,#add-outfit,#list-outfit{
     width: 20%;
     margin-left: 40%;
     margin-right: 40%;
@@ -99,11 +100,11 @@ body{
     border-style: none;
 }
 
-#add-article:hover{
+#add-article:hover,#add-outfit:hover,#list-outfit:hover{
     background-color:#666;
 }
 
-#add-article-text{
+#add-article-text, #add-outfit-text,#list-outfit-text{
     text-decoration-line: none;
     font-size: 20px;
     font-family: 'Francois One', sans-serif;
