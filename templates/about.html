@@ -13,33 +13,32 @@
             </header>
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
             <div id="about-info">
                 <h4>Hej!</h4>
-                <p>
-                    Varmt välkommen till KLÄDR! Vi är så glad att du är här. Har du någonsin känt dig stressad över din garderob? Stress no more! Med vår tjänst kan du enkelt organisera och hålla koll på alla dina klädesplagg och accessoarer. 
-                    Vet du inte vad du ska ha på dig på festen eller till skolan? Använd vår generator för att slumpmässigt få en färdig outfit utifrån din garderob! Självklart kan du filtrera efter till exempel tillfälle eller väder. 
+                <p>Vi på <mark class="orangered">KLÄDR</mark> hälsar dig varmt välkommen!</p>
+                <p>Vi är så glad att du är här. Har du någonsin känt dig stressad över din garderob? Stress no more! Med vår tjänst kan du enkelt organisera och hålla koll på alla dina klädesplagg och accessoarer.
+                </p>
+                <p>Vet du inte vad du ska ha på dig på festen eller till skolan? Använd vår generator för att slumpmässigt få en färdig outfit utifrån din garderob! Självklart kan du filtrera efter till exempel tillfälle eller väder.  
                 </p>
                 <h4>Vilka är vi?</h4>
                 <div id="about-picture">
-                    <img src="images/aboutlalalal.jpg" alt="picture">
+                    <img src="/static/about-image.jpg" alt="picture">
                 </div>
                 <p>
-                    Vi är fyra studenter från Informationsarkitekturprogrammet på Malmö universitet vid namn Alva, Johan, Rebecka & Laura. Vi har gjort denna hemsida som projekt i kursen Systemutveckling under våren 2020. 
+                    Vi är fyra studenter som läser informationsarkitektur på Malmö universitet vid namn Alva, Johan, Rebecka & Laura. Vi har gjort denna hemsida som projekt i en kurs om systemutveckling under våren 2020. 
                     Vi kan nu stolt presentera vår tjänst KLÄDR. Vi hoppas att du kommer tycka om den lika mycket som vi gör!
                 </p>
-                <h4>Kontakta oss</h4>
+                <h4>KONTAKTA OSS</h4>
                 <div id="about-form">
-                    <form action="#">
-                        <p>Email</p>
-                            <input type="email" maxlength="30" placeholder="din@mail.com"> 
-                        <p>Skriv dina funderingar nedan</p>
-                            <textarea name="comments" cols="30" rows="10" placeholder="Funderingar..."></textarea>
-                        <p>Klar? Tryck på skicka</p>
-                            <input type="button" name="Skicka" id="" value="Skicka">   
+                    <form action="about.html" method="POST">
+                        <label for="text">Har du några funderingar? Skriv här nedan! Om du vill få ditt mail besvarat, skriv din e-postadress i meddelandet!</label>
+                        <textarea id="text-input" name="text-input" placeholder="Skriv dina funderingar här..."></textarea>
+                        <input type="submit" id="submit-message" name="submit-message" value="SKICKA" onclick="validate()">
                     </form>
+                </div>
                 </div>
             </div>
             <footer>
