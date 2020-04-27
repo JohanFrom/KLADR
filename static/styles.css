@@ -8,7 +8,7 @@ body{
 /*INDEX FIRST PAGE*/
 #content > #first-page{
     background-image: url(/static/artflow_202003312041.jpg);
-    height: 4000px;
+    height: auto;
     width: 1300px;
 }
 
@@ -58,27 +58,47 @@ body{
     font-size: 25px;
     margin-left: 130px;
     margin-top: 150px;
-    border-style: solid;
     padding-left: 10px;
     padding-right: 10px;
-    border-width: thin;
-    border-color: gray; 
-    border-radius: 5px;
-    box-shadow: 0 0 10px #666;
+    
 }
-
+#first-page > #first-section > h1 > a{
+    text-decoration: none; 
+    color: orangered;
+}
+#first-page > #first-section > h1 > a:hover{
+    color: #666;
+}
 #first-page > #second-section{
     width: 300px;
     font-size: 25px;
-    margin-top: 650px;
-    margin-left: 700px;
-    border-style: solid;
+    margin-top: 150px;
+    margin-left: 810px;
     padding-left: 10px;
     padding-right: 10px;
-    border-width: thin;
-    border-color: gray; 
-    border-radius: 5px;
-    box-shadow: 0 0 10px #666;
+    font-size: 20px;
+}
+#first-page > #second-section > h1 > a{
+    text-decoration: none; 
+    color: orangered;
+}
+#first-page > #second-section > h1 > a:hover{
+    color: #666;
+}
+#first-page > #third-section{
+    width: 300px;
+    font-size: 25px;
+    margin-left: 130px;
+    margin-top: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#first-page > #third-section > h1 > a{
+    text-decoration: none; 
+    color: orangered;
+}
+#first-page > #third-section > h1 > a:hover{
+    color: #666;
 }
 
 /*FOOTER*/
@@ -106,10 +126,9 @@ footer > p{
     padding-right: 150px;
 }
 
-#content > #about-jumbotron > h4{
+mark.orangered{
     color: orangered;
-    text-align: center;
-    font-size: 50px;
+    background-color: whitesmoke;
 }
 
 #about-picture > img{
@@ -129,58 +148,23 @@ footer > p{
 
 #about-info > h4{
     color: orangered;
+    text-align: center;
+    font-size: 50px;
 }
-
-input[type=email], select{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=text], select{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-  
-input[type=submit] {
-    width: 100%;
-    background-color: grey;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-  
-input[type=submit]:hover{
-    background-color: orangered;
-}
-
   
 #about-form{
-    border-radius: 10px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    margin-left: 150px;
-    margin-right: 150px;
-    margin-bottom: 50px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+    font-family: 'Francois One', sans-serif;
 }
 
 #scroll{
     position: fixed;
     right: 30px;
     bottom: 30px;
-
     height: 50px;
     width: 50px;
     background-color: dimgrey;
@@ -204,7 +188,34 @@ input[type=submit]:hover{
     filter: "alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
 }
-
+input[type=submit]{
+    background-color: orangered; 
+    font-family: 'Francois One', sans-serif; 
+    color: white; 
+    font-size: 20px;
+    border-radius: 5px; 
+    border: none; 
+    align-items: center;
+    margin-top: 20px;
+}
+input[type=email]{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#content > #about-info > #about-form > form > textarea {
+    width: 100%;
+    height: 150px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+  }
 /*TRENDER*/
 /*GRID - TRENDER*/
 #grid{
@@ -230,6 +241,7 @@ input[type=submit]:hover{
 #first-section-trend > h2 {
     text-align: center;
     padding: 20px;
+    color: orangered;
 }
 
 #carouselExampleIndicators{
@@ -267,13 +279,30 @@ header > .tipsheader{
 }
 
 #clothes{
-    color: dimgrey;
     text-align: center;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: #666;
+    font-family: 'Francois One', sans-serif; 
+    color: whitesmoke; 
+    font-size: 15px;
+    border-radius: 5px; 
+    border: none;
+    display: block;
+    width: 20%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.carousel-inner{
+    border-radius: 5px;
 }
 
 #clothes:hover{
     cursor: pointer;
-    color: orangered;
+    color: white;
+    background-color: orangered;
 }
 
 footer{
@@ -294,14 +323,6 @@ footer{
     cursor: pointer;
     text-decoration: none;
 }
-
-#clotheslaudry{
-    border-top-style: solid;
-    border-color: lightgrey;
-    border-width: thin;
-    padding-top: 20px;
-}
-
 
 #laundry > h6, h5{
 color: orangered;
@@ -397,4 +418,43 @@ section > p{
 
 button:after{
     content: '\2191';
+}
+/* INSERT.HTML*/
+#content > main > h2{
+    color: orangered;
+    text-align: center;
+}
+#content > main > #upload-form{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+#content > main > #upload-form > #type {
+    background-color: orangered;
+    font-family: 'Francois One', sans-serif; 
+    color: whitesmoke; 
+    font-size: 15px;
+    border-radius: 5px; 
+    border: none; 
+}
+#content > main > #upload-form > #file-picker, #comment-clothes{
+    font-family: 'Francois One', sans-serif;
+    font-size: 12px; 
+    color: #666;
+}
+#content > main > #upload-form > #file-picker, #comment-clothes, #type{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#content > main > #upload-form > #upload-button{
+    background-color: orangered; 
+    font-family: 'Francois One', sans-serif; 
+    color: whitesmoke; 
+    font-size: 20px;
+    border-radius: 5px; 
+    border: none; 
+}
+#content > main > #upload-form > #upload-button:hover{
+    background-color: grey;
 }
