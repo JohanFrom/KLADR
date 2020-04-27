@@ -156,5 +156,18 @@ def trends():
 def about():
     return render_template('about.html')
 
+@app.route('/about.html', methods = ["GET", "POST"])
+def sendemail():
+    user_text = request.form.get("text-input")
+    user_email = "kladr2020@gmail.com"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+
+    server.login("kladr2020@gmail.com", "kladr2020april")
+    server.sendmail("kladr2020@gmail.com", user_email, user_text)
+    print(user_email, user_text)
+
+    return render_template('about.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
