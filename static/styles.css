@@ -424,7 +424,7 @@ button:after{
     color: orangered;
     text-align: center;
 }
-#content > main > #upload-form{
+#content > main > #upload-form, #remove-form{
     display: flex; 
     flex-direction: column;
     align-items: center;

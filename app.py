@@ -76,6 +76,11 @@ def remove(filename):
     os.remove(destination)
 
     cursor.execute("""
+        DELETE from outfit_article
+        WHERE article_name = '%s';
+    """ % (filename))
+    
+    cursor.execute("""
         DELETE from wardrobe
         WHERE filename = '%s';
     """ % (filename))
