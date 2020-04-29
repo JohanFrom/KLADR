@@ -149,7 +149,97 @@ def list_outfits():
     print(outfit_names)
     return render_template("list.html", outfits = all_outfits, names=outfit_names)
 #prova att ha två listor, en med namn och en med outfits
+
+@app.route('/show_outfit/<outfit>')
+def show_outfit(outfit):
+    cursor.execute(
+        """
+        select article_name 
+        from outfit_article 
+        where outfit_name = '%s'; 
+        
+        """ % (outfit))
     
+    outfit_articles = []
+    for article in cursor:
+        outfit_articles.append(article[0])
+    
+    print(outfit_articles)
+
+    cursor.execute("""
+        select comment
+        from outfit
+        where name = '%s'; 
+        
+        """ % (outfit))
+    for record in cursor:
+        comment = record[0]
+    print(comment)
+
+    return render_template('show_outfit.html', comment = comment, outfit_articles = outfit_articles, outfit=outfit)
+
+
+@app.route('/edit_outfit/<outfit>', methods=["POST","GET"])
+def edit_outfit(outfit):
+    cursor.execute(
+        """
+        select article_name 
+        from outfit_article 
+        where outfit_name = '%s'; 
+        
+        """ % (outfit))
+    
+    outfit_articles = []
+    for article in cursor:
+        outfit_articles.append(article[0])   
+
+
+    cursor.execute("""
+        select comment
+        from outfit
+        where name = '%s'; 
+        
+        """ % (outfit))
+    for record in cursor:
+        comment = record[0]
+    
+    cursor.execute("""
+        SELECT filename from wardrobe;
+
+        """)
+    wardrobe=[] 
+    for data in cursor:
+        wardrobe.append(data[0])
+
+    return render_template('edit_outfit.html', wardrobe=wardrobe, comment=comment, outfit_articles=outfit_articles, outfit=outfit)
+
+@app.route('/edit_outfit_form/<outfit>', methods=["POST","GET"])
+def edit_outfit_form(outfit):
+    cursor.execute("""
+        DELETE
+        FROM outfit_article
+        WHERE outfit_name ='%s';
+    """ % (outfit))
+
+
+    new_outfit = request.form.get("name")
+    new_comment = request.form.get("comment")
+    cursor.execute("""
+        UPDATE outfit
+        SET name = '%s' , comment = '%s' WHERE name = '%s';
+    """ % (new_outfit,new_comment,outfit))
+    article_names = request.form.getlist("article")
+
+    for name in article_names:
+        cursor.execute("""
+            insert into outfit_article 
+            values ('%s','%s');
+        """ % (new_outfit,name))
+    conn.commit()
+
+    return redirect(url_for('show_outfit', outfit = new_outfit))
+
+
 @app.route('/add_outfit', methods=["POST","GET"])
 def add_outfit():
     article_names = request.form.getlist("article")
@@ -157,7 +247,6 @@ def add_outfit():
     outfit_name = request.form.get("name")
     outfit_comment = request.form.get("comment")
     cursor.execute("""insert into outfit (name,comment) values('%s','%s');""" % (outfit_name, outfit_comment))
-    
 
     
     for name in article_names:
@@ -168,6 +257,7 @@ def add_outfit():
     print (article_names)
     conn.commit()
     return redirect(url_for("wardrobe"))
+
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):

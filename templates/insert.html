@@ -5,8 +5,6 @@
         <link rel="stylesheet" href="/static/styles.css">
         <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-        <title>KLÄDR</title>
-
     </head>
     <body>
         <div id="content">
@@ -21,12 +19,12 @@
             <main>
                 <h2>Lägg in nytt plagg</h2>
                 
-                <form id="upload-form" action="{{ url_for('insert') }}" method="POST" enctype="multipart/form-data">
+                <form id="upload-form" action="{{ url_for('insert') }}" method="POST" enctype="multipart/form-data" aria-required="true">
                     
                     <label for="file"> Bildfil:</label>
-                    <input id="file-picker" type="file" name="file" accept="image/*" multiple>
+                    <input id="file-picker" type="file" name="file" accept="image/*" multiple required>
                     <label for="type">Välj en typ</label>
-                        <select id="type" name="type">
+                        <select id="type" name="type" required>
                             <option selected disabled> Välj typ</option>
                             <option value="other" >Annat</option>
 
@@ -92,10 +90,14 @@
                         <option value="Silver">Silver</option>
                         <option value="Flerfärgad">Flerfärgad</option>
                     </select>
-                        <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10"></textarea>
+                        <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10" required></textarea>
                     <input type="submit" value="Lägg till" id="upload-button">
                 </form>
             </main>
+            
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
         </div>
     </body>
 </html>

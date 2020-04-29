@@ -19,7 +19,7 @@
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
 
-            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/images/iconfinder_test.png" alt=""></a>
+            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/static/filter-symbol.png" alt=""></a>
             
             <div id="filter-menu">
                 <div>
@@ -92,11 +92,13 @@
 
 
 
-            <form id="upload-form" action="{{ url_for('add_outfit') }}" method="POST"  >
+            <form id="upload-form" action="{{ url_for('add_outfit', outfit = outfit) }}" method="POST"  >
                 <div id="wardrobe">
                     {% for name in path %}
                         <div >
-                            <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
+                            <img src="{{url_for('send_image', filename=name)}}">
+
+                            
                             <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
 
                         </div>

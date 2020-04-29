@@ -1,0 +1,52 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/stylewardrobe.css">
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+        <title>KLÄDR</title>
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+            </header>
+            <nav>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+            </nav>
+
+            
+           
+            <button id="add-article"><a href="{{url_for('edit_outfit',outfit=outfit)}}">REDIGERA OUTFIT</a></button>
+            <h2>{{outfit}} </h2>
+            <div id="wardrobe">
+                {% for article in outfit_articles %}
+                    <div>
+                        <img src="{{url_for('send_image', filename=article)}}">
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="comment">
+                <p>
+                    {{comment}}
+                </p>
+            </div>
+            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+    
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js"></script>
+    </body>
+</html>

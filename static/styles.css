@@ -7,9 +7,11 @@ body{
 
 /*INDEX FIRST PAGE*/
 #content > #first-page{
-    background-image: url(/static/artflow_202003312041.jpg);
-    height: auto;
-    width: 1300px;
+    background-image: url(/static/index-image.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1552px;
+    width: auto;
 }
 
 /*HEADER*/
@@ -198,12 +200,19 @@ input[type=submit]{
     align-items: center;
     margin-top: 20px;
 }
+
+input[type=submit]:hover{
+    cursor: pointer;
+    background-color: #666;
+}
+
 input[type=email]{
     width: 100%;
     font-family: 'Francois One', sans-serif;
     font-size: 16px;
     margin-bottom: 20px;
 }
+
 #content > #about-info > #about-form > form > textarea {
     width: 100%;
     height: 150px;
@@ -325,8 +334,8 @@ footer{
 }
 
 #laundry > h6, h5{
-color: orangered;
-padding: 20px;
+    color: orangered;
+    padding: 20px;
 }
 
 #laundry{
@@ -424,7 +433,7 @@ button:after{
     color: orangered;
     text-align: center;
 }
-#content > main > #upload-form, #remove-form{
+#content > main > #upload-form{
     display: flex; 
     flex-direction: column;
     align-items: center;

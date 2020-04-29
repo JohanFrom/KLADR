@@ -18,7 +18,7 @@
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
 
-            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/images/iconfinder_test.png" alt=""></a>
+            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
             
             <div id="filter-menu">
                 <div>
@@ -65,13 +65,13 @@
                 
                 
                 <div>
-                    <p class="dots">..</p>
+                    <p>..</p>
                     <a href="{{url_for('filter', value = 'Svart')}}">Svart</a>
                     <a href="{{url_for('filter', value = 'Brun')}}">Brun</a>
                     <a href="{{url_for('filter', value = 'Beige')}}">Beige</a>
                     <a href="{{url_for('filter', value = 'Grå')}}">Grå</a>
                     <a href="{{url_for('filter', value = 'Vit')}}">Vit</a>
-            </div>
+                </div>
                 
                  <div>
                     <p>Färg</p>
@@ -82,7 +82,7 @@
                     <a href="{{url_for('filter', value = 'Röd')}}">Röd</a>
                 </div>
                 <div>  
-                    <p class="dots">..</p>
+                    <p>..</p>
                     <a href="{{url_for('filter', value = 'Rosa')}}">Rosa</a>
                     <a href="{{url_for('filter', value = 'Lila')}}">Lila</a>
                     <a href="{{url_for('filter', value = 'Guld')}}">Guld</a>
@@ -91,11 +91,8 @@
                 </div>
             </div>
 
-            <div id="buttons">
-                <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
-                <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
-                <button id="list-outfit"><a id="list-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
-             </div>
+            <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+
             <div id="wardrobe">
                 {% for name in path %}
                     <div >
@@ -103,6 +100,10 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <button id="add-outfit"><a  href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
+            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>

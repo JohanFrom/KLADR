@@ -92,28 +92,27 @@
 
 
 
-            <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+            <form id="upload-form" action="{{ url_for('edit_outfit_form', outfit = outfit) }}" method="POST"  >
+                <div id="wardrobe">
+                    {% for name in wardrobe %}
+                        <div >
+                            <img src="{{url_for('send_image', filename=name)}}">
 
-            <div id="wardrobe">
-               
-                {% for outfit in outfits %}
-                    <div>
-                        <h2><a href="{{url_for('show_outfit',outfit = names[loop.index0])}}">{{names[loop.index0]}}</a></h2>
-                        
-                        {% for article in outfit %}
-                            
-                            <img src="{{url_for('send_image', filename=article)}}">
-                            
-                        {% endfor %}
-                    </div>
-                   
-                {% endfor %}
-                
-            </div>
+                            {% if name in outfit_articles %}
+                                <input type="checkbox" id="{{name}}" name="article" value="{{name}}" checked>
+                            {% else %}
+                                <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
 
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFIT</a></button>
+                    <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{comment}}</textarea>
 
+                    <label for="name">Döp din outfit!:</label><br>
+                    <input type="text" id="name" name="name" value="{{outfit}}"required><br>
+                    <input type="submit" value="Lägg till outfit!" id="upload-button">
+                </div>
+            </form>
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>
