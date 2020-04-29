@@ -50,7 +50,3 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
-//function popUpFunction() {
-    //myWindow = window.open("https://www.makemesmile.se/guider/kl%C3%A4dv%C3%A5rd-28064305", "", "width=1100, height=800");
-//}
