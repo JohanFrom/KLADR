@@ -1,0 +1,58 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+            </header>
+            <nav>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+            </nav>
+            <div id="about-info">
+                <h4>Hej!</h4>
+                <p>Vi på <mark class="orangered">KLÄDR</mark> hälsar dig varmt välkommen!</p>
+                <p>Vi är så glad att du är här. Har du någonsin känt dig stressad över din garderob? Stress no more! Med vår tjänst kan du enkelt organisera och hålla koll på alla dina klädesplagg och accessoarer.
+                </p>
+                <p>Vet du inte vad du ska ha på dig på festen eller till skolan? Använd vår generator för att slumpmässigt få en färdig outfit utifrån din garderob! Självklart kan du filtrera efter till exempel tillfälle eller väder.  
+                </p>
+                <h4>Vilka är vi?</h4>
+                <div id="about-picture">
+                    <img src="/static/about-image.jpg" alt="picture">
+                </div>
+                <p>
+                    Vi är fyra studenter som läser informationsarkitektur på Malmö universitet vid namn Alva, Johan, Rebecka & Laura. Vi har gjort denna hemsida som projekt i en kurs om systemutveckling under våren 2020. 
+                    Vi kan nu stolt presentera vår tjänst KLÄDR. Vi hoppas att du kommer tycka om den lika mycket som vi gör!
+                </p>
+                <h4>KONTAKTA OSS</h4>
+                <div id="about-form">
+                    <form action="about.html" method="POST">
+                        <label for="text">Har du några funderingar? Skriv här nedan! Om du vill få ditt mail besvarat, skriv din e-postadress i meddelandet!</label>
+                        <textarea id="text-input" name="text-input" placeholder="Skriv dina funderingar här..." required></textarea>
+                        <input type="submit" id="submit-message" name="submit-message" value="SKICKA">
+                    </form>
+                </div>
+                </div>
+            </div>
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+
+    <!--JavaScript-->
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+                    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js/"></script>
+    </body>
+</html>

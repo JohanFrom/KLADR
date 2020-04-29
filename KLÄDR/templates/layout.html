@@ -1,0 +1,73 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+            </header>
+            <nav>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+            </nav>
+
+            <div id="about-jumbotron">
+                <h4>Vilka är vi?</h4>
+            </div>
+
+            <div id="about-picture">
+                <img src="/static/about-image.jpg" alt="picture">
+            </div>
+
+            <div id="about-info">
+                <h4>Hej!</h4>
+                <p>
+                    Varmt välkommen till KLÄDR! Vi är så glad att du är här. Har du någonsin känt dig stressad över din garderob? Stress no more! Med vår tjänst kan du enkelt organisera och hålla koll på alla dina klädesplagg och accessoarer. 
+                    Vet du inte vad du ska ha på dig på festen eller till skolan? Använd vår generator för att slumpmässigt få en färdig outfit utifrån din garderob! Självklart kan du filtrera efter till exempel tillfälle eller väder. 
+                </p>
+                
+                <p>
+                    Vi är fyra studenter från Informationsarkitekturprogrammet på Malmö universitet vid namn Alva, Johan, Rebecka & Laura. Vi har gjort denna hemsida som projekt i kursen Systemutveckling under våren 2020. 
+                    Vi kan nu stolt presentera vår tjänst KLÄDR. Vi hoppas att du kommer tycka om den lika mycket som vi gör!
+                </p>
+
+                <h4>Kontakta oss</h4>
+                <p>Vill du hålla dig uppdaterad över vad som händer hos oss på KLÄDR? Fyll i rutorna nedan för att ta del av den nya information som kommer ut!</p>
+            </div>
+            
+            <div id="about-form">
+                <form action="redirect.html" method="POST">
+                    <label for="first_name">Förnamn</label>
+                    <input type="text" id="first_name" name="firstname_placeholder" placeholder="Förnamn">
+
+                    <label for="last_name">Efternamn</label>
+                    <input type="text" id="last_name" name="lastname_placeholer" placeholder="Efternamn">
+                  
+                    <label for="thoughts">Email</label>
+                    <input type="email" id="email_input" name="email_placeholder" placeholder="name@example.com." maxlength="150">
+                    
+                    <input type ="submit" value="SKICKA" onclick="validate()">
+                </form>
+            </div>
+
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+
+    <!--JavaScript-->
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+                    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js"></script>
+    </body>
+</html>
