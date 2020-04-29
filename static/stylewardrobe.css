@@ -51,6 +51,10 @@ body{
     margin-right: 20px;
 }
 
+#content > #filter-menu > div > .dots{
+    color: whitesmoke;
+}
+
 #content > #filter-menu > div > p{
     color: orangered;
 }
