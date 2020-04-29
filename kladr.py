@@ -23,11 +23,11 @@ def wardrobe():
     cursor.execute("""
     SELECT filename from wardrobe;
     """)
-    stuff=[] 
+    articles=[] 
     for data in cursor:
-        stuff.append(data[0])
+        articles.append(data[0])
     
-    return render_template('wardrobe.html',path = stuff)
+    return render_template('wardrobe.html',path = articles)
     # conn.close()
     
     
@@ -102,12 +102,12 @@ def filter(value):
     # cursor = conn.cursor()
 
     cursor.execute("""select filename from wardrobe WHERE type ='%s' OR colour='%s';"""%(value, value))
-    stuff=[]
+    articles=[]
     for data in cursor:
-        stuff.append(data[0])
+        articles.append(data[0])
     # conn.close()
 
-    return render_template('wardrobe.html',path = stuff)
+    return render_template('wardrobe.html',path = articles)
 
 @app.route('/outfits.html')
 def outfits():
@@ -116,11 +116,11 @@ def outfits():
     cursor.execute("""
     SELECT filename from wardrobe;
     """)
-    stuff=[] 
+    articles=[] 
     for data in cursor:
-        stuff.append(data[0])
+        articles.append(data[0])
 
-    return render_template('outfits.html',path = stuff)   
+    return render_template('outfits.html',path = articles)   
 
 
 @app.route("/list_outfits")
@@ -319,7 +319,7 @@ def sendemail():
     server.starttls()
 
     server.login("kladr2020@gmail.com", "kladr2020april")
-    server.sendmail("kladr2020@gmail.com", user_email, user_text)
+    server.sendmail("kladr2020@gmail.com", user_email, user_text.encode("utf-8"))
     print(user_email, user_text)
 
     return render_template('about.html')
