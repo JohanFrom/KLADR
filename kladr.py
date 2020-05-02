@@ -128,7 +128,7 @@ def list_outfits():
     cursor.execute("""
         select name from outfit;
     """)
-    outfit_names = [] #lista på alla outfit namn
+    outfit_names = [] #lista pa alla outfit namn
 
     for name in cursor:
         outfit_names.append(name[0])
@@ -148,7 +148,7 @@ def list_outfits():
     print(all_outfits)
     print(outfit_names)
     return render_template("list.html", outfits = all_outfits, names=outfit_names)
-#prova att ha två listor, en med namn och en med outfits
+#prova att ha tva listor, en med namn och en med outfits
 
 @app.route('/show_outfit/<outfit>')
 def show_outfit(outfit):

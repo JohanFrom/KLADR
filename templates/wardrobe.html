@@ -95,7 +95,7 @@
 
             <div id="wardrobe">
                 {% for name in path %}
-                    <div >
+                    <div>
                         <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
                     </div>
                 {% endfor %}
