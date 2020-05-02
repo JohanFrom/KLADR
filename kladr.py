@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, send_from_directory, url_for, redirect
+from flask import Flask, render_template, request, send_from_directory, url_for, redirect, flash
 import psycopg2
 import os
 import smtplib
 
 app = Flask(__name__)
+app.secret_key = b'_5dg#y2L"F4Q87sjz\n\xec]/'
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
@@ -60,6 +61,7 @@ def insert():
         cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour) values ('%s','%s', '%s','%s');"% (filename,value,comment,colour) )
         conn.commit()
         # conn.close()
+        flash('Plagg tillagt!')
         return redirect(request.args.get("next") or url_for("wardrobe"))
 
     # return send_from_directory("images", filename, as_attachment=True)
@@ -88,6 +90,7 @@ def remove(filename):
     conn.commit()
     # conn.close()
     
+    flash('Plagg borttaget!')
     return wardrobe()
 
 
@@ -239,6 +242,23 @@ def edit_outfit_form(outfit):
 
     return redirect(url_for('show_outfit', outfit = new_outfit))
 
+@app.route('/remove_outfit/<outfit>',methods = ["POST","GET"])
+def remove_outfit(outfit):
+    cursor.execute("""
+    DELETE
+    FROM outfit_article
+    WHERE outfit_name = '%s';
+    """ % (outfit))
+
+    cursor.execute("""
+    DELETE
+    FROM outfit
+    WHERE name = '%s';
+    """ % (outfit))
+
+    conn.commit()
+    return redirect(url_for('list_outfits'))
+
 
 @app.route('/add_outfit', methods=["POST","GET"])
 def add_outfit():
@@ -322,6 +342,7 @@ def sendemail():
     server.sendmail("kladr2020@gmail.com", user_email, user_text.encode("utf-8"))
     print(user_email, user_text)
 
+    flash('Mail skickat!')
     return render_template('about.html')
 
 if __name__ == '__main__':

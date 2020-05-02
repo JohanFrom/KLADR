@@ -113,6 +113,9 @@
                     <input type="submit" value="Lägg till outfit!" id="upload-button">
                 </div>
             </form>
+            <form id = "remove-form" action="{{url_for('remove_outfit', outfit = outfit)}}">
+                <input type="submit" value="Ta bort outfit!" id="remove-button">
+            </form>
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>

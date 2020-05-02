@@ -79,21 +79,22 @@
                     <aside>
                         <div id="divright">
                             <h4 id="htips">Tips & tricks</h4>
-                            <article class="foldable">
-                                <header>
-                                    <h6 class="tipsheader">Laga jeans</h6>
-                                </header>
-                                <iframe class="video" src="https://www.youtube.com/embed/NM7qpwrlJ48"
-                                    frameborder="0"></iframe>
-                                <p class="description">
-                                    Videon beskriver hur DU kan laga dina trasiga jeans - vilket både är bra för miljön
-                                    och plånboken!
-                                </p>
+                            
+                            <h6 class="tipsheader" onclick="toggle('jeans')">Laga jeans</h6>
+
+                            <article id="jeans">
+                                                                      
+                                    <iframe class="video" src="https://www.youtube.com/embed/NM7qpwrlJ48"
+                                        frameborder="0"></iframe>
+                                    <p class="description">
+                                        Videon beskriver hur DU kan laga dina trasiga jeans - vilket både är bra för miljön
+                                        och plånboken!
+                                    </p>
+                                
                             </article>
-                            <article class="foldable">
-                                <header>
-                                    <h6 class="tipsheader">Från jeans till shorts</h6>
-                                </header>
+
+                            <h6 class="tipsheader" onclick="toggle('shorts')">Från jeans till shorts</h6>
+                            <article id="shorts">
                                 <iframe class="video" src="https://www.youtube.com/embed/ljzVsgKL9Fs"
                                     frameborder="0"></iframe>
                                 <p class="description">
@@ -105,11 +106,9 @@
                     </aside>
                 </div>
                 <div id="clotheslaundry">
-                    <article class="foldable">
-                        <header>
-                            <!-- <h5 id="clothes" onclick="popUpFunction()" id="popUpTips">Klädvård</h5> -->
-                            <h4 id="clothes">Klicka här för tips på klädvård!</h4>
-                        </header>
+                    <h4 id="clothes" onclick="toggle('tips')">Klicka här för tips på klädvård!</h4>
+
+                    <article id="tips">
                         <div id="laundry">
                             <h5>Tvättips</h5>
                             <p>Faktum är att det blir roligare att tvätta om du lägger ned lite tid på att göra rätt. Du

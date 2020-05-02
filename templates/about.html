@@ -17,6 +17,16 @@
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
+            <div id="successMessage">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id=flashwrapper class="alert" role="alert">{{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
             <div id="about-info">
                 <h4>Hej!</h4>
                 <p>Vi på <mark class="orangered">KLÄDR</mark> hälsar dig varmt välkommen!</p>

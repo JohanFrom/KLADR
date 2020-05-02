@@ -21,18 +21,26 @@ $(document).ready(function()
 });
 
 
-$(document).ready(function () {
-    /*
-        Döljer alla element (utom "<header>") i alla element av typen
-        "<article>" med klassen "foldable"
-    */
-    $("article.foldable > *:not(header)").hide();
+// $(document).ready(function () {
+//     /*
+//         Döljer alla element (utom "<header>") i alla element av typen
+//         "<article>" med klassen "foldable"
+//     */
+//     $("article.foldable > *:not(header)").hide();
 
-    $("article.foldable header").on("click", function () {
-        $(this).nextAll("*").slideToggle();
-    });
-});
+//     $("article.foldable header").on("click", function () {
+//         $(this).nextAll("*").slideToggle();
+//     });
+// });
 
+function toggle(ID){
+    var element = document.getElementById(ID);
+    if(element.style.display === "none"){
+        element.style.display = "block";
+    }else{
+        element.style.display = "none";
+    }
+}
 //Get the button:
 mybutton = document.getElementById("my_btn");
 
@@ -50,6 +58,13 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+setTimeout(function() {
+    $('#successMessage').fadeOut('fast');
+}, 3000); // <-- time in milliseconds
+
+
+//$(window).click(function(){$('.messages.status').fadeOut();});
 
 //function popUpFunction() {
     //myWindow = window.open("https://www.makemesmile.se/guider/kl%C3%A4dv%C3%A5rd-28064305", "", "width=1100, height=800");

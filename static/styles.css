@@ -276,7 +276,7 @@ input[type=email]{
     color: orangered;
 }
 
-header > .tipsheader{
+.tipsheader{
     cursor: pointer;
     color: dimgrey;
     padding: 0;
@@ -285,6 +285,10 @@ header > .tipsheader{
 
 .tipsheader:hover{
     color: orangered;
+}
+
+#jeans, #shorts, #tips {
+    display: none;
 }
 
 #clothes{

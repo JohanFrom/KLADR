@@ -18,7 +18,7 @@
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             </nav>
 
-            <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
+            <a href="#" class="filter-only" id="filter-btn" >Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
             
             <div id="filter-menu">
                 <div>
@@ -90,7 +90,16 @@
                     <a href="{{url_for('filter', value = 'Flerfärgad')}}">Flerfärgad</a>
                 </div>
             </div>
-
+            <div id="successMessage">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id=flashwrapper class="alert" role="alert">{{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
             <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
 
             <div id="wardrobe">
