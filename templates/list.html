@@ -92,18 +92,17 @@
 
 
 
-            <button id="add-article"><a id="add-article-text" href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
 
-            <div id="wardrobe">
+            <div >
                
                 {% for outfit in outfits %}
-                    <div>
+                    <div id="outfit">
                         <h2><a href="{{url_for('show_outfit',outfit = names[loop.index0])}}">{{names[loop.index0]}}</a></h2>
                         
                         {% for article in outfit %}
                             
-                            <img src="{{url_for('send_image', filename=article)}}">
-                            
+                                <img src="{{url_for('send_image', filename=article)}}">   
                         {% endfor %}
                     </div>
                    
@@ -111,16 +110,14 @@
                 
             </div>
 
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
-            <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('list_outfits')}}">VISA OUTFIT</a></button>
 
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>
         </div>
     
-    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
-    <span></span>
+        <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+            <span></span>
     </a>
             
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

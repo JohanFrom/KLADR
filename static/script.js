@@ -41,23 +41,23 @@ function toggle(ID){
         element.style.display = "none";
     }
 }
-//Get the button:
-mybutton = document.getElementById("my_btn");
+// //Get the button:
+// mybutton = document.getElementById("my_btn");
 
-window.onscroll = function () { scrollFunction() };
+// window.onscroll = function () { scrollFunction() };
 
-function scrollFunction() {
-    if (document.body.scrollTop > 280 || document.documentElement.scrollTop > 280) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
-    }
-}
+// function scrollFunction() {
+//     if (document.body.scrollTop > 280 || document.documentElement.scrollTop > 280) {
+//         mybutton.style.display = "block";
+//     } else {
+//         mybutton.style.display = "none";
+//     }
+// }
 
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
+// function topFunction() {
+//     document.body.scrollTop = 0;
+//     document.documentElement.scrollTop = 0;
+// }
 
 setTimeout(function() {
     $('#successMessage').fadeOut('fast');
