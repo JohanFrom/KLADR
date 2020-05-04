@@ -443,7 +443,7 @@ button:after{
     align-items: center;
     padding: 20px;
 }
-#content > main > #upload-form > placeholder ,#type, #colour {
+#content > main > #upload-form > placeholder, #type, #colour {
     background-color: orangered;
     font-family: 'Francois One', sans-serif; 
     color: whitesmoke; 
@@ -471,3 +471,4 @@ button:after{
 #content > main > #upload-form > #upload-button:hover, #remove-button:hover{
     background-color: grey;
 }
+
