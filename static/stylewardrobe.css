@@ -136,29 +136,69 @@ body{
     text-decoration: none;
 }
 
-
 #outfit a:hover{
     color: #666;
 }
 
-#outfit  img {
+#outfit > img {
     width: 400px;
     max-height: 500px;
     margin: 1em;
 }
 /*LÄGG TILL OUTFIT*/
-#content > #upload-form > #wardrobe > img{
+#content > #upload-form > #wardrobe{
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
     flex-grow: 1;
     object-fit: cover;
-    margin: 5px;
-    width: 400px;
-    max-height: 500px;
-    margin: 1em;
+    align-items: center;
 }
 
+#content > #upload-form > #wardrobe > img{
+    margin: 5px;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 1em;
+    align-items: center;
+}
+#content > #upload-form{
+    align-items: center;
+}
+
+input[type=submit]{
+    background-color: orangered; 
+    font-family: 'Francois One', sans-serif; 
+    color: white; 
+    font-size: 20px;
+    border-radius: 5px; 
+    border: none; 
+    align-items: center;
+    margin-top: 10px;
+}
+
+input[type=submit]:hover{
+    cursor: pointer;
+    background-color: #666;
+}
+input[type=text]{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    resize: none;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    align-items: center;
+  }
 
 /*FOOTER*/
 footer{

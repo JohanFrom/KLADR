@@ -21,20 +21,15 @@
             <form id="upload-form" action="{{ url_for('add_outfit', outfit = outfit) }}" method="POST"  >
                 <div id="wardrobe">
                     {% for name in path %}
-                        <div >
+                        <div>
                             <img src="{{url_for('send_image', filename=name)}}">
-
-                            
                             <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
-
                         </div>
                     {% endfor %}
-
-                    <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10"></textarea>
-
-                    <label for="name">Döp din outfit!:</label><br>
-                    <input type="text" id="name" name="name" required><br>
-                    <input type="submit" value="Lägg till outfit!" id="upload-button">
+                        <input type="text" id="named-outfit" name="named-outfit" placeholder="Döp din outfit!" required>
+                        <input type="text" id="comment-outfit" name="comment-outfit" placeholder="Kommentera din outfit!" required>
+                        <input type="submit" id="save-outfit" name="save-outfit" value="SPARA OUTFIT">
+                        </form>
                 </div>
             </form>
             <footer>
