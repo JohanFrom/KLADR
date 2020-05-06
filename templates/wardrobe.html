@@ -16,6 +16,11 @@
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                    <a href="/logout">Logout <span class="sr-only">(current)</span></a>
+                {% else %}
+                    <a href="/login">Login <span class="sr-only">(current)</span></a>
+                {% endif %}
             </nav>
 
             <a href="#" class="filter-only" id="filter-btn" >Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
