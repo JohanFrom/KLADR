@@ -17,9 +17,10 @@
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
-                    <a href="/logout">Logout <span class="sr-only">(current)</span></a>
+                    <a class="navitem" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span></a>
                 {% else %}
-                    <a href="/login">Login <span class="sr-only">(current)</span></a>
+                    <a class="navitem" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
+                    <a class="navitem" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
             </nav>
 
@@ -108,6 +109,7 @@
             <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
 
             <div id="wardrobe">
+                <p>{{message}}</p>
                 {% for name in path %}
                     <div id="clothing-article">
                         <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>

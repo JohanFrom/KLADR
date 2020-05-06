@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request, send_from_directory, url_for, redirect, flash, g
+from flask import Flask, session, render_template, request, send_from_directory, url_for, redirect, flash, g, escape
 import psycopg2
 import os
 import smtplib
@@ -17,20 +17,44 @@ def index():
 
 
 @app.route('/wardrobe.html')
+def user_wardrobe():
+    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
+    # cursor = conn.cursor()
+    if 'username' in session:
+        
+        cursor.execute("""
+        SELECT filename from wardrobe
+        WHERE id = %s;
+            """ % escape(session['username']))
+
+        articles=[] 
+        for data in cursor:
+            articles.append(data[0])
+        message = ""
+        if len(articles) == 0:
+            message = "Du har inga plagg tillagda i din garderob!"
+    
+        return render_template('wardrobe.html',path = articles, message = message)
+    
+    message = "Du är inte inloggad!"
+    return render_template('wardrobe.html',path = [], message = message)    
+    # conn.close()
+
+@app.route('/wardrobe.html')
 def wardrobe():
     # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
     # cursor = conn.cursor()
-
+    
     cursor.execute("""
     SELECT filename from wardrobe;
-    """)
+        """)
     articles=[] 
     for data in cursor:
         articles.append(data[0])
+    message = "Du är inte inloggad!"
     
-    return render_template('wardrobe.html',path = articles)
+    return render_template('wardrobe.html',path = articles, message = message)
     # conn.close()
-    
     
 
 @app.route('/insert.html',  methods=["POST","GET"])
@@ -371,18 +395,33 @@ def login_page():
 def login():
     error = None
     if request.method == 'POST':
-        if (request.form['email-account'] != 'admin') \
-                or request.form['password-account'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+
+        email = request.form['email-account']
+
+        cursor.execute("""
+            SELECT * from user_account
+            WHERE email = '%s'
+        """ % (email))
+        user_list = cursor.fetchone()
+        if user_list is None:
+            print("wrong email")
+            error = 'Wrong email or password'
         else:
-            session['logged_in'] = True
-            flash('You were logged in.')
-            return redirect(url_for('wardrobe'))
-    return render_template('login.html', error=error)
+            print(user_list)            
+            if (email != user_list[1]) \
+                    or request.form['password-account'] != user_list[2]:
+                error = 'Invalid Credentials. Please try again.'
+            else:
+                session["username"] = user_list[0]
+                session['logged_in'] = True
+                flash('You were logged in.')
+                return redirect(url_for('user_wardrobe'))
+    return render_template('login.html', error = error)
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop("username", None)
     flash('You were logged out.')
     return redirect(url_for('wardrobe'))
 
