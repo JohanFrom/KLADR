@@ -1,8 +1,9 @@
-  <!Doctype html>
+<!Doctype html>
 <html>
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/static/stylewardrobe.css">
+        <meta name="viewport" content="initial scale 1.0, width=device-width">
         <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
         <title>KLÄDR</title>
@@ -16,12 +17,19 @@
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                    <a class="navitem-logout" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
+                {% else %}
+                    <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
+                    <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
+                {% endif %}
             </nav>
 
+            {% if session['logged_in'] == True %}
             <a href="#" class="filter-only" id="filter-btn" >Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
             
             <div id="filter-menu">
-                <div class="filterheadings">
+                <div>
                     <p>Överdel</p>
                     <a href="{{url_for('filter',value = 'T-shirt')}}">T-Shirts</a>
                     <a href="{{url_for('filter', value = 'Linne')}}">Linnen</a>
@@ -30,7 +38,7 @@
                     <a href="{{url_for('filter', value = 'Hoodie')}}">Hoodie</a>
                     <a href="{{url_for('filter', value = 'Kofta')}}">Kofta</a>
                 </div>
-                <div class="filterheadings"> 
+                <div> 
                     <p>Nederdel</p>
                     <a href="{{url_for('filter', value = 'Byxor')}}">Byxor</a>
                     <a href="{{url_for('filter', value = 'Jeans')}}">Jeans</a>
@@ -39,13 +47,13 @@
                     <a href="{{url_for('filter', value = 'Kjol')}}">Kjol</a>
                     <a href="{{url_for('filter', value = 'Leggings')}}">Leggings</a>
                 </div>
-                <div class="filterheadings">
+                <div>
                     <p>Helkropp</p>
                     <a href="{{url_for('filter', value = 'Klänning')}}">Klänning</a>
                     <a href="{{url_for('filter', value = 'Jumpsuit')}}">Jumpsuit</a>
                     <a href="{{url_for('filter', value = 'Playsuit')}}">Playsuit</a>
                 </div>
-                <div class="filterheadings">
+                <div>
                     <p>Skor</p>
                     <a href="{{url_for('filter', value = 'Sneakers')}}">Sneaker</a>
                     <a href="{{url_for('filter', value = 'Klackar')}}">Klackar</a>
@@ -54,7 +62,7 @@
                     <a href="{{url_for('filter', value = 'Sandaler')}}">Sandaler</a>
                 </div>
                 
-                <div class="filterheadings">  
+                <div>  
                     <p>Ytterkläder</p>
                     <a href="{{url_for('filter', value = 'Lång jacka')}}">Lång jacka</a>
                     <a href="{{url_for('filter', value = 'Kort Jacka')}}">Kort jacka</a>
@@ -64,7 +72,7 @@
                 </div>
                 
                 
-                <div class="dots">
+                <div>
                     <p>..</p>
                     <a href="{{url_for('filter', value = 'Svart')}}">Svart</a>
                     <a href="{{url_for('filter', value = 'Brun')}}">Brun</a>
@@ -73,7 +81,7 @@
                     <a href="{{url_for('filter', value = 'Vit')}}">Vit</a>
                 </div>
                 
-                 <div class="filterheadings">
+                 <div>
                     <p>Färg</p>
                     <a href="{{url_for('filter', value = 'Blå')}}">Blå </a>
                     <a href="{{url_for('filter', value = 'Grön')}}">Grön</a>
@@ -81,7 +89,7 @@
                     <a href="{{url_for('filter', value = 'Orange')}}">Orange</a>
                     <a href="{{url_for('filter', value = 'Röd')}}">Röd</a>
                 </div>
-                <div class="dots">  
+                <div>  
                     <p>..</p>
                     <a href="{{url_for('filter', value = 'Rosa')}}">Rosa</a>
                     <a href="{{url_for('filter', value = 'Lila')}}">Lila</a>
@@ -90,6 +98,7 @@
                     <a href="{{url_for('filter', value = 'Flerfärgad')}}">Flerfärgad</a>
                 </div>
             </div>
+            {% endif %}
             <div id="successMessage">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -100,23 +109,26 @@
                     {% endif %}
                 {% endwith %}
             </div>
-            
-        <div id="wardrobe-buttons">
-            <button id="add-outfit"><a href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+            <p>{{message}}</p>
 
-            <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+            {% if session['logged_in'] == True %}
 
-            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
-
-            <!--<div id="wardrobe-buttons-article"> 
-                <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
-            </div>
-            <div id="wardrobe-buttons-outfit">
+            <div id="wardrobe-buttons">
                 <button id="add-outfit"><a href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+    
+                <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+    
                 <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
-            </div>-->
-        </div>
-          
+    
+                <!--<div id="wardrobe-buttons-article"> 
+                    <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
+                </div>
+                <div id="wardrobe-buttons-outfit">
+                    <button id="add-outfit"><a href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+                    <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+                </div>-->
+            </div>
+
             <div id="wardrobe">
                 {% for name in path %}
                     <div id="clothing-article">
@@ -124,6 +136,8 @@
                     </div>
                 {% endfor %}
             </div>
+
+            {% endif %}
 
             <footer>
                 <p>KLÄDR © 2020</p>
