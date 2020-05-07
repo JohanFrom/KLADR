@@ -24,3 +24,4 @@ i terminalen
 Kör app.py. Vi använder Microsoft Visual Studio Code, så vi vet att det fungerar. Dock borde valfri programmeringsmiljö med utskriftsfönster fungera lika bra. When in doubt, använd terminalen. 
 
 När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till produkten!
+<b>För en mer uppdaterad version av koden, gå in på branchen login! Vi har inte riktigt hunnit merga ihop på ett snyggt sätt!</b>
