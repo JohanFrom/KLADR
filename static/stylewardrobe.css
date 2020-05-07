@@ -20,10 +20,10 @@ body{
 
 /*NAV*/
 #content > nav{
-    background-color: whitesmoke;
     padding-bottom: 20px;
     padding: 15px;
     text-align: center;
+    padding-left: 180px;
     font-size: 20px;
     border-top-style: solid;
     border-bottom-style: solid;
@@ -37,7 +37,29 @@ body{
     padding-left: 10px;
 }
 
+#content > nav > .navitem-login{
+    text-decoration-line: none;
+    color: dimgrey;
+    float: right;
+    padding-left: 10px;
+}
+
+#content > nav > .navitem-login:hover, .navitem-login:focus{
+    color: orangered;
+}
+
 #content > nav > .navitem:hover, .navitem:focus{
+    color: orangered;
+}
+
+#content > nav > .navitem-logout{
+    text-decoration: none;
+    color: dimgrey;
+    float: right;
+    margin-right: 90px;
+}
+
+#content > nav > .navitem-logout:hover, .navitem-logout:focus{
     color: orangered;
 }
 
@@ -51,11 +73,7 @@ body{
     margin-right: 20px;
 }
 
-#content > #filter-menu > .dots{
-    color: whitesmoke;
-}
-
-#content > #filter-menu > .filterheadings{
+#content > #filter-menu > div > p{
     color: orangered;
 }
 
@@ -92,6 +110,7 @@ body{
 #filter-btn:focus + #filter-menu, #filter-menu:hover {
     height: 200px;
 }
+
 
 #wardrobe-buttons{
     text-align: center;
