@@ -41,8 +41,8 @@ def user_wardrobe():
 @app.route('/wardrobe.html')
 def wardrobe():
     cursor.execute("""
-    SELECT filename from wardrobe;
-        """)
+    SELECT filename from wardrobe where id = %s;
+        """%(escape(session['username'])))
     articles=[] 
     for data in cursor:
         articles.append(data[0])
@@ -95,13 +95,13 @@ def remove(filename):
 
     cursor.execute("""
         DELETE from outfit_article
-        WHERE article_name = '%s';
-    """ % (filename))
+        WHERE article_name = '%s' and id = %s;
+    """ % (filename,escape(session['username'])))
     
     cursor.execute("""
         DELETE from wardrobe
-        WHERE filename = '%s';
-    """ % (filename))
+        WHERE filename = '%s' and id = %s;
+    """ % (filename,escape(session['username'])))
 
     conn.commit()
     # conn.close()
@@ -118,7 +118,7 @@ def send_image(filename):
 @app.route('/wardrobe/<value>')
 def filter(value):
 
-    cursor.execute("""select filename from wardrobe WHERE type ='%s' OR colour='%s';"""%(value, value))
+    cursor.execute("""select filename from wardrobe WHERE (type ='%s' OR colour='%s') and id = %s;"""%(value, value,escape(session['username'])))
     articles=[]
     for data in cursor:
         articles.append(data[0])
@@ -203,9 +203,9 @@ def edit_outfit(outfit):
         """
         select article_name 
         from outfit_article 
-        where outfit_name = '%s'; 
+        where outfit_name = '%s' and user_outfit_article = %s; 
         
-        """ % (outfit))
+        """ % (outfit,escape(session['username'])))
     
     outfit_articles = []
     for article in cursor:
@@ -215,16 +215,16 @@ def edit_outfit(outfit):
     cursor.execute("""
         select comment
         from outfit
-        where name = '%s'; 
+        where name = '%s' and id = %s; 
         
-        """ % (outfit))
+        """ % (outfit,escape(session['username'])))
     for record in cursor:
         comment = record[0]
     
     cursor.execute("""
-        SELECT filename from wardrobe;
+        SELECT filename from wardrobe where id = %s;
 
-        """)
+        """ % (escape(session['username'])))
     wardrobe=[] 
     for data in cursor:
         wardrobe.append(data[0])
@@ -326,7 +326,7 @@ def edit(filename):
         newvalue = request.form.get("type")
         newcomment = request.form.get("comment")
         newcolour = request.form.get("colour")
-        cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s';"% (file,newvalue,newcomment,newcolour,image))
+        cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s' and id = %s;"% (file,newvalue,newcomment,newcolour,image, escape(session['username'])))
         conn.commit()
         # conn.close()
         return redirect(request.args.get("next") or url_for("wardrobe"))
