@@ -17,13 +17,14 @@
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
-                    <a class="navitem" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span></a>
+                    <a class="navitem-acc" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span></a>
                 {% else %}
-                    <a class="navitem" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
-                    <a class="navitem" href="{{url_for('register')}}">Registrera</a>
+                    <a class="navitem-acc" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
+                    <a class="navitem-acc" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
             </nav>
 
+            {% if session['logged_in'] == True %}
             <a href="#" class="filter-only" id="filter-btn" >Filtrering <img src="/static/filter-symbol.png" alt="filter"></a>
             
             <div id="filter-menu">
@@ -96,6 +97,7 @@
                     <a href="{{url_for('filter', value = 'Flerfärgad')}}">Flerfärgad</a>
                 </div>
             </div>
+            {% endif %}
             <div id="successMessage">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -106,10 +108,13 @@
                     {% endif %}
                 {% endwith %}
             </div>
+            <p>{{message}}</p>
+
+            {% if session['logged_in'] == True %}
+
             <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
 
             <div id="wardrobe">
-                <p>{{message}}</p>
                 {% for name in path %}
                     <div id="clothing-article">
                         <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
@@ -119,6 +124,7 @@
 
             <button id="add-outfit"><a  href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>            
             <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+            {% endif %}
 
             <footer>
                 <p>KLÄDR © 2020</p>

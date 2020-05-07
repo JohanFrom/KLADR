@@ -18,8 +18,6 @@ def index():
 
 @app.route('/wardrobe.html')
 def user_wardrobe():
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
     if 'username' in session:
         
         cursor.execute("""
@@ -42,9 +40,6 @@ def user_wardrobe():
 
 @app.route('/wardrobe.html')
 def wardrobe():
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
-    
     cursor.execute("""
     SELECT filename from wardrobe;
         """)
@@ -59,44 +54,41 @@ def wardrobe():
 
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
+    if 'username' in session:
+    
+        target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
+        print(target)
+        if not os.path.isdir(target):
+                os.mkdir(target)
+        else:
+            print("Couldn't create upload directory: {}".format(target))
+        print(request.files.getlist("file"))
+        for upload in request.files.getlist("file"):
+            print(upload)
+            print("{} is the file name".format(upload.filename))
+            filename = upload.filename
+            destination = "/".join([target, filename])
+            print ("Accept incoming file:", filename)
+            print ("Save it to:", destination)
+            upload.save(destination)
 
-    target = os.path.join(APP_ROOT, 'images/')
-    print(target)
-    if not os.path.isdir(target):
-            os.mkdir(target)
-    else:
-        print("Couldn't create upload directory: {}".format(target))
-    print(request.files.getlist("file"))
-    for upload in request.files.getlist("file"):
-        print(upload)
-        print("{} is the file name".format(upload.filename))
-        filename = upload.filename
-        destination = "/".join([target, filename])
-        print ("Accept incoming file:", filename)
-        print ("Save it to:", destination)
-        upload.save(destination)
 
-
-        value = request.form.get("type")
-        comment = request.form.get("comment")
-        colour = request.form.get("colour")
-        cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour) values ('%s','%s', '%s','%s');"% (filename,value,comment,colour) )
-        conn.commit()
-        # conn.close()
-        flash('Plagg tillagt!')
-        return redirect(request.args.get("next") or url_for("wardrobe"))
+            value = request.form.get("type")
+            comment = request.form.get("comment")
+            colour = request.form.get("colour")
+            cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour,id) values ('%s','%s', '%s','%s',%s);"% (filename,value,comment,colour,escape(session['username']))) 
+            conn.commit()
+            # conn.close()
+            flash('Plagg tillagt!')
+            return redirect(request.args.get("next") or url_for("wardrobe"))
 
     # return send_from_directory("images", filename, as_attachment=True)
     return render_template('insert.html')
 
 @app.route('/remove/<filename>', methods=["POST","GET"])
 def remove(filename):
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
     
-    target = os.path.join(APP_ROOT, 'images/')
+    target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
     destination = "/".join([target, filename])
     print ("Remove", destination)
     os.remove(destination)
@@ -121,12 +113,10 @@ def remove(filename):
 @app.route('/edit/<filename>')
 @app.route('/insert/<filename>')
 def send_image(filename):
-    return send_from_directory("images", filename)
+    return send_from_directory("images/"+escape(session['username']), filename)
 
 @app.route('/wardrobe/<value>')
 def filter(value):
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
 
     cursor.execute("""select filename from wardrobe WHERE type ='%s' OR colour='%s';"""%(value, value))
     articles=[]
@@ -138,54 +128,55 @@ def filter(value):
 
 @app.route('/outfits.html')
 def outfits():
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
-    cursor.execute("""
-    SELECT filename from wardrobe;
-    """)
-    articles=[] 
-    for data in cursor:
-        articles.append(data[0])
+    
+    articles = []
+    if 'username' in session:
+        cursor.execute("""
+        SELECT filename from wardrobe where id = %s;
+        """ % (escape(session['username'])))
+        articles=[] 
+        for data in cursor:
+            articles.append(data[0])
 
     return render_template('outfits.html',path = articles)   
 
 
 @app.route("/list_outfits")
 def list_outfits():
-    cursor.execute("""
-        select name from outfit;
-    """)
-    outfit_names = [] #lista pa alla outfit namn
-
-    for name in cursor:
-        outfit_names.append(name[0])
-
-    all_outfits = []
-
-    for outfit_name in outfit_names:
+    if 'username' in session:
         cursor.execute("""
-            select article_name from outfit_article
-            where outfit_name = '%s';
-         """ % (outfit_name))
-        temp = []
-        #temp.append(outfit_name)
-        for article in cursor:
-            temp.append(article[0])
-        all_outfits.append(temp)
-    print(all_outfits)
-    print(outfit_names)
-    return render_template("list.html", outfits = all_outfits, names=outfit_names)
+            select name from outfit where id = %s;
+        """ % (escape(session['username'])))
+
+        outfit_names = [] #lista pa alla outfit namn
+
+        for name in cursor:
+            outfit_names.append(name[0])
+
+        all_outfits = []
+
+        for outfit_name in outfit_names:
+            cursor.execute("""
+                select article_name from outfit_article
+                where outfit_name = '%s' and user_outfit_id = %s;
+            """ % (outfit_name,escape(session['username'])))
+            temp = []
+            #temp.append(outfit_name)
+            for article in cursor:
+                temp.append(article[0])
+            all_outfits.append(temp)
+        print(all_outfits)
+        print(outfit_names)
+        return render_template("list.html", outfits = all_outfits, names=outfit_names)
+    return render_template('list.html', outfits=[], names = [])
 #prova att ha tva listor, en med namn och en med outfits
 
 @app.route('/show_outfit/<outfit>')
 def show_outfit(outfit):
-    cursor.execute(
-        """
-        select article_name 
-        from outfit_article 
-        where outfit_name = '%s'; 
-        
-        """ % (outfit))
+    cursor.execute("""
+                select article_name from outfit_article
+                where outfit_name = '%s' and user_outfit_id = %s;
+            """ % (outfit,escape(session['username'])))
     
     outfit_articles = []
     for article in cursor:
@@ -196,9 +187,9 @@ def show_outfit(outfit):
     cursor.execute("""
         select comment
         from outfit
-        where name = '%s'; 
+        where name = '%s' and id = %s; 
         
-        """ % (outfit))
+        """ % (outfit, escape(session['username'])))
     for record in cursor:
         comment = record[0]
     print(comment)
@@ -245,23 +236,23 @@ def edit_outfit_form(outfit):
     cursor.execute("""
         DELETE
         FROM outfit_article
-        WHERE outfit_name ='%s';
-    """ % (outfit))
+        WHERE outfit_name ='%s' and user_outfit_id = %s;
+    """ % (outfit, escape(session['username'])))
 
 
     new_outfit = request.form.get("name")
     new_comment = request.form.get("comment")
     cursor.execute("""
         UPDATE outfit
-        SET name = '%s' , comment = '%s' WHERE name = '%s';
-    """ % (new_outfit,new_comment,outfit))
+        SET name = '%s' , comment = '%s' WHERE name = '%s'and id = %s;
+    """ % (new_outfit,new_comment,outfit, escape(session['username'])))
     article_names = request.form.getlist("article")
 
     for name in article_names:
         cursor.execute("""
-            insert into outfit_article 
-            values ('%s','%s');
-        """ % (new_outfit,name))
+            insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
+            values ('%s','%s',%s,%s);
+        """ % (new_outfit,name,escape(session['username']),escape(session['username'])))
     conn.commit()
 
     return redirect(url_for('show_outfit', outfit = new_outfit))
@@ -271,14 +262,14 @@ def remove_outfit(outfit):
     cursor.execute("""
     DELETE
     FROM outfit_article
-    WHERE outfit_name = '%s';
-    """ % (outfit))
+    WHERE outfit_name = '%s' and user_outfit_id = %s;
+    """ % (outfit, escape(session['username'])))
 
     cursor.execute("""
     DELETE
     FROM outfit
-    WHERE name = '%s';
-    """ % (outfit))
+    WHERE name = '%s' and user_outfit_id = %s;
+    """ % (outfit,escape(session['username'])))
 
     conn.commit()
     return redirect(url_for('list_outfits'))
@@ -288,16 +279,16 @@ def remove_outfit(outfit):
 def add_outfit():
     article_names = request.form.getlist("article")
 
-    outfit_name = request.form.get("name")
-    outfit_comment = request.form.get("comment")
-    cursor.execute("""insert into outfit (name,comment) values('%s','%s');""" % (outfit_name, outfit_comment))
+    outfit_name = request.form.get("named-outfit")
+    outfit_comment = request.form.get("comment-outfit")
+    cursor.execute("""insert into outfit (name,comment,id) values('%s','%s',%s);""" % (outfit_name, outfit_comment,escape(session['username'])))
 
     
     for name in article_names:
         cursor.execute("""
-            insert into outfit_article 
-            values ('%s','%s');
-        """ % (outfit_name,name))
+            insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
+            values ('%s','%s',%s,%s);
+        """ % (outfit_name,name, escape(session['username']),escape(session['username'])))
     print (article_names)
     conn.commit()
     return redirect(url_for("wardrobe"))
@@ -305,17 +296,15 @@ def add_outfit():
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
-    # conn = psycopg2.connect(dbname = "kladr", user = "aj9099", password="0obetr9j",host="pgserver.mah.se")
-    # cursor = conn.cursor()
 
-    cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s';"""%(filename))
+    cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s' and id = %s;"""%(filename,escape(session['username'])))
     for data in cursor:
         image = data[0]
         value = data[1]
         comment = data[2]
         colour = data[3]
 
-    target = os.path.join(APP_ROOT, 'images/')
+    target = os.path.join(APP_ROOT, 'images/'+escape(session['username']))
     print(target)
 
     if not os.path.isdir(target):

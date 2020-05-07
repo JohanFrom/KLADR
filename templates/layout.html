@@ -16,6 +16,12 @@
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                    <a class="navitem-acc" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span></a>
+                {% else %}
+                    <a class="navitem-acc" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
+                    <a class="navitem-acc" href="{{url_for('register')}}">Registrera</a>
+                {% endif %}
             </nav>
 
             <div id="about-jumbotron">
