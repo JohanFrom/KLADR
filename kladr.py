@@ -203,7 +203,7 @@ def edit_outfit(outfit):
         """
         select article_name 
         from outfit_article 
-        where outfit_name = '%s' and user_outfit_article = %s; 
+        where outfit_name = '%s' and user_outfit_id = %s; 
         
         """ % (outfit,escape(session['username'])))
     

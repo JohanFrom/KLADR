@@ -167,7 +167,7 @@ body{
     align-items: center;
 }
 
-#content > #upload-form > #wardrobe > img{
+#content > #upload-form > #wardrobe img{
     margin: 5px;
     max-width: 300px;
     max-height: 300px;
