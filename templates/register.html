@@ -1,0 +1,40 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial scale 1.0, width=device-width">
+        <link href="/static/styles.css" rel=stylesheet>
+        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+        <title>KLÄDR</title>
+    </head>
+    <body>
+        <div id="content">
+            <header>
+                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+            </header>
+            
+            <div id="register">
+                <form action="{{url_for('register_account')}}" method="POST">
+                    <label for="email-account">Lägg till ditt email</label>
+                    <input type="email" placeholder="Email" name="email-account">
+                    <label for="password-account">Lägg till lösenord</label>
+                    <input type="password" placeholder="Password" name="password-account">
+                    <input id="register-btn" type="submit" value="Registera">
+                </form>
+            </div>
+        
+            <footer>
+                <p>KLÄDR © 2020</p>
+            </footer>
+        </div>
+        
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+    <span></span>
+    </a>
+    <!--JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/static/script.js/"></script>
+    </body>
+</html>
