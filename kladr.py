@@ -13,11 +13,13 @@ cursor = conn.cursor()
 @app.route('/')
 @app.route('/index.html')
 def index():
+    '''Metod som skicka tillbaka template index.html'''
     return render_template('index.html')
 
 
 @app.route('/wardrobe.html')
-def user_wardrobe():
+def wardrobe():
+    '''metod som visar upp garderoben med en specifik användares artiklar'''
     if 'username' in session:
         
         cursor.execute("""
@@ -37,23 +39,11 @@ def user_wardrobe():
     message = "Du är inte inloggad! Om du vill se din garderob så skapa ett konto ovan!"
     return render_template('wardrobe.html',path = [], message = message)    
     # conn.close()
-
-@app.route('/wardrobe.html')
-def wardrobe():
-    cursor.execute("""
-    SELECT filename from wardrobe where id = %s;
-        """%(escape(session['username'])))
-    articles=[] 
-    for data in cursor:
-        articles.append(data[0])
-    message = "Du är inte inloggad!"
-    
-    return render_template('wardrobe.html',path = articles, message = message)
-    # conn.close()
     
 
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
+    '''Metod som lägger till en användares plagg i garderoben och i en mapp med användarens namn.'''
     if 'username' in session:
     
         target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
@@ -87,7 +77,7 @@ def insert():
 
 @app.route('/remove/<filename>', methods=["POST","GET"])
 def remove(filename):
-    
+    '''metod som tar bort en artikel från garderoben och från användarens mapp'''
     target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
     destination = "/".join([target, filename])
     print ("Remove", destination)
@@ -113,11 +103,12 @@ def remove(filename):
 @app.route('/edit/<filename>')
 @app.route('/insert/<filename>')
 def send_image(filename):
+    '''metod som returnerar en bild från en mapp'''
     return send_from_directory("images/"+escape(session['username']), filename)
 
 @app.route('/wardrobe/<value>')
 def filter(value):
-
+    '''metod som visar upp artiklar av en specifik typ eller färg från en viss användare'''
     cursor.execute("""select filename from wardrobe WHERE (type ='%s' OR colour='%s') and id = %s;"""%(value, value,escape(session['username'])))
     articles=[]
     for data in cursor:
@@ -128,7 +119,7 @@ def filter(value):
 
 @app.route('/outfits.html')
 def outfits():
-    
+    '''metod för att användaren ska kunna lägga till en outfit. Den visar alla artiklar som kan läggas till i en outfit'''
     articles = []
     if 'username' in session:
         cursor.execute("""
@@ -143,6 +134,7 @@ def outfits():
 
 @app.route("/list_outfits")
 def list_outfits():
+    ''' metod som listar alla outfits'''
     if 'username' in session:
         cursor.execute("""
             select name from outfit where id = %s;
@@ -169,10 +161,10 @@ def list_outfits():
         print(outfit_names)
         return render_template("list.html", outfits = all_outfits, names=outfit_names)
     return render_template('list.html', outfits=[], names = [])
-#prova att ha tva listor, en med namn och en med outfits
 
 @app.route('/show_outfit/<outfit>')
 def show_outfit(outfit):
+    '''metod som visar en specifik outfit'''
     cursor.execute("""
                 select article_name from outfit_article
                 where outfit_name = '%s' and user_outfit_id = %s;
@@ -199,6 +191,7 @@ def show_outfit(outfit):
 
 @app.route('/edit_outfit/<outfit>', methods=["POST","GET"])
 def edit_outfit(outfit):
+    '''metod för att visa en outfit som ska redigeras, fyller i formuläret med rätt data'''
     cursor.execute(
         """
         select article_name 
@@ -232,6 +225,7 @@ def edit_outfit(outfit):
 
 @app.route('/edit_outfit_form/<outfit>', methods=["POST","GET"])
 def edit_outfit_form(outfit):
+    '''metod som redigerar en outfit'''
     cursor.execute("""
         DELETE
         FROM outfit_article
@@ -258,6 +252,7 @@ def edit_outfit_form(outfit):
 
 @app.route('/remove_outfit/<outfit>',methods = ["POST","GET"])
 def remove_outfit(outfit):
+    '''metod för att ta bort en outfit'''
     cursor.execute("""
     DELETE
     FROM outfit_article
@@ -276,6 +271,7 @@ def remove_outfit(outfit):
 
 @app.route('/add_outfit', methods=["POST","GET"])
 def add_outfit():
+    '''metod för att lägga till en outfit'''
     article_names = request.form.getlist("article")
 
     outfit_name = request.form.get("named-outfit")
@@ -295,7 +291,7 @@ def add_outfit():
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
-
+    '''metod för att redigera en artikel'''
     cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s' and id = %s;"""%(filename,escape(session['username'])))
     for data in cursor:
         image = data[0]
@@ -337,14 +333,17 @@ def edit(filename):
 
 @app.route('/trends.html')
 def trends():
+    '''metod för att returnera template trends.html'''
     return render_template('trends.html')
 
 @app.route('/about.html')
 def about():
+    '''metod för att returnera template about.html'''
     return render_template('about.html')
 
 @app.route('/about.html', methods = ["GET", "POST"])
 def sendemail():
+    '''metod för att skicka ett mail'''
     user_text = request.form.get("text-input")
     user_email = "kladr2020@gmail.com"
     server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -359,10 +358,12 @@ def sendemail():
 
 @app.route('/register.html')
 def register():
+    '''metod för att skicka tillbaka template register.html'''
     return render_template('register.html')
 
 @app.route('/register.html', methods = ["GET", "POST"])
 def register_account():
+    '''metod för att registrera en användare'''
     email_register = request.form.get("email-account")
     password_register = request.form.get("password-account")
 
@@ -377,10 +378,12 @@ def register_account():
 
 @app.route('/login.html')
 def login_page():
+    '''metod för att returnera login.html'''
     return render_template('login.html')
 
 @app.route('/login.html', methods = ["GET", "POST"])
 def login():
+    '''metod för att logga in'''
     error = None
     if request.method == 'POST':
 
@@ -402,15 +405,16 @@ def login():
             else:
                 session["username"] = user_list[0]
                 session['logged_in'] = True
-                flash('You were logged in.')
-                return redirect(url_for('user_wardrobe'))
+                flash('Du är inloggad!')
+                return redirect(url_for('wardrobe'))
     return render_template('login.html', error = error)
 
 @app.route('/logout')
 def logout():
+    '''metod för att logga ut'''
     session.pop('logged_in', None)
     session.pop("username", None)
-    flash('You were logged out.')
+    flash('Du är utloggad!')
     return redirect(url_for('wardrobe'))
 
 
