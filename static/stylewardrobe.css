@@ -164,7 +164,7 @@ body{
     margin: 5px;
 }
 
-#successMessage{
+#content > p{
     margin: 16px;
 }
 
