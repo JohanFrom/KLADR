@@ -165,7 +165,7 @@ body{
 }
 
 #content > p{
-    margin: 16px;
+    text-align: center;
 }
 
 #content > #wardrobe > #clothing-article img{
