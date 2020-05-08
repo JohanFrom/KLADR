@@ -142,6 +142,7 @@ footer{
 footer > p{
     text-align: center;
     color: orangered;
+    margin: 16px 0;
 }
 
 /*ABOUT.html*/
