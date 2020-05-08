@@ -73,10 +73,6 @@ body{
     margin-right: 20px;
 }
 
-#content > #filter-menu > div > p{
-    color: orangered;
-}
-
 #content > #filter-menu > div > a{
     display: block;
     text-decoration: none;
@@ -111,7 +107,6 @@ body{
     height: 200px;
 }
 
-
 #wardrobe-buttons{
     text-align: center;
 }
@@ -128,7 +123,7 @@ body{
 
 #add-outfit, #list-outfit{
     width: 20%;
-    margin: 0 20px 30px 20px;
+    margin: 30px 20px;
     font-size: 15px;
     background-color: #666;
     color: white;
@@ -151,6 +146,14 @@ body{
     font-size: 20px;
 }
 
+#content > #filter-menu > .dots{
+    color: whitesmoke;
+}
+
+#content > #filter-menu > .filterheadings{
+    color: orangered;
+}
+
 /*CONTENT*/
 #content > #wardrobe{
     display: flex;
@@ -160,6 +163,11 @@ body{
     object-fit: cover;
     margin: 5px;
 }
+
+#successMessage{
+    margin: 16px;
+}
+
 #content > #wardrobe > #clothing-article img{
     width: 400px;
     max-height: 500px;
