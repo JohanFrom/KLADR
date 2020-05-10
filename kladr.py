@@ -44,6 +44,7 @@ def wardrobe():
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
     '''Metod som lägger till en användares plagg i garderoben och i en mapp med användarens namn.'''
+            
     if 'username' in session:
     
         target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
@@ -60,17 +61,23 @@ def insert():
             destination = "/".join([target, filename])
             print ("Accept incoming file:", filename)
             print ("Save it to:", destination)
-            upload.save(destination)
-
-
-            value = request.form.get("type")
-            comment = request.form.get("comment")
-            colour = request.form.get("colour")
-            cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour,id) values ('%s','%s', '%s','%s',%s);"% (filename,value,comment,colour,escape(session['username']))) 
-            conn.commit()
+           
+            try:           
+                upload.save(destination)
+                value = request.form.get("type")
+                comment = request.form.get("comment")
+                colour = request.form.get("colour")
+                cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour,id) values ('%s','%s', '%s','%s',%s);"% (filename,value,comment,colour,escape(session['username']))) 
+                conn.commit()
+                flash('Plagg tillagt!')
+                return redirect(request.args.get("next") or url_for("wardrobe"))
+            except:
+                conn.rollback()
+                flash('Plagg kunde inte läggas till!') 
+                return redirect(request.args.get("next") or url_for("wardrobe"))
+  
             # conn.close()
-            flash('Plagg tillagt!')
-            return redirect(request.args.get("next") or url_for("wardrobe"))
+           
 
     # return send_from_directory("images", filename, as_attachment=True)
     return render_template('insert.html')
@@ -81,24 +88,29 @@ def remove(filename):
     target = os.path.join(APP_ROOT, 'images/'+ escape(session['username']))
     destination = "/".join([target, filename])
     print ("Remove", destination)
-    os.remove(destination)
+   
+    try:
+        os.remove(destination)
 
-    cursor.execute("""
-        DELETE from outfit_article
-        WHERE article_name = '%s' and id = %s;
-    """ % (filename,escape(session['username'])))
-    
-    cursor.execute("""
-        DELETE from wardrobe
-        WHERE filename = '%s' and id = %s;
-    """ % (filename,escape(session['username'])))
+        cursor.execute("""
+            DELETE from outfit_article
+            WHERE article_name = '%s' and id = %s;
+        """ % (filename,escape(session['username'])))
+        
+        cursor.execute("""
+            DELETE from wardrobe
+            WHERE filename = '%s' and id = %s;
+        """ % (filename,escape(session['username'])))
 
-    conn.commit()
-    # conn.close()
-    
-    flash('Plagg borttaget!')
-    return wardrobe()
-
+        conn.commit()
+        # conn.close()
+        
+        flash('Plagg borttaget!')
+        return wardrobe()
+    except:
+        conn.rollback()
+        flash('Plagg kunde inte tas bort!')
+        return wardrobe()
 
 @app.route('/edit/<filename>')
 @app.route('/insert/<filename>')
@@ -226,105 +238,125 @@ def edit_outfit(outfit):
 @app.route('/edit_outfit_form/<outfit>', methods=["POST","GET"])
 def edit_outfit_form(outfit):
     '''metod som redigerar en outfit'''
-    cursor.execute("""
-        DELETE
-        FROM outfit_article
-        WHERE outfit_name ='%s' and user_outfit_id = %s;
-    """ % (outfit, escape(session['username'])))
-
-
-    new_outfit = request.form.get("name")
-    new_comment = request.form.get("comment")
-    cursor.execute("""
-        UPDATE outfit
-        SET name = '%s' , comment = '%s' WHERE name = '%s'and id = %s;
-    """ % (new_outfit,new_comment,outfit, escape(session['username'])))
-    article_names = request.form.getlist("article")
-
-    for name in article_names:
+    try:
         cursor.execute("""
-            insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
-            values ('%s','%s',%s,%s);
-        """ % (new_outfit,name,escape(session['username']),escape(session['username'])))
-    conn.commit()
+            DELETE
+            FROM outfit_article
+            WHERE outfit_name ='%s' and user_outfit_id = %s;
+        """ % (outfit, escape(session['username'])))
 
-    return redirect(url_for('show_outfit', outfit = new_outfit))
+
+        new_outfit = request.form.get("name")
+        new_comment = request.form.get("comment")
+        cursor.execute("""
+            UPDATE outfit
+            SET name = '%s' , comment = '%s' WHERE name = '%s'and id = %s;
+        """ % (new_outfit,new_comment,outfit, escape(session['username'])))
+        article_names = request.form.getlist("article")
+
+        for name in article_names:
+            cursor.execute("""
+                insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
+                values ('%s','%s',%s,%s);
+            """ % (new_outfit,name,escape(session['username']),escape(session['username'])))
+        conn.commit()
+
+        return redirect(url_for('show_outfit', outfit = new_outfit))
+    except:
+        conn.rollback()
+        flash('Outfiten kunde inte redigeras!')
+        return wardrobe()
 
 @app.route('/remove_outfit/<outfit>',methods = ["POST","GET"])
 def remove_outfit(outfit):
     '''metod för att ta bort en outfit'''
-    cursor.execute("""
-    DELETE
-    FROM outfit_article
-    WHERE outfit_name = '%s' and user_outfit_id = %s;
-    """ % (outfit, escape(session['username'])))
+    try:    
+        cursor.execute("""
+        DELETE
+        FROM outfit_article
+        WHERE outfit_name = '%s' and user_outfit_id = %s;
+        """ % (outfit, escape(session['username'])))
 
-    cursor.execute("""
-    DELETE
-    FROM outfit
-    WHERE name = '%s' and user_outfit_id = %s;
-    """ % (outfit,escape(session['username'])))
+        cursor.execute("""
+        DELETE
+        FROM outfit
+        WHERE name = '%s' and user_outfit_id = %s;
+        """ % (outfit,escape(session['username'])))
 
-    conn.commit()
-    return redirect(url_for('list_outfits'))
-
+        conn.commit()
+        return redirect(url_for('list_outfits'))
+    except:
+        conn.rollback()
+        flash('outfit kunde inte tas bort!')
+        return wardrobe()
 
 @app.route('/add_outfit', methods=["POST","GET"])
 def add_outfit():
     '''metod för att lägga till en outfit'''
-    article_names = request.form.getlist("article")
+    try:
+        article_names = request.form.getlist("article")
 
-    outfit_name = request.form.get("named-outfit")
-    outfit_comment = request.form.get("comment-outfit")
-    cursor.execute("""insert into outfit (name,comment,id) values('%s','%s',%s);""" % (outfit_name, outfit_comment,escape(session['username'])))
+        outfit_name = request.form.get("named-outfit")
+        outfit_comment = request.form.get("comment-outfit")
+        cursor.execute("""insert into outfit (name,comment,id) values('%s','%s',%s);""" % (outfit_name, outfit_comment,escape(session['username'])))
 
-    
-    for name in article_names:
-        cursor.execute("""
-            insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
-            values ('%s','%s',%s,%s);
-        """ % (outfit_name,name, escape(session['username']),escape(session['username'])))
-    print (article_names)
-    conn.commit()
-    return redirect(url_for("wardrobe"))
+        
+        for name in article_names:
+            cursor.execute("""
+                insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
+                values ('%s','%s',%s,%s);
+            """ % (outfit_name,name, escape(session['username']),escape(session['username'])))
+        print (article_names)
+        conn.commit()
+        return redirect(url_for("wardrobe"))
+    except:
+        conn.rollback()
+        flash('outfit kunde inte läggas till!')
+        return wardrobe()
 
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
     '''metod för att redigera en artikel'''
-    cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s' and id = %s;"""%(filename,escape(session['username'])))
-    for data in cursor:
-        image = data[0]
-        value = data[1]
-        comment = data[2]
-        colour = data[3]
+    try:
+        cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s' and id = %s;"""%(filename,escape(session['username'])))
+        for data in cursor:
+            image = data[0]
+            value = data[1]
+            comment = data[2]
+            colour = data[3]
 
-    target = os.path.join(APP_ROOT, 'images/'+escape(session['username']))
-    print(target)
+        target = os.path.join(APP_ROOT, 'images/'+escape(session['username']))
+        print(target)
 
-    if not os.path.isdir(target):
-            os.mkdir(target)
-    else:
-        print("Couldn't create upload directory: {}".format(target))
-    print(request.files.getlist("file"))
-    for upload in request.files.getlist("file"):
-        print(upload)
-        print("{} is the file name".format(upload.filename))
-        file = upload.filename
-        destination = "/".join([target, file])
-        print ("Accept incoming file:", file)
-        print ("Save it to:", destination)
-        upload.save(destination)
-        # with open (destination,'rb') as f:
-        #     blob = f.read()
-        # binary = psycopg2.Binary(blob)
-        newvalue = request.form.get("type")
-        newcomment = request.form.get("comment")
-        newcolour = request.form.get("colour")
-        cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s' and id = %s;"% (file,newvalue,newcomment,newcolour,image, escape(session['username'])))
-        conn.commit()
-        # conn.close()
-        return redirect(request.args.get("next") or url_for("wardrobe"))
+        if not os.path.isdir(target):
+                os.mkdir(target)
+        else:
+            print("Couldn't create upload directory: {}".format(target))
+        print(request.files.getlist("file"))
+        for upload in request.files.getlist("file"):
+            print(upload)
+            print("{} is the file name".format(upload.filename))
+            file = upload.filename
+            destination = "/".join([target, file])
+            print ("Accept incoming file:", file)
+            print ("Save it to:", destination)
+            upload.save(destination)
+            # with open (destination,'rb') as f:
+            #     blob = f.read()
+            # binary = psycopg2.Binary(blob)
+            newvalue = request.form.get("type")
+            newcomment = request.form.get("comment")
+            newcolour = request.form.get("colour")
+            cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s' and id = %s;"% (file,newvalue,newcomment,newcolour,image, escape(session['username'])))
+            conn.commit()
+            # conn.close()
+            return redirect(request.args.get("next") or url_for("wardrobe"))
+    except:
+        conn.rollback()
+        flash('Plagg kunde inte redigeras!')
+        return wardrobe()
+
 
     print(image, value, comment)
 
@@ -364,17 +396,22 @@ def register():
 @app.route('/register.html', methods = ["GET", "POST"])
 def register_account():
     '''metod för att registrera en användare'''
-    email_register = request.form.get("email-account")
-    password_register = request.form.get("password-account")
+    try:
+        email_register = request.form.get("email-account")
+        password_register = request.form.get("password-account")
 
-    cursor.execute("""
-            insert into user_account (email, password)
-            values ('%s','%s');
-        """ % (email_register, password_register))
+        cursor.execute("""
+                insert into user_account (email, password)
+                values ('%s','%s');
+            """ % (email_register, password_register))
 
-    conn.commit()
-    
-    return redirect(url_for("login_page"))
+        conn.commit()
+        
+        return redirect(url_for("login_page"))
+    except:
+        conn.rollback()
+        flash('Kontot kunde inte skapas!')
+        return wardrobe()
 
 @app.route('/login.html')
 def login_page():
@@ -396,12 +433,12 @@ def login():
         user_list = cursor.fetchone()
         if user_list is None:
             print("wrong email")
-            error = 'Wrong email or password'
+            error = 'Fel mail eller lösenord'
         else:
             print(user_list)            
             if (email != user_list[1]) \
                     or request.form['password-account'] != user_list[2]:
-                error = 'Invalid Credentials. Please try again.'
+                error = 'Fel mail eller lösenord'
             else:
                 session["username"] = user_list[0]
                 session['logged_in'] = True
