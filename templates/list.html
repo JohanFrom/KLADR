@@ -33,70 +33,27 @@
 
         <div id="filter-menu">
             <div class="filterheadings">
-                <p>Överdel</p>
-                <a href="{{url_for('filter',value = 'T-shirt')}}">T-Shirts</a>
-                <a href="{{url_for('filter', value = 'Linne')}}">Linnen</a>
-                <a href="{{url_for('filter', value = 'Skjorta')}}">Skjorta</a>
-                <a href="{{url_for('filter', value = 'Stickat')}}">Stickat</a>
-                <a href="{{url_for('filter', value = 'Hoodie')}}">Hoodie</a>
-                <a href="{{url_for('filter', value = 'Kofta')}}">Kofta</a>
+                <p>Finare tillfällen</p>
+                <a href="{{url_for('filter_outfit',value = 'Bröllop')}}">Bröllop</a>
+                <a href="{{url_for('filter_outfit',value = 'Dop')}}">Dop</a>
+                <a href="{{url_for('filter_outfit',value = 'Högtid')}}">Högtid</a>
+                <a href="{{url_for('filter_outfit',value = 'Fest')}}">Fest</a>
+                <a href="{{url_for('filter_outfit',value = 'Date')}}">Date</a>
             </div>
             <div class="filterheadings">
-                <p>Nederdel</p>
-                <a href="{{url_for('filter', value = 'Byxor')}}">Byxor</a>
-                <a href="{{url_for('filter', value = 'Jeans')}}">Jeans</a>
-                <a href="{{url_for('filter', value = 'Shorts')}}">Shorts</a>
-                <a href="{{url_for('filter', value = 'Sweatpants')}}">Sweatpants</a>
-                <a href="{{url_for('filter', value = 'Kjol')}}">Kjol</a>
-                <a href="{{url_for('filter', value = 'Leggings')}}">Leggings</a>
+                <p>Vardagliga tillfällen</p>
+                <a href="{{url_for('filter_outfit',value = 'Vardag')}}">Vardag</a>
+                <a href="{{url_for('filter_outfit',value = 'Skola')}}">Skola</a>
+                <a href="{{url_for('filter_outfit',value = 'Arbete')}}">Arbete</a>
+                <a href="{{url_for('filter_outfit',value = 'Annat')}}">Annat</a>
             </div>
             <div class="filterheadings">
-                <p>Helkropp</p>
-                <a href="{{url_for('filter', value = 'Klänning')}}">Klänning</a>
-                <a href="{{url_for('filter', value = 'Jumpsuit')}}">Jumpsuit</a>
-                <a href="{{url_for('filter', value = 'Playsuit')}}">Playsuit</a>
-            </div>
-            <div class="filterheadings">
-                <p>Skor</p>
-                <a href="{{url_for('filter', value = 'Sneakers')}}">Sneaker</a>
-                <a href="{{url_for('filter', value = 'Klackar')}}">Klackar</a>
-                <a href="{{url_for('filter', value = 'Kängor')}}">Kängor</a>
-                <a href="{{url_for('filter', value = 'Stövlar')}}">Stövlar</a>
-                <a href="{{url_for('filter', value = 'Sandaler')}}">Sandaler</a>
-            </div>
-            <div class="filterheadings">
-                <p>Ytterkläder</p>
-                <a href="{{url_for('filter', value = 'Lång jacka')}}">Lång jacka</a>
-                <a href="{{url_for('filter', value = 'Kort Jacka')}}">Kort jacka</a>
-                <a href="{{url_for('filter', value = 'Kappa/Rock')}}">Kappa/Rock</a>
-                <a href="{{url_for('filter', value = 'Regnjacka')}}">Regnjacka</a>
-                <a href="{{url_for('filter', value = 'Termobyxor')}}">Termobyxor</a>
-            </div>
-
-            <div class="dots">
-                <p>..</p>
-                <a href="{{url_for('filter', value = 'Svart')}}">Svart</a>
-                <a href="{{url_for('filter', value = 'Brun')}}">Brun</a>
-                <a href="{{url_for('filter', value = 'Beige')}}">Beige</a>
-                <a href="{{url_for('filter', value = 'Grå')}}">Grå</a>
-                <a href="{{url_for('filter', value = 'Vit')}}">Vit</a>
-            </div>
-
-            <div class="filterheadings">
-                <p>Färg</p>
-                <a href="{{url_for('filter', value = 'Blå')}}">Blå </a>
-                <a href="{{url_for('filter', value = 'Grön')}}">Grön</a>
-                <a href="{{url_for('filter', value = 'Gul')}}">Gul</a>
-                <a href="{{url_for('filter', value = 'Orange')}}">Orange</a>
-                <a href="{{url_for('filter', value = 'Röd')}}">Röd</a>
-            </div>
-            <div class="dots">
-                <p>..</p>
-                <a href="{{url_for('filter', value = 'Rosa')}}">Rosa</a>
-                <a href="{{url_for('filter', value = 'Lila')}}">Lila</a>
-                <a href="{{url_for('filter', value = 'Guld')}}">Guld</a>
-                <a href="{{url_for('filter', value = 'Silver')}}">Silver</a>
-                <a href="{{url_for('filter', value = 'Flerfärgad')}}">Flerfärgad</a>
+                <p>Årstid</p>
+                <a href="{{url_for('filter_outfit',value = 'Vinter')}}">Vinter</a>
+                <a href="{{url_for('filter_outfit',value = 'Vår')}}">Vår</a>
+                <a href="{{url_for('filter_outfit',value = 'Sommar')}}">Sommar</a>
+                <a href="{{url_for('filter_outfit',value = 'Höst')}}">Höst</a>
+                <a href="{{url_for('filter_outfit',value = 'Flera')}}">Flera</a>
             </div>
         </div>
 

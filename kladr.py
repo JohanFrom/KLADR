@@ -173,7 +173,43 @@ def list_outfits():
         print(outfit_names)
         return render_template("list.html", outfits = all_outfits, names=outfit_names)
     return render_template('list.html', outfits=[], names = [])
+@app.route('/list_outfits/<value>')
+def filter_outfit(value):
+    if 'username' in session:
+        cursor.execute("""
+            select name from outfit where (type = '%s' OR season = '%s') AND id = %s;
+        """ % (value,value,escape(session['username'])))
 
+        outfit_names = [] #lista pa alla outfit namn
+
+        for name in cursor:
+            outfit_names.append(name[0])
+
+        all_outfits = []
+
+        for outfit_name in outfit_names:
+            cursor.execute("""
+                    select article_name from outfit_article
+                    where outfit_name = '%s' and user_outfit_id = %s;
+                """ % (outfit_name,escape(session['username'])))
+            temp = []
+                   #temp.append(outfit_name)
+            for article in cursor:
+                temp.append(article[0])
+            all_outfits.append(temp)
+        print(all_outfits)
+        print(outfit_names)
+        return render_template("list.html", outfits = all_outfits, names=outfit_names)
+    return render_template('list.html', outfits=[], names = [])
+
+    '''metod som visar upp artiklar av en specifik typ eller färg från en viss användare'''
+    cursor.execute("""select filename from wardrobe WHERE (type ='%s' OR colour='%s') and id = %s;"""%(value, value,escape(session['username'])))
+    articles=[]
+    for data in cursor:
+        articles.append(data[0])
+    # conn.close()
+
+    return render_template('wardrobe.html',path = articles)
 @app.route('/show_outfit/<outfit>')
 def show_outfit(outfit):
     '''metod som visar en specifik outfit'''
@@ -218,13 +254,15 @@ def edit_outfit(outfit):
 
 
     cursor.execute("""
-        select comment
+        select comment,type,season
         from outfit
         where name = '%s' and id = %s; 
         
         """ % (outfit,escape(session['username'])))
     for record in cursor:
         comment = record[0]
+        outfit_type = record[1]
+        season = record[2]
     
     cursor.execute("""
         SELECT filename from wardrobe where id = %s;
@@ -233,7 +271,7 @@ def edit_outfit(outfit):
     for data in cursor:
         wardrobe.append(data[0])
 
-    return render_template('edit_outfit.html', wardrobe=wardrobe, comment=comment, outfit_articles=outfit_articles, outfit=outfit)
+    return render_template('edit_outfit.html', wardrobe=wardrobe, comment=comment, outfit_articles=outfit_articles, outfit=outfit, type = outfit_type, season = season)
 
 @app.route('/edit_outfit_form/<outfit>', methods=["POST","GET"])
 def edit_outfit_form(outfit):
@@ -248,10 +286,12 @@ def edit_outfit_form(outfit):
 
         new_outfit = request.form.get("name")
         new_comment = request.form.get("comment")
+        new_type = request.form.get("type")
+        new_season = request.form.get("season")
         cursor.execute("""
             UPDATE outfit
-            SET name = '%s' , comment = '%s' WHERE name = '%s'and id = %s;
-        """ % (new_outfit,new_comment,outfit, escape(session['username'])))
+            SET name = '%s' , comment = '%s', type = '%s', season = '%s' WHERE name = '%s'and id = %s;
+        """ % (new_outfit,new_comment,new_type,new_season,outfit, escape(session['username'])))
         article_names = request.form.getlist("article")
 
         for name in article_names:
@@ -298,7 +338,9 @@ def add_outfit():
 
         outfit_name = request.form.get("named-outfit")
         outfit_comment = request.form.get("comment-outfit")
-        cursor.execute("""insert into outfit (name,comment,id) values('%s','%s',%s);""" % (outfit_name, outfit_comment,escape(session['username'])))
+        outfit_season = request.form.get("season")
+        outfit_type = request.form.get("type")
+        cursor.execute("""insert into outfit (name,comment,id, type, season) values('%s','%s',%s,'%s','%s');""" % (outfit_name, outfit_comment,escape(session['username']),outfit_type,outfit_season))
 
         
         for name in article_names:

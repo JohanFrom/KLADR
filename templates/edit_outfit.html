@@ -29,7 +29,7 @@
                 <div id="wardrobe">
                     {% for name in wardrobe %}
                         <div >
-                            <img src="{{url_for('send_image', filename=name)}}">
+                            <label for="{{name}}"><img src="{{url_for('send_image', filename=name)}}"></label>
 
                             {% if name in outfit_articles %}
                                 <input type="checkbox" id="{{name}}" name="article" value="{{name}}" checked>
@@ -40,7 +40,32 @@
                     {% endfor %}
 
                     <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{comment}}</textarea>
+                    
+                    <select id="type" name="type" required>
+                        <option disabled> Tillfälle</option>   
+                        <option selected>{{type}}</option>                        
+                        <option value="Annat">Annat</option>
 
+                        <option value="Bröllop">Bröllop</option>
+                        <option value="Dop">Dop</option>
+                        <option value="Vardag">Vardag</option>
+                        <option value="Högtid">Högtid</option>
+                        <option value="Fest">Fest</option>
+                        <option value="Skola">Skola</option>
+                        <option value="Arbete">Arbete</option>
+                        <option value="Date">Date</option>
+                    </select>
+
+                   
+                    <select id="season" name="season" required>
+                        <option disabled>Välj en årstid</option>    
+                        <option selected>{{season}}</option>                                                
+                        <option value="Vår">Vår</option>
+                        <option value="Vinter">Vinter</option>
+                        <option value="Sommar">Sommar</option>
+                        <option value="Höst">Höst</option>
+                        <option value="Flera">Flera</option>
+                    </select>
                     <label for="name">Döp din outfit!:</label><br>
                     <input type="text" id="name" name="name" value="{{outfit}}"required><br>
                     <input type="submit" value="Redigera outfit!" id="upload-button">

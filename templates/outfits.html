@@ -28,12 +28,38 @@
                 <div id="wardrobe">
                     {% for name in path %}
                         <div>
-                            <img src="{{url_for('send_image', filename=name)}}">
+                            <label for="{{name}}"><img src="{{url_for('send_image', filename=name)}}"></label>
                             <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
                         </div>
                     {% endfor %}
                         <input type="text" id="named-outfit" name="named-outfit" placeholder="Döp din outfit!" required>
-                        <input type="text" id="comment-outfit" name="comment-outfit" placeholder="Kommentera din outfit!" required>
+
+                        
+                        <select id="type" name="type" required>
+                            <option disabled selected> Tillfälle</option>                            
+                            <option value="Annat">Annat</option>
+
+                            <option value="Bröllop">Bröllop</option>
+                            <option value="Dop">Dop</option>
+                            <option value="Vardag">Vardag</option>
+                            <option value="Högtid">Högtid</option>
+                            <option value="Fest">Fest</option>
+                            <option value="Skola">Skola</option>
+                            <option value="Arbete">Arbete</option>
+                            <option value="Date">Date</option>
+                        </select>
+
+                       
+                        <select id="season" name="season" required>
+                            <option disabled selected>Välj en årstid</option>                            
+                            <option value="Vår">Vår</option>
+                            <option value="Vinter">Vinter</option>
+                            <option value="Sommar">Sommar</option>
+                            <option value="Höst">Höst</option>
+                            <option value="Flera">Flera</option>
+                        </select>
+                        <input type="text" id="comment-outfit" name="comment-outfit" placeholder="Kommentera din outfit!" >
+
                         <input type="submit" id="save-outfit" name="save-outfit" value="SPARA OUTFIT">
                         </form>
                 </div>
