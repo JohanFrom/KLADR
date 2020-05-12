@@ -17,9 +17,9 @@
             <div id="register">
                 <form action="{{url_for('register_account')}}" method="POST">
                     <label for="email-account">Lägg till ditt email</label>
-                    <input type="email" placeholder="Email" name="email-account">
+                    <input type="email" placeholder="Email" name="email-account" required>
                     <label for="password-account">Lägg till lösenord</label>
-                    <input type="password" placeholder="Password" name="password-account">
+                    <input type="password" placeholder="Password" name="password-account" required>
                     <input id="register-btn" type="submit" value="Registera">
                 </form>
             </div>

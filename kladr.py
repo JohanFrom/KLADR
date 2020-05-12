@@ -404,15 +404,26 @@ def register_account():
     try:
         email_register = request.form.get("email-account")
         password_register = request.form.get("password-account")
-
         cursor.execute("""
-                insert into user_account (email, password)
-                values ('%s','%s');
-            """ % (email_register, password_register))
+            SELECT email from user_account;
+        """)
+        accounts = []
+        for record in cursor:
+            accounts.append(record[0])
+        if email_register not in accounts:
+            print(cursor.fetchall())
+            print(accounts)
+            cursor.execute("""
+                    insert into user_account (email, password)
+                    values ('%s','%s');
+                """ % (email_register, password_register))
 
-        conn.commit()
-        
-        return redirect(url_for("login_page"))
+            conn.commit()
+            
+            return redirect(url_for("login_page"))
+        else:
+            flash('Email redan i användning')
+            return wardrobe()
     except:
         conn.rollback()
         flash('Kontot kunde inte skapas!')
