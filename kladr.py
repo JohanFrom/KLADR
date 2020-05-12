@@ -423,11 +423,11 @@ def register_account():
             return redirect(url_for("login_page"))
         else:
             flash('Email redan i användning')
-            return wardrobe()
+            return render_template('register.html')
     except:
         conn.rollback()
         flash('Kontot kunde inte skapas!')
-        return wardrobe()
+        return render_template('register.html')
 
 @app.route('/login.html')
 def login_page():
