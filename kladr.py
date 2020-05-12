@@ -376,17 +376,22 @@ def about():
 @app.route('/about.html', methods = ["GET", "POST"])
 def sendemail():
     '''metod för att skicka ett mail'''
-    user_text = request.form.get("text-input")
-    user_email = "kladr2020@gmail.com"
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
+    try:
+        user_text = request.form.get("text-input")
+        user_email = "kladr2020@gmail.com"
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
 
-    server.login("kladr2020@gmail.com", "kladr2020april")
-    server.sendmail("kladr2020@gmail.com", user_email, user_text.encode("utf-8"))
-    print(user_email, user_text)
+        server.login("kladr2020@gmail.com", "kladr2020april")
+        server.sendmail("kladr2020@gmail.com", user_email, user_text.encode("utf-8"))
+        print(user_email, user_text)
 
-    flash('Mail skickat!')
-    return render_template('about.html')
+        flash('Mail skickat!')
+        return render_template('about.html')
+    except:
+        flash('Mail inte skickat!')
+        return render_template('about.html')
+        
 
 @app.route('/register.html')
 def register():
