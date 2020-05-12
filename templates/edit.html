@@ -31,9 +31,9 @@
                 <form id="upload-form" action="{{ url_for('edit', filename= image) }}" method="POST" enctype="multipart/form-data">
                         
                     <label for="file"> Bildfil:</label>
-                    <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple>
+                    <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple required>
                     <label for="type">Välj en typ</label>
-                        <select id="type" name="type">
+                        <select id="type" name="type" required>
                             <option value="{{ value }}">{{ value }}</option>
                             <option value="other">Annat</option>
 
