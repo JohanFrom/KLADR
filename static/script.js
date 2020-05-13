@@ -60,7 +60,7 @@ function toggle(ID) {
 // }
 
 setTimeout(function () {
-    $('#successMessage').fadeOut('fast');
+    $('#success-message').fadeOut('fast');
 }, 3000); // <-- time in milliseconds
 
 
