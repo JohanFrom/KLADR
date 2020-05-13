@@ -62,14 +62,14 @@ body{
     color: orangered;
 }
 
-#content > nav > .navitem-logout{
+#content > nav > .navitem-active{
     text-decoration: none;
     color: dimgrey;
     float: right;
-    padding-right: 70px;
+    padding-right: 10px;
 }
 
-#content > nav > .navitem-logout:hover, .navitem-logout:focus{
+#content > nav > .navitem-active:hover, .navitem-active:focus{
     color: orangered;
 }
 

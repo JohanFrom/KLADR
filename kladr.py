@@ -446,6 +446,9 @@ def register_account():
     try:
         email_register = request.form.get("email-account")
         password_register = request.form.get("password-account")
+        firstname_register = request.form.get("first-name")
+        lastname_register = request.form.get("last-name")
+        gender_register = request.form.get("gender")
         cursor.execute("""
             SELECT email from user_account;
         """)
@@ -456,9 +459,9 @@ def register_account():
             print(cursor.fetchall())
             print(accounts)
             cursor.execute("""
-                    insert into user_account (email, password)
-                    values ('%s','%s');
-                """ % (email_register, password_register))
+                insert into user_account (email, password, acc_firstname, acc_lastname, acc_gender)
+                values ('%s','%s','%s','%s','%s');
+                """ % (email_register, password_register, firstname_register, lastname_register, gender_register))
 
             conn.commit()
             
@@ -470,6 +473,34 @@ def register_account():
         conn.rollback()
         flash('Kontot kunde inte skapas!')
         return render_template('register.html')
+
+@app.route('/profile.html')
+def show_profile():
+    if 'username' in session:
+        cursor.execute("""SELECT acc_firstname, acc_lastname, acc_gender, email, password from user_account where id = %s;"""%(escape(session['username'])))
+        for data in cursor:
+            firstname = data[0]
+            lastname = data[1]
+            gender = data[2]
+            email = data[3]
+            password = data[4]
+
+    return render_template ('profile.html', firstname = firstname, lastname = lastname, gender = gender, email = email, password = password)
+
+@app.route('/profile.html', methods = ["GET", "POST"])
+def update_profile():
+    if 'username' in session:
+        email = request.form.get('email-account')
+        password = request.form.get('password-account')
+        firstname = request.form.get("first-name")
+        lastname = request.form.get("last-name")
+        gender = request.form.get("gender")
+
+        cursor.execute("UPDATE user_account SET email = '%s', password = '%s', acc_firstname = '%s', acc_lastname = '%s', acc_gender = '%s' WHERE id = %s;"% (email, password, firstname, lastname, gender, escape(session['username'])))
+
+        conn.commit()
+    
+    return render_template('profile.html')
 
 @app.route('/login.html')
 def login_page():

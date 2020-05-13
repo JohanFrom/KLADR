@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial scale 1.0, width=device-width">
-        <link rel="stylesheet" href="/static/stylewardrobe.css">
+        <link href="/static/styles.css" rel=stylesheet>
         <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
         <title>KLÄDR</title>
@@ -13,6 +13,7 @@
             <header>
                 <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
             </header>
+
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
                 <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
@@ -26,35 +27,38 @@
                 {% endif %}
             </nav>
 
-            
-           
-            <button id="add-article"><a href="{{url_for('edit_outfit',outfit=outfit)}}">REDIGERA OUTFIT</a></button>
-            <h2>{{outfit}} </h2>
-            <div id="wardrobe">
-                {% for article in outfit_articles %}
-                    <div>
-                        <img src="{{url_for('send_image', filename=article)}}">
-                    </div>
-                {% endfor %}
+            <div id="register">
+                <form action="{{url_for('update_profile')}}" method="POST" enctype="multipart/form-data">
+                    <label for="first-name">Ditt namn</label>
+                    <input type="text" placeholder="Förnamn" name="first-name" value ="{{ firstname }}">
+                    <label for="last-name">Ditt namn</label>
+                    <input type="text" placeholder="Efternamn" name="last-name" value="{{ lastname }}">
+                    <label for="gender">Kön</label>
+                    <select name="gender" id="gender">
+                        <option value="{{ gender }}">{{ gender }}</option>
+                        <option value="Man">Man</option>
+                        <option value="Kvinna">Kvinna</option>
+                        <option value="Annat">Annat</option>
+                    </select>
+                    <label for="email-account">Ditt email</label>
+                    <input type="email" placeholder="Email" name="email-account" value="{{ email }}">
+                    <label for="password-account">Lägg till lösenord</label>
+                    <input type="password" placeholder="Password" name="password-account" value="{{ password }}">
+                    <input id="register-btn" type="submit" value="Uppdatera">
+                </form>
             </div>
-            <div id="comment">
-                <p>
-                    {{comment}}
-                </p>
-            </div>
-            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
-
+        
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>
         </div>
-    
+        
     <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
     <span></span>
     </a>
-            
+    <!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript"></script>
-    <script src="/static/script.js"></script>
+    <script src="/static/script.js/"></script>
     </body>
 </html>
