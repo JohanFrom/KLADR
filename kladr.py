@@ -36,7 +36,7 @@ def wardrobe():
     
         return render_template('wardrobe.html',path = articles, message = message)
     
-    message = "Du är inte inloggad. Logga in eller skapa ett konto för att se din garderob!"
+    message = "Välkommen till KLÄDR! Logga in eller skapa ett konto för att se din garderob!"
     return render_template('wardrobe.html',path = [], message = message)    
     # conn.close()
     
@@ -69,11 +69,11 @@ def insert():
                 colour = request.form.get("colour")
                 cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour,id) values ('%s','%s', '%s','%s',%s);"% (filename,value,comment,colour,escape(session['username']))) 
                 conn.commit()
-                flash('Plagg tillagt!')
+                flash('Artikeln är tillagd!')
                 return redirect(request.args.get("next") or url_for("wardrobe"))
             except:
                 conn.rollback()
-                flash('Plagg kunde inte läggas till!') 
+                flash('Artikeln kunde inte läggas till!') 
                 return redirect(request.args.get("next") or url_for("wardrobe"))
   
             # conn.close()
@@ -105,11 +105,11 @@ def remove(filename):
         conn.commit()
         # conn.close()
         
-        flash('Plagg borttaget!')
+        flash('Artikeln är borttagen!')
         return wardrobe()
     except:
         conn.rollback()
-        flash('Plagg kunde inte tas bort!')
+        flash('Artikeln kunde inte tas bort!')
         return wardrobe()
 
 @app.route('/edit/<filename>')
@@ -327,7 +327,7 @@ def remove_outfit(outfit):
         return redirect(url_for('list_outfits'))
     except:
         conn.rollback()
-        flash('outfit kunde inte tas bort!')
+        flash('Outfit kunde inte tas bort!')
         return wardrobe()
 
 @app.route('/add_outfit', methods=["POST","GET"])
@@ -353,7 +353,7 @@ def add_outfit():
         return redirect(url_for("wardrobe"))
     except:
         conn.rollback()
-        flash('outfit kunde inte läggas till!')
+        flash('Outfit kunde inte läggas till!')
         return wardrobe()
 
 
@@ -396,7 +396,7 @@ def edit(filename):
             return redirect(request.args.get("next") or url_for("wardrobe"))
     except:
         conn.rollback()
-        flash('Plagg kunde inte redigeras!')
+        flash('Artikeln kunde inte redigeras!')
         return wardrobe()
 
 
@@ -428,10 +428,10 @@ def sendemail():
         server.sendmail("kladr2020@gmail.com", user_email, user_text.encode("utf-8"))
         print(user_email, user_text)
 
-        flash('Mail skickat!')
+        flash('E-mailet skickades!')
         return render_template('about.html')
     except:
-        flash('Mail inte skickat!')
+        flash('E-mailet kunde inte skickas!')
         return render_template('about.html')
         
 
@@ -467,7 +467,7 @@ def register_account():
             
             return redirect(url_for("login_page"))
         else:
-            flash('Email redan i användning')
+            flash('E-mailen används redan')
             return render_template('register.html')
     except:
         conn.rollback()

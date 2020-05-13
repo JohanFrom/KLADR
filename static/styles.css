@@ -4,6 +4,15 @@ body{
     font-family: 'Francois One', sans-serif;
     background-color: whitesmoke;
 }
+/*FLASHMEDDELANDEN*/
+#content > #success-message, #flashwrapper{
+    text-align: center;
+    color: white;
+    background-color: orangered;
+    border-radius: 5px; 
+    border: none; 
+    font-size: 16px;
+}
 
 /*INDEX FIRST PAGE*/
 #content > #first-page{
