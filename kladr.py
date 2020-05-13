@@ -533,7 +533,7 @@ def login():
                 session['logged_in'] = True
                 flash('Du är inloggad!')
                 return redirect(url_for('wardrobe'))
-    return render_template('login.html', error = error)
+    #return render_template('login.html', error = error)
 
 @app.route('/logout')
 def logout():

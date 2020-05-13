@@ -46,7 +46,7 @@ body{
 }
 
 /*NAV*/
-#content > nav{
+#content > nav > #menu-options{
     padding-bottom: 20px;
     padding: 15px;
     text-align: center;
@@ -58,35 +58,35 @@ body{
     border-width: thin;
 }
 
-#content > nav > .navitem{
+#content > nav > #menu-options > .navitem{
     text-decoration-line: none;
     color: dimgrey;
     padding-left: 10px;
 }
 
-#content > nav > .navitem-login{
+#content > nav > #menu-options > .navitem-login{
     text-decoration-line: none;
     color: dimgrey;
     float: right;
     padding-left: 10px;
 }
 
-#content > nav > .navitem-login:hover, .navitem-login:focus{
+#content > nav > #menu-options > .navitem-login:hover, .navitem-login:focus{
     color: orangered;
 }
 
-#content > nav > .navitem:hover, .navitem:focus{
+#content > nav > #menu-options > .navitem:hover, .navitem:focus{
     color: orangered;
 }
 
-#content > nav > .navitem-active{
+#content > nav > #menu-options > .navitem-active{
     text-decoration: none;
     color: dimgrey;
     float: right;
     padding-right: 10px;
 }
 
-#content > nav > .navitem-active:hover, .navitem-active:focus{
+#content > nav > #menu-options > .navitem-active:hover{
     color: orangered;
 }
 
@@ -480,12 +480,14 @@ button:after{
     color: orangered;
     text-align: center;
 }
+
 #content > main > #upload-form, #remove-form{
     display: flex; 
     flex-direction: column;
     align-items: center;
     padding: 20px;
 }
+
 #content > main > #upload-form > placeholder, #type, #colour {
     background-color: orangered;
     font-family: 'Francois One', sans-serif; 
@@ -494,15 +496,18 @@ button:after{
     border-radius: 5px; 
     border: none; 
 }
+
 #content > main > #upload-form > #file-picker, #comment-clothes{
     font-family: 'Francois One', sans-serif;
     font-size: 12px; 
     color: #666;
 }
+
 #content > main > #upload-form > #file-picker, #comment-clothes, #type, #colour{
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
 #content > main > #upload-form > #upload-button{
     background-color: orangered; 
     font-family: 'Francois One', sans-serif; 
@@ -521,10 +526,12 @@ button:after{
     justify-content: center;
     padding-bottom: 50px;
 }
+
 #content > #label{
     font-size: 20px;
     color: orangered;
 }
+
 #content > #login > form > input{
     display: block;
     margin-bottom: 10px;
@@ -535,6 +542,7 @@ button:after{
     padding-right: 5px;
     margin-left: 110px;
 }
+
 #content > #register > form{
     background-color: whitesmoke;
     display: flex;
@@ -543,12 +551,14 @@ button:after{
     padding: 40px;
     font-family: 'Francois One', sans-serif;
 }
+
 input[type=text]{
     width: 100%;
     font-family: 'Francois One', sans-serif;
     font-size: 16px;
     margin-bottom: 20px;
 }
+
 #content > #register > form > select{
     width: 100%;
     font-family: 'Francois One', sans-serif;
@@ -565,15 +575,112 @@ input[type=text]{
     padding: 40px;
     font-family: 'Francois One', sans-serif;
 }
+
 input[type=text]{
     width: 100%;
     font-family: 'Francois One', sans-serif;
     font-size: 16px;
     margin-bottom: 20px;
 }
+
 #content > #add-profile > form > select{
     width: 100%;
     font-family: 'Francois One', sans-serif;
     font-size: 16px;
     margin-bottom: 20px;
+}
+
+/*Meny knapp vid responsivitet*/
+.mobile-only {
+    display: none;
+}
+
+/*Responvivitet*/
+@media screen and (max-width: 900px){
+    #content > #first-page{
+        background-image: none;
+        height: 1200px;
+    } 
+    
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+        
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+
+    /*index.html*/
+    #content > #first-page > #first-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    #content > #first-page > #second-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    #content > #first-page > #third-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    /*about.html*/
+    #content > #about-info{
+        text-align: center;
+    }
+
+    #content > #about-info > #about-picture > img{
+        width: 100%;
+        height: 80%;
+    }
+
+    #content > #about-info > h4{
+        margin: 0px;
+    }
 }

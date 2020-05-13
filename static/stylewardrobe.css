@@ -34,7 +34,7 @@ body{
 }
 
 /*NAV*/
-#content > nav{
+#content > nav > #menu-options{
     padding-bottom: 20px;
     padding: 15px;
     text-align: center;
@@ -46,35 +46,35 @@ body{
     border-width: thin;
 }
 
-#content > nav > .navitem{
+#content > nav > #menu-options > .navitem{
     text-decoration-line: none;
     color: dimgrey;
     padding-left: 10px;
 }
 
-#content > nav > .navitem-login{
+#content > nav > #menu-options > .navitem-login{
     text-decoration-line: none;
     color: dimgrey;
     float: right;
     padding-left: 10px;
 }
 
-#content > nav > .navitem-login:hover, .navitem-login:focus{
+#content > nav > #menu-options > .navitem-login:hover, .navitem-login:focus{
     color: orangered;
 }
 
-#content > nav > .navitem:hover, .navitem:focus{
+#content > nav > #menu-options > .navitem:hover, .navitem:focus{
     color: orangered;
 }
 
-#content > nav > .navitem-active{
+#content > nav > #menu-options > .navitem-active{
     text-decoration: none;
     color: dimgrey;
     float: right;
     padding-right: 10px;
 }
 
-#content > nav > .navitem-active:hover, .navitem-active:focus{
+#content > nav > #menu-options > .navitem-active:hover{
     color: orangered;
 }
 
@@ -213,6 +213,7 @@ body{
     max-height: 500px;
     margin: 1em;
 }
+
 /*LÄGG TILL OUTFIT*/
 #content > #upload-form > #wardrobe{
     display: flex;
@@ -230,9 +231,11 @@ body{
     margin: 1em;
     align-items: center;
 }
+
 #content > #upload-form{
     align-items: center;
 }
+
 #content > form > #type, #season{
     background-color: orangered;
     font-family: 'Francois One', sans-serif; 
@@ -242,6 +245,7 @@ body{
     border-radius: 5px; 
     border: none; 
 }
+
 #content > form > #season, #type{
     background-color: orangered;
     font-family: 'Francois One', sans-serif; 
@@ -267,6 +271,7 @@ input[type=submit]:hover{
     cursor: pointer;
     background-color: #666;
 }
+
 input[type=text]{
     display: flex;
     flex-direction: column;
@@ -327,4 +332,203 @@ footer > p{
     background-color: orangered;
     filter: "alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
+}
+
+/*Menyknapp för responsivitet*/
+.mobile-only{
+    display: none;
+}
+
+/*Responvivitet*/
+@media screen and (max-width: 900px){
+    #content > #first-page{
+        background-image: none;
+        height: 1200px;
+    } 
+    
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        font-size: 100%;
+    }
+
+    #content > nav > #menu-options > .navitem-active{
+        font-size: 100%;
+    }
+
+    #content > nav > #menu-options > .navitem-logout{
+        font-size: 100%;
+    }
+
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+        
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+
+    #content > #first-page > #first-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    #content > #first-page > #second-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    #content > #first-page > #third-section{
+        padding: 0px;
+        margin-left: 300px;
+        text-align: center;
+    }
+
+    /*wardrobe.html*/
+    #content > #filter-btn{
+        margin-top: 15px;
+    }
+
+    #content > #wardrobe{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        object-fit: cover;
+        margin: 5px;
+        justify-content: center;
+    }
+    
+    #content > #wardrobe > #clothing-article img{
+        width: 200px;
+        max-height: 200px;
+        margin: 1em;
+    }
+
+    /*list.html*/
+    #content > #outfit{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        object-fit: cover;
+        margin: 5px;
+        justify-content: center;
+    }
+
+    #content > div > #outfit img{
+        width: 200px;
+        max-height: 200px;
+        margin: 1em;
+    }
+
+    /*outfits.html*/
+    #content > #upload-form > #wardrobe{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        object-fit: cover;
+        margin: 5px;
+        justify-content: center;
+    }
+
+    #content > #upload-form > #wardrobe > div img{
+        width: 200px;
+        max-height: 200px;
+        margin: 1em;
+    }
+}
+
+@media screen and (max-width: 772px){
+    #content > #wardrobe-buttons{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #add-article{
+        margin: 10px;
+        font-size: 10px;
+        background-color: orangered;
+        color: white;
+        border-radius: 15px;
+        border-style: none;
+    }
+    
+    #add-outfit, #list-outfit{
+        margin: 10px;
+        font-size: 10px;
+        background-color: #666;
+        color: white;
+        border-radius: 15px;
+        border-style: none;
+    }
+}
+
+@media screen and (max-width: 375px){
+    /*wardrobe.html*/
+    #content > #wardrobe-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #content > #wardrobe-buttons > #add-outfit > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #add-article > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #list-outfit > a{
+        font-size: 16px;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 350px;
+    }
 }
