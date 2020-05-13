@@ -508,29 +508,15 @@ button:after{
 }
 
 /*Registrera, logga in*/
-#content > #register{
+#content > #login, #register, #add-profile{
     display: flex;
     justify-content: center;
     padding-bottom: 50px;
 }
-
-#content > #register > form > input{
-    display: block;
-    margin-bottom: 10px;
-    padding-right: 100px;
+#content > #label{
+    font-size: 20px;
+    color: orangered;
 }
-
-#content > #register > form > #register-btn{
-    padding-right: 5px;
-    margin-left: 110px;
-}
-
-#content > #login{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 50px;
-}
-
 #content > #login > form > input{
     display: block;
     margin-bottom: 10px;
@@ -541,6 +527,27 @@ button:after{
     padding-right: 5px;
     margin-left: 110px;
 }
+#content > #register > form{
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+    font-family: 'Francois One', sans-serif;
+}
+input[type=text]{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#content > #register > form > select{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
 /*PROFILSIDA*/
 #content > #add-profile > form{
     background-color: whitesmoke;

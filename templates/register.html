@@ -13,6 +13,20 @@
             <header>
                 <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
             </header>
+            <nav>
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                    <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img
+                        src="/static/logout-image.png" alt="logout"></a>
+                    <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
+                {% else %}
+                    <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span
+                        class="sr-only">(current)</span></a>
+                    <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
+                {% endif %}
+            </nav>
            
             <div id="successMessage">
                 {% with messages = get_flashed_messages() %}
@@ -27,11 +41,21 @@
 
             <div id="register">
                 <form action="{{url_for('register_account')}}" method="POST">
-                    <label for="email-account">Lägg till din e-mail</label>
-                    <input type="email" placeholder="Email" name="email-account" required>
-                    <label for="password-account">Lägg till lösenord</label>
-                    <input type="password" placeholder="Password" name="password-account" required>
-                    <input id="register-btn" type="submit" value="Registera">
+                    <label for="first-name">Förnamn</label>
+                    <input type="text" placeholder="Förnamn" name="first-name">
+                    <label for="last-name">Efternamn</label>
+                    <input type="text" placeholder="Efternamn" name="last-name">
+                    <label for="gender">Kön</label>
+                    <select name="gender" id="gender">
+                        <option value="Man">Man</option>
+                        <option value="Kvinna">Kvinna</option>
+                        <option value="Annat">Annat</option>
+                    </select>
+                    <label for="email-account">E-mail</label>
+                    <input type="email" placeholder="E-mail" name="email-account">
+                    <label for="password-account">Lösenord</label>
+                    <input type="password" placeholder="Lösenord" name="password-account">
+                    <input id="register-btn" type="submit" value="REGISTRERA">
                 </form>
             </div>
         
