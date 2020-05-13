@@ -36,7 +36,11 @@ $(document).ready(function()
 function toggle(ID){
     var element = document.getElementById(ID);
     if(element.style.display === "none" || element.style.display ===""){
-        element.style.display = "block";
+        if(ID == "filter-menu"){
+            element.style.display = "flex";
+        }else{
+            element.style.display = "block";
+        }
     }else{
         element.style.display = "none";
     }

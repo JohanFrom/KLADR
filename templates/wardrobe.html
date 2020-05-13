@@ -30,8 +30,10 @@
         </nav>
 
         {% if session['logged_in'] == True %}
-        <a href="#" class="filter-only" id="filter-btn">Filtrering <img src="/static/filter-symbol.png"
-                alt="filter"></a>
+
+        <a href="#" class="filter-only" id="filter-btn" onclick="toggle('filter-menu')">Filtrering <img src="/static/filter-symbol.png"
+alt="filter"></a>
+
 
         <div id="filter-menu">
             <div class="filterheadings">
