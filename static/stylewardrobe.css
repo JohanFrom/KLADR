@@ -64,8 +64,8 @@ body{
 }
 
 #content > #filter-menu{
-    display: flex;
-    margin: auto;
+    display: none;
+    flex-direction: row;
     text-align: center;
 }
 
@@ -96,16 +96,16 @@ body{
 }
 
 #filter-menu{
-    height: 0px;
-    overflow: hidden;
+    height: 200px;
     transition: 0.5s all;
+    display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: center; 
 }
 
-#filter-btn:focus + #filter-menu, #filter-menu:hover {
+/*#filter-btn:focus + #filter-menu, #filter-menu:hover {
     height: 200px;
-}
+}*/
 
 #wardrobe-buttons{
     text-align: center;

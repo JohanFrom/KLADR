@@ -1,22 +1,18 @@
 //SCROLL UP
-$(document).ready(function()
-{
-    $(window).scroll(function()
-    {
-        if ($(this).scrollTop() > 800)
-        {
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 800) {
             $('#scroll').fadeIn();
         }
-        else
-        { $('#scroll').fadeOut();
+        else {
+            $('#scroll').fadeOut();
         }
     });
 
-    $('#scroll').click(function()
-    {
+    $('#scroll').click(function () {
         $("html, body").animate(
-            {scrollTop: 0}, 700);
-            return false;
+            { scrollTop: 0 }, 700);
+        return false;
     });
 });
 
@@ -33,11 +29,15 @@ $(document).ready(function()
 //     });
 // });
 
-function toggle(ID){
+function toggle(ID) {
     var element = document.getElementById(ID);
-    if(element.style.display === "none" || element.style.display ===""){
-        element.style.display = "block";
-    }else{
+    if (element.style.display === "none" || element.style.display === "") {
+        if (ID == "filter-menu") {
+            element.style.display = "flex";
+        } else {
+            element.style.display = "block";
+        }
+    } else {
         element.style.display = "none";
     }
 }
@@ -59,7 +59,7 @@ function toggle(ID){
 //     document.documentElement.scrollTop = 0;
 // }
 
-setTimeout(function() {
+setTimeout(function () {
     $('#successMessage').fadeOut('fast');
 }, 3000); // <-- time in milliseconds
 
