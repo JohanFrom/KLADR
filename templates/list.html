@@ -17,7 +17,7 @@
         </header>
         <nav>
             <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-            <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+            <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
             <a class="navitem" href="{{url_for('about')}}">Om oss</a>
             {% if session['logged_in'] == True %}
                 <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img
@@ -39,7 +39,7 @@
                 <a href="{{url_for('filter_outfit',value = 'Dop')}}">Dop</a>
                 <a href="{{url_for('filter_outfit',value = 'Högtid')}}">Högtid</a>
                 <a href="{{url_for('filter_outfit',value = 'Fest')}}">Fest</a>
-                <a href="{{url_for('filter_outfit',value = 'Date')}}">Date</a>
+                <a href="{{url_for('filter_outfit',value = 'Date')}}">Dejt</a>
             </div>
             <div class="filterheadings">
                 <p>Vardagliga tillfällen</p>

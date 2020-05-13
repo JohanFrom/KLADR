@@ -16,7 +16,7 @@
 
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
                     <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
@@ -27,12 +27,12 @@
                 {% endif %}
             </nav>
 
-            <div id="register">
+            <div id="add-profile">
                 <form action="{{url_for('update_profile')}}" method="POST" enctype="multipart/form-data">
-                    <label for="first-name">Ditt namn</label>
-                    <input type="text" placeholder="Förnamn" name="first-name" value ="{{ firstname }}">
-                    <label for="last-name">Ditt namn</label>
-                    <input type="text" placeholder="Efternamn" name="last-name" value="{{ lastname }}">
+                    <label for="first-name">Förnamn</label>
+                    <input type="text" id="first-name-placeholder" placeholder="Förnamn" name="first-name" value ="{{ firstname }}">
+                    <label for="last-name">Efternamn</label>
+                    <input type="text" id="last-name-placeholder" placeholder="Efternamn" name="last-name" value="{{ lastname }}">
                     <label for="gender">Kön</label>
                     <select name="gender" id="gender">
                         <option value="{{ gender }}">{{ gender }}</option>
@@ -40,7 +40,7 @@
                         <option value="Kvinna">Kvinna</option>
                         <option value="Annat">Annat</option>
                     </select>
-                    <label for="email-account">Ditt email</label>
+                    <label for="email-account">E-mail</label>
                     <input type="email" placeholder="Email" name="email-account" value="{{ email }}">
                     <label for="password-account">Lägg till lösenord</label>
                     <input type="password" placeholder="Password" name="password-account" value="{{ password }}">

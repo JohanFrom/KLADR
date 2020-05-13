@@ -36,7 +36,7 @@ def wardrobe():
     
         return render_template('wardrobe.html',path = articles, message = message)
     
-    message = "Du är inte inloggad! Om du vill se din garderob så skapa ett konto ovan!"
+    message = "Du är inte inloggad. Logga in eller skapa ett konto för att se din garderob!"
     return render_template('wardrobe.html',path = [], message = message)    
     # conn.close()
     

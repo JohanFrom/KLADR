@@ -130,6 +130,12 @@ body{
     border-radius: 15px;
     border-style: none;
 }
+#content > #add-profile > form > select{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
 
 #add-article:hover{
     background-color: #666;
@@ -211,6 +217,24 @@ body{
 }
 #content > #upload-form{
     align-items: center;
+}
+#content > form > #type, #season{
+    background-color: orangered;
+    font-family: 'Francois One', sans-serif; 
+    color: whitesmoke; 
+    font-size: 15px;
+    margin-left: 10px;
+    border-radius: 5px; 
+    border: none; 
+}
+#content > form > #season, #type{
+    background-color: orangered;
+    font-family: 'Francois One', sans-serif; 
+    color: whitesmoke; 
+    font-size: 15px;
+    margin-right: 10px;
+    border-radius: 5px; 
+    border: none; 
 }
 
 input[type=submit]{

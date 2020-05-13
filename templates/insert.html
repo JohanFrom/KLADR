@@ -15,7 +15,7 @@
             </header>
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
                     <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
@@ -26,7 +26,7 @@
                 {% endif %}
             </nav>
             <main>
-                <h2>Lägg in nytt plagg</h2>
+                <h2>Lägg till artikel</h2>
                 
                 <form id="upload-form" action="{{ url_for('insert') }}" method="POST" enctype="multipart/form-data" aria-required="true">
                     
@@ -97,7 +97,7 @@
                         <option value="Lila">Lila</option>
                         <option value="Guld">Guld</option>
                         <option value="Silver">Silver</option>
-                        <option value="Flerfärgad">Flerfärgad</option>
+                        <option value="Flerfärgad">Multifärgad</option>
                     </select>
                         <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10"></textarea>
                     <input type="submit" value="Lägg till" id="upload-button">

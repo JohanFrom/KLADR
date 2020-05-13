@@ -15,7 +15,7 @@
             </header>
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
                     <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
@@ -54,7 +54,7 @@
                         <option value="Fest">Fest</option>
                         <option value="Skola">Skola</option>
                         <option value="Arbete">Arbete</option>
-                        <option value="Date">Date</option>
+                        <option value="Date">Dejt</option>
                     </select>
 
                    

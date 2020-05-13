@@ -532,3 +532,24 @@ button:after{
     padding-right: 5px;
     margin-left: 110px;
 }
+/*PROFILSIDA*/
+#content > #add-profile > form{
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+    font-family: 'Francois One', sans-serif;
+}
+input[type=text]{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#content > #add-profile > form > select{
+    width: 100%;
+    font-family: 'Francois One', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}

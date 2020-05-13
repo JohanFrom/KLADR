@@ -15,7 +15,7 @@
             </header>
             <nav>
                 <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                <a class="navitem" href="{{url_for('trends')}}">Trender & Tips</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
                     <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
@@ -27,7 +27,7 @@
             </nav>
 
             <main>
-                <h2>Redigera plagg</h2>
+                <h2>Redigera artikel</h2>
 
                 <form id="upload-form" action="{{ url_for('edit', filename= image) }}" method="POST" enctype="multipart/form-data">
                         
