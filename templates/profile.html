@@ -26,7 +26,16 @@
                     <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
             </nav>
-
+            <div id="success-message">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div id=flashwrapper class="alert" role="alert">{{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
             <div id="add-profile">
                 <form action="{{url_for('update_profile')}}" method="POST" enctype="multipart/form-data">
                     <label for="first-name">Förnamn</label>
@@ -44,7 +53,7 @@
                     <input type="email" placeholder="Email" name="email-account" value="{{ email }}">
                     <label for="password-account">Lägg till lösenord</label>
                     <input type="password" placeholder="Password" name="password-account" value="{{ password }}">
-                    <input id="register-btn" type="submit" value="Uppdatera">
+                    <input id="register-btn" type="submit" value="UPPDATERA">
                 </form>
             </div>
         

@@ -25,7 +25,16 @@
                     <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
             </nav>
-
+            <div id="success-message">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div id=flashwrapper class="alert" role="alert">{{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
             <form id="upload-form" action="{{ url_for('edit_outfit_form', outfit = outfit) }}" method="POST"  >
                 <div id="wardrobe">
                     {% for name in wardrobe %}

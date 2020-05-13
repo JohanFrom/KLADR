@@ -3,7 +3,22 @@ body{
     font-family: 'Francois One', sans-serif;
     background-color: whitesmoke;
 }
-
+/*FLASHMEDDELANDEN*/
+#content > #success-message{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-right: 500px;
+    margin-left: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: orangered;
+    border-radius: 5px; 
+    border: none; 
+    font-size: 16px;
+}
 /*HEADER*/
 #content > header{
     background-color: whitesmoke;
