@@ -404,6 +404,7 @@ footer > p{
         display: flex;
         flex-direction: row; 
         padding-top: 20px;
+        align-items: center;
     }
     #content > #upload-form > #wardrobe{
         display: flex;
@@ -411,6 +412,9 @@ footer > p{
         flex-wrap: wrap;
         flex-grow: 1;
         object-fit: cover;
+        align-items: center;
+    }
+    #content > #upload-form{
         align-items: center;
     }
 }
