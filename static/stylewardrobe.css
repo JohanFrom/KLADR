@@ -339,7 +339,7 @@ footer > p{
     display: none;
 }
 
-/*Responvivitet*/
+/*Responvivitet endast för sidor som har med wardrobe att göra*/
 
 /* Mobiltelefoner*/
 @media screen and (max-width: 600px){
@@ -390,6 +390,28 @@ footer > p{
 
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
+    }
+    #content > #wardrobe > #clothing-article img{
+        height: 180px;
+        width: 180px;
+        display: flex;
+        flex-direction: row; 
+    }
+/*OUTFITS.HTML*/
+    #content > #upload-form > #wardrobe img{
+        height: 180px;
+        width: 180px;
+        display: flex;
+        flex-direction: row; 
+        padding-top: 20px;
+    }
+    #content > #upload-form > #wardrobe{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        object-fit: cover;
+        align-items: center;
     }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
@@ -442,6 +464,7 @@ footer > p{
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
     }
+    
 }
 /*Surfplattor*/
 @media screen and (max-width: 1024px){
