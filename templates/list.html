@@ -33,6 +33,8 @@
 
         <a href="#" class="filter-only" id="filter-btn" onclick="toggle('filter-menu')">Filtrering <img src="/static/filter-symbol.png" alt=""></a>
 
+    
+
         <div id="filter-menu">
             <div class="filterheadings">
                 <p>Finare tillfällen</p>
@@ -58,9 +60,20 @@
                 <a href="{{url_for('filter_outfit',value = 'Flera')}}">Flera</a>
             </div>
         </div>
-
+        <div id="success-message">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div id=flashwrapper class="alert" role="alert">{{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+        
         <div id="wardrobe-buttons">
             <button id="add-outfit"><a id="add-outfit-text" href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+            <button id="generate-outfit"><a href = "{{url_for('generate')}}">GENERERA EN OUTFIT</a></button>
         </div>
 
         <div>

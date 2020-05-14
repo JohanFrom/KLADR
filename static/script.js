@@ -16,7 +16,10 @@ $(document).ready(function () {
     });
 });
 
-
+$('#remove-form').submit(function() {
+    var c = confirm("Click OK to continue?");
+    return c; //you can just return c because it will be true or false
+});
 // $(document).ready(function () {
 //     /*
 //         Döljer alla element (utom "<header>") i alla element av typen

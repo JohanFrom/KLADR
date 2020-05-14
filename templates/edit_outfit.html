@@ -38,7 +38,11 @@
                 {% endif %}
                 {% endwith %}
             </div>
+            {%if outfit ==" " %}
+            <form id="upload-form" action="{{ url_for('add_outfit') }}" method="POST">
+            {%else %}
             <form id="upload-form" action="{{ url_for('edit_outfit_form', outfit = outfit) }}" method="POST"  >
+            {%endif  %}
                 <div id="wardrobe">
                     {% for name in wardrobe %}
                         <div >
@@ -51,11 +55,44 @@
                             {% endif %}
                         </div>
                     {% endfor %}
-
-                    <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{comment}}</textarea>
+                    
+                    
+                    
+                    {%if outfit ==" " %}
+                    <input type="text" id="name" name="name" placeholder = "Döp din outfit!"required><br>
                     
                     <select id="type" name="type" required>
-                        <option disabled> Tillfälle</option>   
+                        <option disabled selected>Tillfälle</option>   
+                        <option value="Annat">Annat</option>
+
+                        <option value="Bröllop">Bröllop</option>
+                        <option value="Dop">Dop</option>
+                        <option value="Vardag">Vardag</option>
+                        <option value="Högtid">Högtid</option>
+                        <option value="Fest">Fest</option>
+                        <option value="Skola">Skola</option>
+                        <option value="Arbete">Arbete</option>
+                        <option value="Date">Dejt</option>
+                    </select>
+
+                   
+                    <select id="season" name="season" required>
+                        <option disabled selected>Välj en årstid</option>                                               
+                        <option value="Vår">Vår</option>
+                        <option value="Vinter">Vinter</option>
+                        <option value="Sommar">Sommar</option>
+                        <option value="Höst">Höst</option>
+                        <option value="Flera">Flera</option>
+                    </select>
+                    
+                    <input type="text" id="comment" name="comment" placeholder="Kommentera din outfit!" >
+
+                    <input type="submit" value="SPARA OUTFIT" id="upload-button">
+                    {%else%}
+                    <input type="text" id="name" name="name" value="{{outfit}}"required><br>
+                    
+                    <select id="type" name="type" required>
+                        <option disabled>Tillfälle</option>   
                         <option selected>{{type}}</option>                        
                         <option value="Annat">Annat</option>
 
@@ -79,14 +116,20 @@
                         <option value="Höst">Höst</option>
                         <option value="Flera">Flera</option>
                     </select>
-                    <label for="name">Döp din outfit!:</label><br>
-                    <input type="text" id="name" name="name" value="{{outfit}}"required><br>
+                    <input type="text" id="comment" name="comment" value ="{{comment}}" >
+
                     <input type="submit" value="Redigera outfit!" id="upload-button">
+                    {%endif%}
                 </div>
             </form>
+            {%if outfit ==" " %}
+
+            {%else%}
             <form id = "remove-form" action="{{url_for('remove_outfit', outfit = outfit)}}">
-                <input type="submit" value="Ta bort outfit!" id="remove-button">
+            
+            <input type="submit" value="Ta bort outfit!" id="remove-button">
             </form>
+            {%endif%}
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>

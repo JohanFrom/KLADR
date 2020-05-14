@@ -28,12 +28,30 @@
                     {% endif %} 
                 </div>
             </nav>
-           
-            <button id="add-article"><a href="{{url_for('edit_outfit',outfit=outfit)}}">REDIGERA OUTFIT</a></button>
+
+            <div id="success-message">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div id=flashwrapper class="alert" role="alert">{{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div id = wardrobe-buttons>
+            {% if outfit == " "%}
+            <button id="add-article"><a href="{{url_for('save_outfit',outfit=outfit_articles)}}">SPARA OUTFIT</a></button>
+                {%else%}
+                <button id="add-article"><a href="{{url_for('edit_outfit',outfit=outfit)}}">REDIGERA OUTFIT</a></button>
+                {%endif%}
+
+            </div>
             <h2>{{outfit}} </h2>
+
             <div id="wardrobe">
                 {% for article in outfit_articles %}
-                    <div>
+                    <div id ="clothing-article">
                         <img src="{{url_for('send_image', filename=article)}}">
                     </div>
                 {% endfor %}
@@ -43,8 +61,10 @@
                     {{comment}}
                 </p>
             </div>
-            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
 
+            <div id="wardrobe-buttons">
+                <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+            </div>
             <footer>
                 <p>KLÄDR © 2020</p>
             </footer>

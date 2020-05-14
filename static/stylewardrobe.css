@@ -136,7 +136,7 @@ body{
     border-style: none;
 }
 
-#add-outfit, #list-outfit{
+#add-outfit, #list-outfit, #generate-outfit{
     width: 20%;
     margin: 30px 20px;
     font-size: 15px;
@@ -156,11 +156,11 @@ body{
     background-color: #666;
 }
 
-#add-outfit:hover, #list-outfit:hover{
+#add-outfit:hover, #list-outfit:hover, #generate-outfit:hover{
     background-color: orangered;
 }
 
-#add-article > a, #add-outfit > a, #list-outfit > a{
+#add-article > a, #add-outfit > a, #list-outfit > a, #generate-outfit > a{
     text-decoration: none;
     color: white;
     font-family: 'francois one', sans-serif;
@@ -189,10 +189,15 @@ body{
     text-align: center;
 }
 
+#content > h2, #comment > p {
+    margin: 1em;
+}
+
 #content > #wardrobe > #clothing-article img{
     width: 400px;
     max-height: 500px;
     margin: 1em;
+    
 }
 
 #outfit{
@@ -224,7 +229,7 @@ body{
     align-items: center;
 }
 
-#content > #upload-form > #wardrobe > img{
+#content > #upload-form > #wardrobe img{
     margin: 5px;
     max-width: 300px;
     max-height: 300px;
@@ -498,7 +503,7 @@ footer > p{
         border-style: none;
     }
     
-    #add-outfit, #list-outfit{
+    #add-outfit, #list-outfit, #generate-outfit{
         margin: 10px;
         font-size: 10px;
         background-color: #666;
@@ -525,6 +530,10 @@ footer > p{
     }
 
     #content > #wardrobe-buttons > #list-outfit > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #generate-outfit > a{
         font-size: 16px;
     }
 
