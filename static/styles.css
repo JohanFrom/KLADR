@@ -11,7 +11,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     height: 1552px;
-    width: auto;
+    width: 100%;
 }
 
 /*FLASHMEDDELANDEN*/
@@ -115,7 +115,7 @@ body{
     width: 300px;
     font-size: 25px;
     margin-top: 150px;
-    margin-left: 810px;
+    margin-left: 700px;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -131,7 +131,7 @@ body{
 #first-page > #third-section{
     width: 300px;
     font-size: 25px;
-    margin-left: 175px;
+    margin-left: 130px;
     margin-top: 130px;
     padding-top: 100px;
     padding-left: 100px;
@@ -596,12 +596,9 @@ input[type=text]{
 }
 
 /*Responvivitet*/
-@media screen and (max-width: 900px){
-    #content > #first-page{
-        background-image: none;
-        height: 1200px;
-    } 
-    
+
+/* Mobiltelefoner*/
+@media screen and (max-width: 600px){
     .mobile-only{
         display: block;
     }
@@ -623,7 +620,7 @@ input[type=text]{
         border-top-style: solid;
         border-color: dimgrey;
         border-width: thin;
-        
+
     }
 
     #menu-btn:hover{
@@ -651,36 +648,185 @@ input[type=text]{
         height: 160px;
     }
 
-    /*index.html*/
-    #content > #first-page > #first-section{
-        padding: 0px;
-        margin-left: 300px;
+}
+/*Större mobiltelefoner/mindre surfplattor*/
+@media screen and (max-width: 600px){
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
         text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
     }
 
-    #content > #first-page > #second-section{
-        padding: 0px;
-        margin-left: 300px;
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+}
+/*Surfplattor*/
+@media screen and (max-width: 1024px){
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
         text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
     }
 
-    #content > #first-page > #third-section{
-        padding: 0px;
-        margin-left: 300px;
-        text-align: center;
+    #menu-btn:hover{
+        color: black;
     }
 
-    /*about.html*/
-    #content > #about-info{
-        text-align: center;
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
     }
 
-    #content > #about-info > #about-picture > img{
-        width: 100%;
-        height: 80%;
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
     }
 
-    #content > #about-info > h4{
-        margin: 0px;
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+    #first-page > #first-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 80px;
+        margin-top: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    #first-page > #second-section{
+        width: 300px;
+        font-size: 25px;
+        margin-top: 200px;
+        margin-left: 550px;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 20px;
+    }
+    #first-page > #third-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 5px;
+        margin-top: 130px;
+        padding-top: 100px;
+        padding-left: 100px;
+        padding-right: 10px;
+    }
+}
+@media screen and (min-width: 1025px){
+    #first-page > #first-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 100px;
+        margin-top: 65px;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    #first-page > #first-section > h1 > a{
+        text-decoration: none; 
+        color: orangered;
+    }
+    #first-page > #first-section > h1 > a:hover{
+        color: #666;
+    }
+    #first-page > #second-section{
+        width: 300px;
+        font-size: 25px;
+        margin-top: 150px;
+        margin-left: 550px;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 20px;
+    }
+    #first-page > #second-section > h1 > a{
+        text-decoration: none; 
+        color: orangered;
+    }
+    #first-page > #second-section > h1 > a:hover{
+        color: #666;
+    }
+    #first-page > #third-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 5px;
+        margin-top: 130px;
+        padding-top: 100px;
+        padding-left: 100px;
+        padding-right: 10px;
+    }
+    #first-page > #third-section > h1 > a{
+        text-decoration: none; 
+        color: orangered;
+    }
+    #first-page > #third-section > h1 > a:hover{
+        color: #666;
     }
 }

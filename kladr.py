@@ -43,7 +43,7 @@ def wardrobe():
 
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
-    '''Metod som lägger till en användares plagg i garderoben och i en mapp med användarens namn.'''
+    '''Metod som lägger till en användares artikel i garderoben och i en mapp med användarens namn.'''
             
     if 'username' in session:
     

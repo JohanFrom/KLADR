@@ -340,12 +340,9 @@ footer > p{
 }
 
 /*Responvivitet*/
-@media screen and (max-width: 900px){
-    #content > #first-page{
-        background-image: none;
-        height: 1200px;
-    } 
-    
+
+/* Mobiltelefoner*/
+@media screen and (max-width: 600px){
     .mobile-only{
         display: block;
     }
@@ -359,18 +356,6 @@ footer > p{
         flex-direction: column;
     }
 
-    #content > nav > #menu-options > .navitem{
-        font-size: 100%;
-    }
-
-    #content > nav > #menu-options > .navitem-active{
-        font-size: 100%;
-    }
-
-    #content > nav > #menu-options > .navitem-logout{
-        font-size: 100%;
-    }
-
     #menu-btn{
         text-align: center;
         color: dimgrey;
@@ -379,7 +364,7 @@ footer > p{
         border-top-style: solid;
         border-color: dimgrey;
         border-width: thin;
-        
+
     }
 
     #menu-btn:hover{
@@ -406,129 +391,108 @@ footer > p{
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
     }
-
-    #content > #first-page > #first-section{
-        padding: 0px;
-        margin-left: 300px;
-        text-align: center;
-    }
-
-    #content > #first-page > #second-section{
-        padding: 0px;
-        margin-left: 300px;
-        text-align: center;
-    }
-
-    #content > #first-page > #third-section{
-        padding: 0px;
-        margin-left: 300px;
-        text-align: center;
-    }
-
-    /*wardrobe.html*/
-    #content > #filter-btn{
-        margin-top: 15px;
-    }
-
-    #content > #wardrobe{
-        display: flex;
-        flex-direction:row;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        object-fit: cover;
-        margin: 5px;
-        justify-content: center;
-    }
-    
-    #content > #wardrobe > #clothing-article img{
-        width: 200px;
-        max-height: 200px;
-        margin: 1em;
-    }
-
-    /*list.html*/
-    #content > #outfit{
-        display: flex;
-        flex-direction:row;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        object-fit: cover;
-        margin: 5px;
-        justify-content: center;
-    }
-
-    #content > div > #outfit img{
-        width: 200px;
-        max-height: 200px;
-        margin: 1em;
-    }
-
-    /*outfits.html*/
-    #content > #upload-form > #wardrobe{
-        display: flex;
-        flex-direction:row;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        object-fit: cover;
-        margin: 5px;
-        justify-content: center;
-    }
-
-    #content > #upload-form > #wardrobe > div img{
-        width: 200px;
-        max-height: 200px;
-        margin: 1em;
-    }
 }
+/*Större mobiltelefoner/mindre surfplattor*/
+@media screen and (max-width: 600px){
+    .mobile-only{
+        display: block;
+    }
 
-@media screen and (max-width: 772px){
-    #content > #wardrobe-buttons{
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
         display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
+        flex-direction: column;
     }
-    
-    #add-article{
-        margin: 10px;
-        font-size: 10px;
-        background-color: orangered;
-        color: white;
-        border-radius: 15px;
-        border-style: none;
-    }
-    
-    #add-outfit, #list-outfit{
-        margin: 10px;
-        font-size: 10px;
-        background-color: #666;
-        color: white;
-        border-radius: 15px;
-        border-style: none;
-    }
-}
 
-@media screen and (max-width: 375px){
-    /*wardrobe.html*/
-    #content > #wardrobe-buttons{
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
         display: flex;
-        flex-direction: row;
-        justify-content: center;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
     }
 
-    #content > #wardrobe-buttons > #add-outfit > a{
-        font-size: 16px;
-    }
-
-    #content > #wardrobe-buttons > #add-article > a{
-        font-size: 16px;
-    }
-
-    #content > #wardrobe-buttons > #list-outfit > a{
-        font-size: 16px;
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
     }
 
     #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 350px;
+        height: 160px;
     }
 }
+/*Surfplattor*/
+@media screen and (max-width: 1024px){
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+    
+}
+
