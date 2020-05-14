@@ -11,7 +11,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     height: 1552px;
-    width: 100%;
+    width: auto;
 }
 
 /*FLASHMEDDELANDEN*/
@@ -303,10 +303,10 @@ input[type=email]{
 }
 
 .carousel-item{
-    height: 500px;
+    height: auto;
 } 
 .carousel-item img{
-    height: 500px;
+    height: auto;
 }
 
 #divleft > #htrends{
@@ -599,6 +599,11 @@ input[type=text]{
 
 /* Mobiltelefoner*/
 @media screen and (max-width: 600px){
+ /*INDEX.HTML*/
+    #content > #first-page{
+        background-image: none;
+        height: 800px;
+    }
     .mobile-only{
         display: block;
     }
@@ -647,7 +652,55 @@ input[type=text]{
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
     }
-
+    #content > #first-page > #first-section{
+        text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
+        
+    }
+    #content > #first-page > #second-section{
+        text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
+    }
+    #content > #first-page > #third-section{
+        text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
+        
+    }
+/*ABOUT.HTML*/
+    #content > #about-info{
+        text-align: center;
+    }
+    #content > #about-info > #about-picture > img{
+        width: 200px;
+        height: 160px;
+        align-items: center;
+    }
+    #content > #about-info > h4{
+        font-size: 30px;
+        margin: 0px;
+    }
+    #content > #about-info > p{
+        font-size: 15px;
+    }
+    #content > #about-info > #about-form > form > label{
+        font-size: 15px;
+    }
+/*TRENDS.HTML*/
+    #content > #trend-page > #first-section-trend > #carouselExampleIndicators {
+        width: 70%
+    }
+    .carousel-item{
+        height: auto;
+    } 
+    .carousel-item img{
+        height: auto;
+    }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
 @media screen and (max-width: 600px){
@@ -701,7 +754,7 @@ input[type=text]{
     }
 }
 /*Surfplattor*/
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1200px){
     .mobile-only{
         display: block;
     }
@@ -777,56 +830,5 @@ input[type=text]{
         padding-top: 100px;
         padding-left: 100px;
         padding-right: 10px;
-    }
-}
-@media screen and (min-width: 1025px){
-    #first-page > #first-section{
-        width: 300px;
-        font-size: 25px;
-        margin-left: 100px;
-        margin-top: 65px;
-        padding-left: 10px;
-        padding-right: 10px;
-        
-    }
-    #first-page > #first-section > h1 > a{
-        text-decoration: none; 
-        color: orangered;
-    }
-    #first-page > #first-section > h1 > a:hover{
-        color: #666;
-    }
-    #first-page > #second-section{
-        width: 300px;
-        font-size: 25px;
-        margin-top: 150px;
-        margin-left: 550px;
-        padding-top: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 20px;
-    }
-    #first-page > #second-section > h1 > a{
-        text-decoration: none; 
-        color: orangered;
-    }
-    #first-page > #second-section > h1 > a:hover{
-        color: #666;
-    }
-    #first-page > #third-section{
-        width: 300px;
-        font-size: 25px;
-        margin-left: 5px;
-        margin-top: 130px;
-        padding-top: 100px;
-        padding-left: 100px;
-        padding-right: 10px;
-    }
-    #first-page > #third-section > h1 > a{
-        text-decoration: none; 
-        color: orangered;
-    }
-    #first-page > #third-section > h1 > a:hover{
-        color: #666;
     }
 }
