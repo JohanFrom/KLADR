@@ -115,7 +115,7 @@ body{
     width: 300px;
     font-size: 25px;
     margin-top: 150px;
-    margin-left: 810px;
+    margin-left: 700px;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -131,7 +131,7 @@ body{
 #first-page > #third-section{
     width: 300px;
     font-size: 25px;
-    margin-left: 175px;
+    margin-left: 130px;
     margin-top: 130px;
     padding-top: 100px;
     padding-left: 100px;
@@ -303,10 +303,10 @@ input[type=email]{
 }
 
 .carousel-item{
-    height: 500px;
+    height: auto;
 } 
 .carousel-item img{
-    height: 500px;
+    height: auto;
 }
 
 #divleft > #htrends{
@@ -596,12 +596,14 @@ input[type=text]{
 }
 
 /*Responvivitet*/
-@media screen and (max-width: 900px){
+
+/* Mobiltelefoner*/
+@media screen and (max-width: 600px){
+ /*INDEX.HTML*/
     #content > #first-page{
         background-image: none;
-        height: 1200px;
-    } 
-    
+        height: 800px;
+    }
     .mobile-only{
         display: block;
     }
@@ -623,7 +625,7 @@ input[type=text]{
         border-top-style: solid;
         border-color: dimgrey;
         border-width: thin;
-        
+
     }
 
     #menu-btn:hover{
@@ -650,37 +652,183 @@ input[type=text]{
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
     }
-
-    /*index.html*/
     #content > #first-page > #first-section{
-        padding: 0px;
-        margin-left: 300px;
         text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
+        
     }
-
     #content > #first-page > #second-section{
-        padding: 0px;
-        margin-left: 300px;
         text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
     }
-
     #content > #first-page > #third-section{
-        padding: 0px;
-        margin-left: 300px;
         text-align: center;
+        margin: auto;
+        padding: 0px;
+        font-size: 20px;
+        
     }
-
-    /*about.html*/
+/*ABOUT.HTML*/
     #content > #about-info{
         text-align: center;
     }
-
     #content > #about-info > #about-picture > img{
-        width: 100%;
-        height: 80%;
+        width: 200px;
+        height: 160px;
+        align-items: center;
+    }
+    #content > #about-info > h4{
+        font-size: 30px;
+        margin: 0px;
+    }
+    #content > #about-info > p{
+        font-size: 15px;
+    }
+    #content > #about-info > #about-form > form > label{
+        font-size: 15px;
+    }
+/*TRENDS.HTML*/
+    #content > #trend-page > #first-section-trend > #carouselExampleIndicators {
+        width: 70%
+    }
+    .carousel-item{
+        height: auto;
+    } 
+    .carousel-item img{
+        height: auto;
+    }
+}
+/*Större mobiltelefoner/mindre surfplattor*/
+@media screen and (max-width: 600px){
+    .mobile-only{
+        display: block;
     }
 
-    #content > #about-info > h4{
-        margin: 0px;
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+}
+/*Surfplattor*/
+@media screen and (max-width: 1200px){
+    .mobile-only{
+        display: block;
+    }
+
+    #content > nav{
+        flex-direction: column;
+    }
+
+    #content > #menu-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-btn{
+        text-align: center;
+        color: dimgrey;
+        text-decoration: none;
+        font-size: 30px;
+        border-top-style: solid;
+        border-color: dimgrey;
+        border-width: thin;
+
+    }
+
+    #menu-btn:hover{
+        color: black;
+    }
+
+    #content > nav > #menu-options{
+        display: flex;
+        height: 0px;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s all;
+        border-style: none;
+        padding-bottom: 0px;
+        padding-right: 190px;
+        border-bottom-style: solid;
+        border-color: dimgrey;
+    }
+
+    #content > nav > #menu-options > .navitem{
+        color: orangered;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
+    #first-page > #first-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 80px;
+        margin-top: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    #first-page > #second-section{
+        width: 300px;
+        font-size: 25px;
+        margin-top: 200px;
+        margin-left: 550px;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 20px;
+    }
+    #first-page > #third-section{
+        width: 300px;
+        font-size: 25px;
+        margin-left: 5px;
+        margin-top: 130px;
+        padding-top: 100px;
+        padding-left: 100px;
+        padding-right: 10px;
     }
 }
