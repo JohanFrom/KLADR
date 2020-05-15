@@ -118,10 +118,6 @@ body{
     justify-content: center; 
 }
 
-/*#filter-btn:focus + #filter-menu, #filter-menu:hover {
-    height: 200px;
-}*/
-
 #wardrobe-buttons{
     text-align: center;
 }
@@ -347,7 +343,7 @@ footer > p{
 /*Responvivitet endast för sidor som har med wardrobe att göra*/
 
 /* Mobiltelefoner*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 420px){
     .mobile-only{
         display: block;
     }
@@ -396,13 +392,14 @@ footer > p{
     #menu-btn:focus + #menu-options, #menu-options:hover {
         height: 160px;
     }
+
     #content > #wardrobe > #clothing-article img{
         height: 180px;
         width: 180px;
         display: flex;
         flex-direction: row; 
     }
-/*OUTFITS.HTML*/
+
     #content > #upload-form > #wardrobe img{
         height: 180px;
         width: 180px;
@@ -411,6 +408,7 @@ footer > p{
         padding-top: 20px;
         align-items: center;
     }
+
     #content > #upload-form > #wardrobe{
         display: flex;
         flex-direction:row;
@@ -419,12 +417,86 @@ footer > p{
         object-fit: cover;
         align-items: center;
     }
+
     #content > #upload-form{
         align-items: center;
     }
+
+    #content > #wardrobe-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #content > #wardrobe-buttons > #add-outfit > a{
+        font-size: 12px;
+    }
+
+    #content > #wardrobe-buttons > #add-article > a{
+        font-size: 12px;
+    }
+
+    #content > #wardrobe-buttons > #list-outfit > a{
+        font-size: 12px;
+    }
+
+    #content > #wardrobe-buttons > #generate-outfit > a{
+        font-size: 12px;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 350px;
+    }
+
+    #content > #filter-menu{
+        display: none;
+        flex-direction: row;
+        height: 350px;
+        flex-grow: 1;
+        object-fit: cover;
+        margin: 5px;
+        text-align: center;
+    }
+    
+    #content > #filter-menu > div{
+        margin-right: 10px;
+    }
+    
+    #content > #filter-menu > div > a{
+        display: block;
+        text-decoration: none;
+        color: dimgrey;
+        font-size: 15px;
+    }
+    
+    #content > #filter-menu > div > a:hover{
+        color: orangered;
+    }
+    
+    .filter-only{
+        display: block;
+    }
+    
+    #filter-btn{
+        text-align: center;
+        text-decoration: none;
+        color: dimgrey;
+        font-size: 20px;
+    }
+    
+    #filter-menu{
+        height: 350px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        object-fit: cover;
+        margin: 5px;
+        justify-content: center; 
+    }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
-@media screen and (max-width: 600px){
+@media screen and (min-width: 420px){
     .mobile-only{
         display: block;
     }
@@ -474,6 +546,31 @@ footer > p{
         height: 160px;
     }
     
+    #content > #wardrobe-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #content > #wardrobe-buttons > #add-outfit > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #add-article > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #list-outfit > a{
+        font-size: 16px;
+    }
+
+    #content > #wardrobe-buttons > #generate-outfit > a{
+        font-size: 16px;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 350px;
+    }
 }
 /*Surfplattor*/
 @media screen and (max-width: 1024px){
@@ -529,9 +626,30 @@ footer > p{
     #content > nav > #menu-options > .navitem{
         color: orangered;
     }
+    #content > #wardrobe-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #content > #wardrobe-buttons > #add-outfit > a{
+        font-size: 20px;
+    }
+
+    #content > #wardrobe-buttons > #add-article > a{
+        font-size: 20px;
+    }
+
+    #content > #wardrobe-buttons > #list-outfit > a{
+        font-size: 20px;
+    }
 
     #content > #wardrobe-buttons > #generate-outfit > a{
-        font-size: 16px;
+        font-size: 20px;
+    }
+
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 350px;
     }
 
     #menu-btn:focus + #menu-options, #menu-options:hover {
