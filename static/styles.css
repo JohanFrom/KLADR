@@ -598,7 +598,7 @@ input[type=text]{
 /*Responvivitet*/
 
 /* Mobiltelefoner*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 420px){
  /*INDEX.HTML*/
     #content > #first-page{
         background-image: none;
@@ -703,7 +703,7 @@ input[type=text]{
     }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
-@media screen and (max-width: 600px){
+@media screen and (min-width: 420px){
     .mobile-only{
         display: block;
     }
@@ -754,7 +754,7 @@ input[type=text]{
     }
 }
 /*Surfplattor*/
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 1024px){
     .mobile-only{
         display: block;
     }
