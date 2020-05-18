@@ -40,7 +40,7 @@
             </div>
             <form id="upload-form" action="{{ url_for('add_outfit', outfit = outfit) }}" method="POST"  >
                 <div id="wardrobe">
-                    {% for name in path %}
+                    {% for name in articles %}
                         <div>
                             <label for="{{name}}"><img src="{{url_for('send_image', filename=name)}}"></label>
                             <input type="checkbox" id="{{name}}" name="article" value="{{name}}">

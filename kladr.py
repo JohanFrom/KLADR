@@ -24,9 +24,9 @@ def wardrobe():
     if 'username' in session:
         
         cursor.execute("""
-        SELECT filename from wardrobe
-        WHERE id = %s;
-            """ % escape(session['username']))
+            SELECT filename from wardrobe
+            WHERE id = %s;
+        """ % escape(session['username']))
 
         articles=[] 
         for data in cursor:
@@ -35,11 +35,10 @@ def wardrobe():
         if len(articles) == 0:
             message = "Du har inga plagg tillagda i din garderob!"
     
-        return render_template('wardrobe.html',path = articles, message = message)
+        return render_template('wardrobe.html',articles = articles, message = message)
     
     message = "Välkommen till KLÄDR! Logga in eller skapa ett konto för att se din garderob!"
-    return render_template('wardrobe.html',path = [], message = message)    
-    # conn.close()
+    return render_template('wardrobe.html',articles = [], message = message)    
     
 
 @app.route('/insert.html',  methods=["POST","GET"])
@@ -68,7 +67,11 @@ def insert():
                 value = request.form.get("type")
                 comment = request.form.get("comment")
                 colour = request.form.get("colour")
-                cursor.execute("INSERT INTO wardrobe (filename,type,comment,colour,id) values ('%s','%s', '%s','%s',%s);"% (filename,value,comment,colour,escape(session['username']))) 
+                cursor.execute("""
+                    INSERT 
+                    INTO wardrobe (filename,type,comment,colour,id) 
+                    VALUES ('%s','%s','%s','%s',%s);
+                """% (filename,value,comment,colour,escape(session['username']))) 
                 conn.commit()
                 flash('Artikeln är tillagd!')
                 return redirect(request.args.get("next") or url_for("wardrobe"))
@@ -77,10 +80,8 @@ def insert():
                 flash('Artikeln kunde inte läggas till!') 
                 return redirect(request.args.get("next") or url_for("wardrobe"))
   
-            # conn.close()
            
 
-    # return send_from_directory("images", filename, as_attachment=True)
     return render_template('insert.html')
 
 @app.route('/remove/<filename>', methods=["POST","GET"])
@@ -94,18 +95,18 @@ def remove(filename):
 
         cursor.execute("""
             DELETE from outfit_article
-            WHERE article_name = '%s' and id = %s;
+            WHERE article_name = '%s' AND id = %s;
         """ % (filename,escape(session['username'])))
         
         cursor.execute("""
             DELETE from wardrobe
-            WHERE filename = '%s' and id = %s;
+            WHERE filename = '%s' AND id = %s;
         """ % (filename,escape(session['username'])))
 
         cursor.execute("""
-        SELECT name
-        FROM outfit
-        where id = %s;
+            SELECT name
+            FROM outfit
+            WHERE id = %s;
         """ % (escape(session['username'])))
 
         outfit_names = cursor.fetchall()
@@ -115,7 +116,7 @@ def remove(filename):
             cursor.execute("""
                 SELECT article_name
                 FROM outfit_article
-                WHERE outfit_name = '%s' and user_outfit_id = %s;
+                WHERE outfit_name = '%s' AND user_outfit_id = %s;
             """ %(name[0], escape(session['username'])))
 
             outfit_articles = cursor.fetchall()
@@ -123,12 +124,11 @@ def remove(filename):
             if len(outfit_articles) == 0:
                 cursor.execute("""
                     DELETE FROM outfit
-                    WHERE name = '%s' and id = %s;
+                    WHERE name = '%s' AND id = %s;
                 """ % (name[0], escape(session['username'])))
         os.remove(destination)
 
         conn.commit()
-        # conn.close()
         
         flash('Artikeln är borttagen!')
         return wardrobe()
@@ -146,27 +146,34 @@ def send_image(filename):
 @app.route('/wardrobe/<value>')
 def filter(value):
     '''metod som visar upp artiklar av en specifik typ eller färg från en viss användare'''
-    cursor.execute("""select filename from wardrobe WHERE (type ='%s' OR colour='%s') and id = %s;"""%(value, value,escape(session['username'])))
+
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE (type ='%s' OR colour='%s') AND id = %s;
+    """%(value, value,escape(session['username'])))
+
     articles=[]
     for data in cursor:
         articles.append(data[0])
-    # conn.close()
 
-    return render_template('wardrobe.html',path = articles)
+    return render_template('wardrobe.html',articles = articles)
 
-@app.route('/outfits.html')
-def outfits():
+@app.route('/add_outfit.html')
+def add_outfit():
     '''metod för att användaren ska kunna lägga till en outfit. Den visar alla artiklar som kan läggas till i en outfit'''
     articles = []
     if 'username' in session:
         cursor.execute("""
-        SELECT filename from wardrobe where id = %s;
+            SELECT filename 
+            FROM wardrobe 
+            WHERE id = %s;
         """ % (escape(session['username'])))
         articles=[] 
         for data in cursor:
             articles.append(data[0])
 
-    return render_template('outfits.html',path = articles)   
+    return render_template('add_outfit.html',articles = articles)   
 
 
 @app.route("/list_outfits")
@@ -174,7 +181,9 @@ def list_outfits():
     ''' metod som listar alla outfits'''
     if 'username' in session:
         cursor.execute("""
-            select name from outfit where id = %s;
+            SELECT name 
+            FROM outfit 
+            WHERE id = %s;
         """ % (escape(session['username'])))
 
         outfit_names = [] #lista pa alla outfit namn
@@ -186,23 +195,27 @@ def list_outfits():
 
         for outfit_name in outfit_names:
             cursor.execute("""
-                select article_name from outfit_article
-                where outfit_name = '%s' and user_outfit_id = %s;
+                SELECT article_name 
+                FROM outfit_article
+                WHERE outfit_name = '%s' AND user_outfit_id = %s;
             """ % (outfit_name,escape(session['username'])))
             temp = []
-            #temp.append(outfit_name)
             for article in cursor:
                 temp.append(article[0])
             all_outfits.append(temp)
         print(all_outfits)
         print(outfit_names)
-        return render_template("list.html", outfits = all_outfits, names=outfit_names)
-    return render_template('list.html', outfits=[], names = [])
+        return render_template("list_outfits.html", outfits = all_outfits, names=outfit_names)
+    return render_template('list_outfits.html', outfits=[], names = [])
+
 @app.route('/list_outfits/<value>')
 def filter_outfit(value):
+    '''metod för att filtrera outfits'''
     if 'username' in session:
         cursor.execute("""
-            select name from outfit where (type = '%s' OR season = '%s') AND id = %s;
+            SELECT name 
+            FROM outfit 
+            WHERE (type = '%s' OR season = '%s') AND id = %s;
         """ % (value,value,escape(session['username'])))
 
         outfit_names = [] #lista pa alla outfit namn
@@ -214,34 +227,28 @@ def filter_outfit(value):
 
         for outfit_name in outfit_names:
             cursor.execute("""
-                    select article_name from outfit_article
-                    where outfit_name = '%s' and user_outfit_id = %s;
-                """ % (outfit_name,escape(session['username'])))
+                SELECT article_name 
+                FROM outfit_article
+                WHERE outfit_name = '%s' AND user_outfit_id = %s;
+            """ % (outfit_name,escape(session['username'])))
+
             temp = []
-                   #temp.append(outfit_name)
             for article in cursor:
                 temp.append(article[0])
             all_outfits.append(temp)
         print(all_outfits)
         print(outfit_names)
-        return render_template("list.html", outfits = all_outfits, names=outfit_names)
-    return render_template('list.html', outfits=[], names = [])
+        return render_template("list_outfits.html", outfits = all_outfits, names=outfit_names)
+    return render_template('list_outfits.html', outfits=[], names = [])
 
-    '''metod som visar upp artiklar av en specifik typ eller färg från en viss användare'''
-    cursor.execute("""select filename from wardrobe WHERE (type ='%s' OR colour='%s') and id = %s;"""%(value, value,escape(session['username'])))
-    articles=[]
-    for data in cursor:
-        articles.append(data[0])
-    # conn.close()
-
-    return render_template('wardrobe.html',path = articles)
 @app.route('/show_outfit/<outfit>')
 def show_outfit(outfit):
     '''metod som visar en specifik outfit'''
     cursor.execute("""
-                select article_name from outfit_article
-                where outfit_name = '%s' and user_outfit_id = %s;
-            """ % (outfit,escape(session['username'])))
+        SELECT article_name 
+        FROM outfit_article
+        WHERE outfit_name = '%s' AND user_outfit_id = %s;
+    """ % (outfit,escape(session['username'])))
     
     outfit_articles = []
     for article in cursor:
@@ -250,13 +257,13 @@ def show_outfit(outfit):
     print(outfit_articles)
 
     cursor.execute("""
-        select comment
-        from outfit
-        where name = '%s' and id = %s; 
-        
-        """ % (outfit, escape(session['username'])))
-    for record in cursor:
-        comment = record[0]
+        SELECT comment
+        FROM outfit
+        WHERE name = '%s' AND id = %s; 
+    """ % (outfit, escape(session['username'])))
+
+    for data in cursor:
+        comment = data[0]
     print(comment)
 
     return render_template('show_outfit.html', comment = comment, outfit_articles = outfit_articles, outfit=outfit)
@@ -265,13 +272,11 @@ def show_outfit(outfit):
 @app.route('/edit_outfit/<outfit>', methods=["POST","GET"])
 def edit_outfit(outfit):
     '''metod för att visa en outfit som ska redigeras, fyller i formuläret med rätt data'''
-    cursor.execute(
-        """
-        select article_name 
-        from outfit_article 
-        where outfit_name = '%s' and user_outfit_id = %s; 
-        
-        """ % (outfit,escape(session['username'])))
+    cursor.execute("""
+        SELECT article_name 
+        FROM outfit_article 
+        WHERE outfit_name = '%s' AND user_outfit_id = %s;
+    """ % (outfit,escape(session['username'])))
     
     outfit_articles = []
     for article in cursor:
@@ -279,19 +284,22 @@ def edit_outfit(outfit):
 
 
     cursor.execute("""
-        select comment,type,season
-        from outfit
-        where name = '%s' and id = %s; 
-        
-        """ % (outfit,escape(session['username'])))
-    for record in cursor:
-        comment = record[0]
-        outfit_type = record[1]
-        season = record[2]
+        SELECT comment,type,season
+        FROM outfit
+        WHERE name = '%s' AND id = %s; 
+    """ % (outfit,escape(session['username'])))
+
+    for data in cursor:
+        comment = data[0]
+        outfit_type = data[1]
+        season = data[2]
     
     cursor.execute("""
-        SELECT filename from wardrobe where id = %s;
-        """ % (escape(session['username'])))
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s;
+    """ % (escape(session['username'])))
+
     wardrobe=[] 
     for data in cursor:
         wardrobe.append(data[0])
@@ -300,9 +308,13 @@ def edit_outfit(outfit):
 
 @app.route("/save_outfit/<outfit>")
 def save_outfit(outfit):
+    '''metod för att spara en outfit'''
     cursor.execute("""
-        SELECT filename from wardrobe where id = %s;
-        """ % (escape(session['username'])))
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s;
+    """ % (escape(session['username'])))
+
     wardrobe=[] 
     for data in cursor:
         wardrobe.append(data[0])
@@ -315,32 +327,33 @@ def edit_outfit_form(outfit):
         cursor.execute("""
             DELETE
             FROM outfit_article
-            WHERE outfit_name ='%s' and user_outfit_id = %s;
+            WHERE outfit_name ='%s' AND user_outfit_id = %s;
         """ % (outfit, escape(session['username'])))
 
 
-        new_outfit = request.form.get("name")
-        new_comment = request.form.get("comment")
-        new_type = request.form.get("type")
-        new_season = request.form.get("season")
+        updated_outfit_name = request.form.get("name")
+        updated_comment = request.form.get("comment")
+        updated_type = request.form.get("type")
+        updated_season = request.form.get("season")
 
         cursor.execute("""
             UPDATE outfit
-            SET name = '%s' , comment = '%s', type = '%s', season = '%s' WHERE name = '%s'and id = %s;
-        """ % (new_outfit,new_comment,new_type,new_season,outfit, escape(session['username'])))
+            SET name = '%s' , comment = '%s', type = '%s', season = '%s' 
+            WHERE name = '%s'AND id = %s;
+        """ % (updated_outfit_name, updated_comment, updated_type, updated_season, outfit, escape(session['username'])))
         article_names = request.form.getlist("article")
 
         for name in article_names:
             cursor.execute("""
-                insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
-                values ('%s','%s',%s,%s);
-            """ % (new_outfit,name,escape(session['username']),escape(session['username'])))
+                INSERT INTO outfit_article (outfit_name,article_name, id, user_outfit_id)
+                VALUES ('%s','%s',%s,%s);
+            """ % (updated_outfit_name, name, escape(session['username']), escape(session['username'])))
         conn.commit()
         if(outfit == " "):
             flash('Outfit sparad!')
         else:
             flash('Outfit redigerad!')
-        return redirect(url_for('show_outfit', outfit = new_outfit))
+        return redirect(url_for('show_outfit', outfit = updated_outfit_name))
     except:
         conn.rollback()
         flash('Outfiten kunde inte redigeras!')
@@ -351,15 +364,15 @@ def remove_outfit(outfit):
     '''metod för att ta bort en outfit'''
     try:    
         cursor.execute("""
-        DELETE
-        FROM outfit_article
-        WHERE outfit_name = '%s' and user_outfit_id = %s;
+            DELETE
+            FROM outfit_article
+            WHERE outfit_name = '%s' AND user_outfit_id = %s;
         """ % (outfit, escape(session['username'])))
 
         cursor.execute("""
-        DELETE
-        FROM outfit
-        WHERE name = '%s' and id = %s;
+            DELETE
+            FROM outfit
+            WHERE name = '%s' AND id = %s;
         """ % (outfit,escape(session['username'])))
 
         conn.commit()
@@ -380,14 +393,17 @@ def add_outfit():
         outfit_comment = request.form.get("comment")
         outfit_season = request.form.get("season")
         outfit_type = request.form.get("type")
-        cursor.execute("""insert into outfit (name,comment,id, type, season) values('%s','%s',%s,'%s','%s');""" % (outfit_name, outfit_comment,escape(session['username']),outfit_type,outfit_season))
-
+        cursor.execute("""
+            INSERT INTO outfit (name,comment,id, type, season) 
+            VALUES ('%s','%s',%s,'%s','%s');
+        """ % (outfit_name, outfit_comment,escape(session['username']),outfit_type,outfit_season))
         
         for name in article_names:
             cursor.execute("""
-                insert into outfit_article (outfit_name,article_name, id, user_outfit_id)
-                values ('%s','%s',%s,%s);
+                INSERT INTO outfit_article (outfit_name,article_name, id, user_outfit_id)
+                VALUES ('%s','%s',%s,%s);
             """ % (outfit_name,name, escape(session['username']),escape(session['username'])))
+
         print (article_names)
         conn.commit()
         flash('Outfit tillagd!')
@@ -400,28 +416,27 @@ def add_outfit():
 
 @app.route('/generate')
 def generate():
+    '''metod för att generera en outfit'''
     random = randint(1,2)
-    outside = "and type = 'Lång jacka' or type = 'Kort jacka' or type = 'Kappa/Rock' or type = 'Regnjacka'"
-    tops = "and type = 'T-shirt' or type='Linne' or type ='Skjorta' or type = 'Stickat' or type = 'Hoodie' or type = 'Kofta'"
-    whole_body = "and type = 'Playsuit' or type = 'Klänning' or type = 'Jumpsuit'"
-    bottoms = "and type = 'Byxor' or type = 'Shorts' or type = 'Jeans' or type = 'Sweatpants' or type = 'Kjol' or type = 'Leggings'"
-    shoes =" (and type = 'Sneakers' or type ='Klackar' or type = 'Kängor' or type = 'Stövlar' or type = 'Sandaler')"
     try:    
         cursor.execute("""
-        SELECT filename 
-        from wardrobe 
-        where id = %s   
-        and (type = 'Lång jacka' or type = 'Kort jacka' or type = 'Kappa/Rock' or type = 'Regnjacka') order by random();         
+            SELECT filename 
+            FROM wardrobe 
+            WHERE id = %s   
+            AND (type = 'Lång jacka' OR type = 'Kort jacka' OR type = 'Kappa/Rock' OR type = 'Regnjacka') 
+            ORDER BY random();         
         """ % (escape(session['username'])))
+
         for data in cursor:
             jacket = data[0]
                 
         cursor.execute("""
-        SELECT filename 
-        from wardrobe 
-        where id = %s
-        and (type = 'Sneakers' or type ='Klackar' or type = 'Kängor' or type = 'Stövlar' or type = 'Sandaler') order by random();
-            """ % (escape(session['username'])))
+            SELECT filename 
+            FROM wardrobe 
+            WHERE id = %s
+            AND (type = 'Sneakers' OR type ='Klackar' OR type = 'Kängor' OR type = 'Stövlar' OR type = 'Sandaler') 
+            ORDER BY random();
+        """ % (escape(session['username'])))
 
         for data in cursor:
             shoe = data[0]
@@ -429,19 +444,21 @@ def generate():
         if random == 1:
             cursor.execute("""
                 SELECT filename 
-                from wardrobe 
-                where id = %s
-                and(type = 'T-shirt' or type='Linne' or type ='Skjorta' or type = 'Stickat' or type = 'Hoodie' or type = 'Kofta') order by random();
-                """ % (escape(session['username'])))
+                FROM wardrobe 
+                WHERE id = %s
+                AND (type = 'T-shirt' OR type='Linne' OR type ='Skjorta' OR type = 'Stickat' OR type = 'Hoodie' OR type = 'Kofta') 
+                ORDER BY random();
+            """ % (escape(session['username'])))
             for data in cursor:
                     top = data[0]
                 
             cursor.execute("""
                 SELECT filename 
-                from wardrobe 
-                where id = %s
-                and( type = 'Byxor' or type = 'Shorts' or type = 'Jeans' or type = 'Sweatpants' or type = 'Kjol' or type = 'Leggings') order by random();
-                """ % (escape(session['username'])))
+                FROM wardrobe 
+                WHERE id = %s
+                AND ( type = 'Byxor' OR type = 'Shorts' OR type = 'Jeans' OR type = 'Sweatpants' OR type = 'Kjol' OR type = 'Leggings') 
+                ORDER BY random();
+            """ % (escape(session['username'])))
             for data in cursor:
                 bottom = data[0]
 
@@ -450,10 +467,11 @@ def generate():
         else:
             cursor.execute("""
                 SELECT filename 
-                from wardrobe 
-                where id = %s
-                and (type = 'Playsuit' or type = 'Klänning' or type = 'Jumpsuit') order by random();
-                """ % (escape(session['username'])))
+                FROM wardrobe 
+                WHERE id = %s
+                AND (type = 'Playsuit' OR type = 'Klänning' OR type = 'Jumpsuit') 
+                ORDER BY random();
+            """ % (escape(session['username'])))
             for data in cursor:
                 body = data[0]
             outfit = [jacket,shoe,body]
@@ -470,7 +488,11 @@ def generate():
 def edit(filename):
     '''metod för att redigera en artikel'''
     try:
-        cursor.execute("""SELECT filename, type, comment, colour from wardrobe where filename = '%s' and id = %s;"""%(filename,escape(session['username'])))
+        cursor.execute("""
+            SELECT filename, type, comment, colour 
+            FROM wardrobe
+            WHERE filename = '%s' AND id = %s;
+        """% (filename,escape(session['username'])))
         for data in cursor:
             image = data[0]
             value = data[1]
@@ -493,15 +515,17 @@ def edit(filename):
             print ("Accept incoming file:", file)
             print ("Save it to:", destination)
             upload.save(destination)
-            # with open (destination,'rb') as f:
-            #     blob = f.read()
-            # binary = psycopg2.Binary(blob)
-            newvalue = request.form.get("type")
-            newcomment = request.form.get("comment")
-            newcolour = request.form.get("colour")
-            cursor.execute("UPDATE wardrobe SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' WHERE filename = '%s' and id = %s;"% (file,newvalue,newcomment,newcolour,image, escape(session['username'])))
+            updated_value = request.form.get("type")
+            updated_comment = request.form.get("comment")
+            updated_colour = request.form.get("colour")
+
+            cursor.execute("""
+                UPDATE wardrobe 
+                SET filename = '%s' ,type = '%s' ,comment = '%s', colour ='%s' 
+                WHERE filename = '%s' AND id = %s;
+            """% (file, updated_value, updated_comment, updated_colour, image, escape(session['username'])))
+
             conn.commit()
-            # conn.close()
             flash('Artikeln redigerad!')
             return redirect(request.args.get("next") or url_for("wardrobe"))
     except:
@@ -560,18 +584,19 @@ def register_account():
         lastname_register = request.form.get("last-name")
         gender_register = request.form.get("gender")
         cursor.execute("""
-            SELECT email from user_account;
+            SELECT email 
+            FROM user_account;
         """)
         accounts = []
-        for record in cursor:
-            accounts.append(record[0])
+        for data in cursor:
+            accounts.append(data[0])
         if email_register not in accounts:
             print(cursor.fetchall())
             print(accounts)
             cursor.execute("""
-                insert into user_account (email, password, acc_firstname, acc_lastname, acc_gender)
-                values ('%s','%s','%s','%s','%s');
-                """ % (email_register, password_register, firstname_register, lastname_register, gender_register))
+                INSERT INTO user_account (email, password, acc_firstname, acc_lastname, acc_gender)
+                VALUES ('%s','%s','%s','%s','%s');
+            """ % (email_register, password_register, firstname_register, lastname_register, gender_register))
 
             conn.commit()
             
@@ -586,8 +611,14 @@ def register_account():
 
 @app.route('/profile.html')
 def show_profile():
+    '''metod för att visa en användares profil'''
     if 'username' in session:
-        cursor.execute("""SELECT acc_firstname, acc_lastname, acc_gender, email, password from user_account where id = %s;"""%(escape(session['username'])))
+        cursor.execute("""
+            SELECT acc_firstname, acc_lastname, acc_gender, email, password 
+            FROM user_account 
+            WHERE id = %s;
+        """%(escape(session['username'])))
+
         for data in cursor:
             firstname = data[0]
             lastname = data[1]
@@ -599,6 +630,7 @@ def show_profile():
 
 @app.route('/profile.html', methods = ["GET", "POST"])
 def update_profile():
+    '''metod för att uppdatera en användares profil'''
     if 'username' in session:
         email = request.form.get('email-account')
         password = request.form.get('password-account')
@@ -606,7 +638,11 @@ def update_profile():
         lastname = request.form.get("last-name")
         gender = request.form.get("gender")
 
-        cursor.execute("UPDATE user_account SET email = '%s', password = '%s', acc_firstname = '%s', acc_lastname = '%s', acc_gender = '%s' WHERE id = %s;"% (email, password, firstname, lastname, gender, escape(session['username'])))
+        cursor.execute("""
+            UPDATE user_account 
+            SET email = '%s', password = '%s', acc_firstname = '%s', acc_lastname = '%s', acc_gender = '%s' 
+            WHERE id = %s;
+        """ % (email, password, firstname, lastname, gender, escape(session['username'])))
 
         conn.commit()
     
@@ -626,7 +662,8 @@ def login():
         email = request.form['email-account']
 
         cursor.execute("""
-            SELECT * from user_account
+            SELECT * 
+            FROM user_account
             WHERE email = '%s'
         """ % (email))
         user_list = cursor.fetchone()
@@ -643,7 +680,7 @@ def login():
                 session['logged_in'] = True
                 flash('Du är inloggad!')
                 return redirect(url_for('wardrobe'))
-    #return render_template('login.html', error = error)
+    return render_template('login.html', error = error)
 
 @app.route('/logout')
 def logout():

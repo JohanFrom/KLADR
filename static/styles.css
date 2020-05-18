@@ -90,6 +90,8 @@ body{
     color: orangered;
 }
 
+/* FIRST PAGE*/
+
 #content > #first-page{
     background-color: whitesmoke;
     padding: 1px;
@@ -441,7 +443,7 @@ section > p{
 
 .video{
     height: 300px;
-    width: 350;
+    width: 350px;
 }
 
 #popUpTips{

@@ -17,7 +17,7 @@ $(document).ready(function () {
 });
 
 $('#remove-form').submit(function() {
-    var c = confirm("Click OK to continue?");
+    var c = confirm("Vill du verkligen ta bort det här?");
     return c; //you can just return c because it will be true or false
 });
 // $(document).ready(function () {

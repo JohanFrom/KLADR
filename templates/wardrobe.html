@@ -121,7 +121,7 @@
         {% if session['logged_in'] == True %}
 
         <div id="wardrobe-buttons">
-            <button id="add-outfit"><a href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+            <button id="add-outfit"><a href="{{url_for('add_outfit')}}">LÄGG TILL OUTFIT</a></button>
 
             <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
 
@@ -138,7 +138,7 @@
         </div>
 
         <div id="wardrobe">
-            {% for name in path %}
+            {% for name in articles %}
             <div id="clothing-article">
                 <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
             </div>
