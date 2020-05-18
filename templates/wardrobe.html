@@ -121,7 +121,7 @@
         {% if session['logged_in'] == True %}
 
         <div id="wardrobe-buttons">
-            <button id="add-outfit"><a href="{{url_for('add_outfit')}}">LÄGG TILL OUTFIT</a></button>
+            <button id="add-outfit"><a href="{{url_for('add_outfit_page')}}">LÄGG TILL OUTFIT</a></button>
 
             <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
 
@@ -132,7 +132,7 @@
                     <button id="add-article"><a href="{{url_for('insert')}}">LÄGG TILL ARTIKEL</a></button>
                 </div>
                 <div id="wardrobe-buttons-outfit">
-                    <button id="add-outfit"><a href="{{url_for('outfits')}}">LÄGG TILL OUTFIT</a></button>
+                    <button id="add-outfit"><a href="{{url_for('add_outfit_page')}}">LÄGG TILL OUTFIT</a></button>
                     <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
                 </div>-->
         </div>

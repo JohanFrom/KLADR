@@ -159,8 +159,8 @@ def filter(value):
 
     return render_template('wardrobe.html',articles = articles)
 
-@app.route('/add_outfit.html')
-def add_outfit():
+@app.route('/outfits.html')
+def add_outfit_page():
     '''metod för att användaren ska kunna lägga till en outfit. Den visar alla artiklar som kan läggas till i en outfit'''
     articles = []
     if 'username' in session:
