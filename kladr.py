@@ -645,8 +645,11 @@ def update_profile():
         """ % (email, password, firstname, lastname, gender, escape(session['username'])))
 
         conn.commit()
+        flash('Användarprofilen är uppdaterad!')
+    else:
+        flash('Användarprofilen gick inte att uppdatera!')
     
-    return render_template('profile.html')
+    return wardrobe()
 
 @app.route('/login.html')
 def login_page():
