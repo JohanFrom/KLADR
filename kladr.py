@@ -17,7 +17,7 @@ cursor = conn.cursor()
 @app.route('/')
 @app.route('/index.html')
 def index():
-    '''Metod som skicka tillbaka template index.html'''
+    '''metod som skicka tillbaka template index.html'''
     return render_template('index.html')
 
 
@@ -50,7 +50,7 @@ def wardrobe():
 
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
-    '''Metod som lägger till en användares artikel i garderoben och i en mapp med användarens namn.'''
+    '''metod som lägger till en användares artikel i garderoben och i en mapp med användarens namn.'''
             
     if 'username' in session:
     
@@ -173,6 +173,7 @@ def filter(value):
         return wardrobe()
 @app.route("/show_article/<filename>")
 def show_article(filename):
+    '''metoden visar upp vald artikel med bild och kommentar'''
     try:
         if 'username' in session:
             cursor.execute("""
@@ -515,7 +516,7 @@ def generate():
 
 @app.route("/generate/<filename>")
 def generate_from_article(filename):
-    '''Metod som genererar en outfit utifrån en viss artikel'''
+    '''metod som genererar en outfit utifrån en viss artikel'''
     
     random = randint(1,2)
         
@@ -556,6 +557,7 @@ def generate_from_article(filename):
 
 
 def generate_shoes():
+    '''metoden genererar slumpmässigt fram skor ifrån databasen'''
     cursor.execute("""
         SELECT filename 
         FROM wardrobe 
@@ -569,6 +571,7 @@ def generate_shoes():
     return shoe
 
 def generate_full_body():
+    '''metoden genererar slumpmässigt fram en helkroppsartikel ifrån databasen'''
     cursor.execute("""
         SELECT filename 
         FROM wardrobe 
@@ -582,6 +585,7 @@ def generate_full_body():
     return body
 
 def generate_bottoms():
+    '''metoden genererar slumpmässigt fram nederdel ifrån databasen'''
     cursor.execute("""
         SELECT filename 
         FROM wardrobe 
@@ -594,6 +598,7 @@ def generate_bottoms():
     return bottom
 
 def generate_top():
+    '''metoden genererar slumpmässigt fram överdel ifrån databasen'''
     cursor.execute("""
         SELECT filename 
         FROM wardrobe 
@@ -606,6 +611,7 @@ def generate_top():
     return top
 
 def generate_jacket():
+    '''metoden genererar slumpmässigt fram ytterkläder ifrån databasen'''
     cursor.execute("""
         SELECT filename 
         FROM wardrobe 
