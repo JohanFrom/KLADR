@@ -48,16 +48,38 @@
             {%else %}
             <form id="upload-form" action="{{ url_for('edit_outfit_form', outfit = outfit) }}" method="POST">
                 {%endif  %}
+
                 <div id="wardrobe">
                     {% for name in wardrobe %}
                     <div>
-                        <label for="{{name}}"><img src="{{url_for('send_image', filename=name)}}"></label>
+                            
+                            {% if outfit == " " %}
+                                {% set newname = "'" + name + "'"%}
+                                <label for="{{newname}}"><img src="{{url_for('send_image', filename=name)}}"></label>
 
-                        {% if name in outfit_articles %}
-                        <input type="checkbox" id="{{name}}" name="article" value="{{name}}" checked>
-                        {% else %}
-                        <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
-                        {% endif %}
+                                {% if newname in outfit_articles %}
+
+                                <input type="checkbox" id="{{newname}}" name="article" value="{{name}}" checked>
+                                {% else %}
+                                    <input type="checkbox" id="{{newname}}" name="article" value="{{name}}">
+                                {% endif %}
+                           {% else %}
+                           
+                           <label for="{{name}}"><img src="{{url_for('send_image', filename=name)}}"></label>
+                           {% if name in outfit_articles %}
+
+                           <input type="checkbox" id="{{name}}" name="article" value="{{name}}" checked>
+                             {% else %}
+                           <input type="checkbox" id="{{name}}" name="article" value="{{name}}">
+                            {%endif%}
+                            
+                            {%endif%}
+
+
+                           
+                            
+
+                        
                     </div>
                     {% endfor %}
 

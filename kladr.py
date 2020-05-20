@@ -6,6 +6,7 @@ import psycopg2
 import os
 import smtplib
 
+
 app = Flask(__name__)
 app.secret_key = b'_5dg#y2L"F4Q87sjz\n\xec]/'
 
@@ -35,6 +36,7 @@ def wardrobe():
             for data in cursor:
                 articles.append(data[0])
             message = ""
+
             if len(articles) == 0:
                 message = "Du har inga plagg tillagda i din garderob!"
         except:
@@ -166,8 +168,30 @@ def filter(value):
 
         return render_template('wardrobe.html',articles = articles)
     except:
+        conn.rollback()      
         flash('Det gick inte att filtrera på vald typ eller färg!')
         return wardrobe()
+@app.route("/show_article/<filename>")
+def show_article(filename):
+    try:
+        if 'username' in session:
+            cursor.execute("""
+            SELECT filename, comment
+            FROM wardrobe
+            WHERE filename = '%s' AND id = %s
+            """ % (filename, escape(session["username"])))
+
+            for data in cursor:
+                article_name = data[0]
+                article_comment = data[1]
+            return render_template("show_article.html", article = article_name, comment = article_comment)
+        else:
+            return wardrobe()
+    except:
+        conn.rollback()
+        flash("Det gick inte att visa artikeln!")
+        return wardrobe()
+
 
 @app.route('/outfits.html')
 def add_outfit_page():
@@ -186,6 +210,7 @@ def add_outfit_page():
 
         return render_template('add_outfit.html',articles = articles)   
     except:
+        conn.rollback()
         return wardrobe()
 
 
@@ -224,6 +249,7 @@ def list_outfits():
         else:
             return wardrobe()
     except:
+        conn.rollback()
         flash('Det gick inte att visa outfits!')
         return wardrobe()
 
@@ -263,6 +289,7 @@ def filter_outfit(value):
         else:
             return wardrobe()
     except:
+        conn.rollback()
         flash('Det gick inte att filtrera!')
         return wardrobe()
 
@@ -296,6 +323,7 @@ def show_outfit(outfit):
         return render_template('show_outfit.html', comment = comment, outfit_articles = outfit_articles, outfit=outfit)
     
     except:
+        conn.rollback()
         flash('Det gick inte att visa outfiten!')
         return wardrobe()
 
@@ -339,6 +367,7 @@ def edit_outfit(outfit):
 
         return render_template('edit_outfit.html', wardrobe=wardrobe, comment=comment, outfit_articles=outfit_articles, outfit=outfit, type = outfit_type, season = season)
     except:
+        conn.rollback()
         flash('Det gick inte att genomföra redigeringen!')
         return wardrobe()
 
@@ -355,8 +384,10 @@ def save_outfit(outfit):
         wardrobe=[] 
         for data in cursor:
             wardrobe.append(data[0])
+        print(wardrobe)
         return render_template('edit_outfit.html', wardrobe=wardrobe, comment="None", outfit_articles=outfit, outfit=" ", type = "None", season = "None")
     except:
+        conn.rollback()
         flash('Det gick inte att spara outfiten!')
         return wardrobe()
 
@@ -459,71 +490,133 @@ def generate():
     '''metod för att generera en outfit'''
     random = randint(1,2)
     try:    
-        cursor.execute("""
-            SELECT filename 
-            FROM wardrobe 
-            WHERE id = %s   
-            AND (type = 'Lång jacka' OR type = 'Kort jacka' OR type = 'Kappa/Rock' OR type = 'Regnjacka') 
-            ORDER BY random();         
-        """ % (escape(session['username'])))
-
-        for data in cursor:
-            jacket = data[0]
+        jacket = generate_jacket()
                 
-        cursor.execute("""
-            SELECT filename 
-            FROM wardrobe 
-            WHERE id = %s
-            AND (type = 'Sneakers' OR type ='Klackar' OR type = 'Kängor' OR type = 'Stövlar' OR type = 'Sandaler') 
-            ORDER BY random();
-        """ % (escape(session['username'])))
-
-        for data in cursor:
-            shoe = data[0]
+        shoe = generate_shoes()
             
         if random == 1:
-            cursor.execute("""
-                SELECT filename 
-                FROM wardrobe 
-                WHERE id = %s
-                AND (type = 'T-shirt' OR type='Linne' OR type ='Skjorta' OR type = 'Stickat' OR type = 'Hoodie' OR type = 'Kofta') 
-                ORDER BY random();
-            """ % (escape(session['username'])))
-            for data in cursor:
-                    top = data[0]
+            top = generate_top()
                 
-            cursor.execute("""
-                SELECT filename 
-                FROM wardrobe 
-                WHERE id = %s
-                AND ( type = 'Byxor' OR type = 'Shorts' OR type = 'Jeans' OR type = 'Sweatpants' OR type = 'Kjol' OR type = 'Leggings') 
-                ORDER BY random();
-            """ % (escape(session['username'])))
-            for data in cursor:
-                bottom = data[0]
+            bottom = generate_bottoms()
 
             outfit = [jacket,shoe,top,bottom]
             print(outfit)
         else:
-            cursor.execute("""
-                SELECT filename 
-                FROM wardrobe 
-                WHERE id = %s
-                AND (type = 'Playsuit' OR type = 'Klänning' OR type = 'Jumpsuit') 
-                ORDER BY random();
-            """ % (escape(session['username'])))
-            for data in cursor:
-                body = data[0]
+            body = generate_full_body()
             outfit = [jacket,shoe,body]
             print(outfit)
             
         return render_template ('show_outfit.html',outfit_articles = outfit, outfit=" ")
     except:
-        print
         conn.rollback()
         print(random)
         flash('Outfit kunde inte genereras!')
         return wardrobe()
+
+@app.route("/generate/<filename>")
+def generate_from_article(filename):
+    '''Metod som genererar en outfit utifrån en viss artikel'''
+    
+    random = randint(1,2)
+        
+    bottoms = generate_bottoms()
+    shoes = generate_shoes()
+    jacket = generate_jacket()
+    top = generate_top()
+    body = generate_full_body()
+
+    cursor.execute("""
+            SELECT type
+            FROM wardrobe
+            WHERE filename = '%s' AND id = %s
+        """ % (filename, escape(session['username'])))
+    for data in cursor:
+        article_type = data[0]
+        
+    if article_type == 'Playsuit' or article_type == 'Klänning' or article_type == 'Jumpsuit':
+        outfit = [filename,shoes,jacket]
+
+    elif article_type == 'Byxor' or article_type == 'Shorts' or article_type == 'Jeans' or article_type == 'Sweatpants' or article_type == 'Kjol' or article_type == 'Leggings':
+        outfit = [filename,top,shoes,jacket]
+            
+    elif article_type == 'T-shirt' or article_type == 'Linne' or article_type == 'Skjorta' or article_type == 'Stickat' or article_type == 'Hoodie' or article_type == 'Kofta':
+        outfit = [filename,bottoms,shoes,jacket]
+
+    elif article_type == 'Lång jacka' or article_type == 'Kort jacka' or article_type == 'Kappa-Rock' or article_type == 'Regnjacka':
+        if random == 1:
+            outfit = [filename,bottoms,shoes,top]
+        else:
+            outfit = [filename,body,shoes]
+    else:
+        if random == 1:
+            outfit = [filename,bottoms,jacket,top]
+        else:
+            outfit = [filename,body,jacket]
+    return render_template ('show_outfit.html',outfit_articles = outfit, outfit=" ")
+
+
+def generate_shoes():
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s
+        AND (type = 'Sneakers' OR type ='Klackar' OR type = 'Kängor' OR type = 'Stövlar' OR type = 'Sandaler') 
+        ORDER BY random();
+    """ % (escape(session['username'])))
+
+    for data in cursor:
+        shoe = data[0]
+    return shoe
+
+def generate_full_body():
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s
+        AND (type = 'Playsuit' OR type = 'Klänning' OR type = 'Jumpsuit') 
+        ORDER BY random();
+     """ % (escape(session['username'])))
+    for data in cursor:
+        body = data[0]
+    
+    return body
+
+def generate_bottoms():
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s
+        AND ( type = 'Byxor' OR type = 'Shorts' OR type = 'Jeans' OR type = 'Sweatpants' OR type = 'Kjol' OR type = 'Leggings') 
+        ORDER BY random();
+    """ % (escape(session['username'])))
+    for data in cursor:
+        bottom = data[0]
+    return bottom
+
+def generate_top():
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s
+        AND (type = 'T-shirt' OR type='Linne' OR type ='Skjorta' OR type = 'Stickat' OR type = 'Hoodie' OR type = 'Kofta') 
+        ORDER BY random();
+    """ % (escape(session['username'])))
+    for data in cursor:
+        top = data[0]
+    return top
+
+def generate_jacket():
+    cursor.execute("""
+        SELECT filename 
+        FROM wardrobe 
+        WHERE id = %s   
+        AND (type = 'Lång jacka' OR type = 'Kort jacka' OR type = 'Kappa-Rock' OR type = 'Regnjacka') 
+        ORDER BY random();         
+    """ % (escape(session['username'])))
+
+    for data in cursor:
+        jacket = data[0]
+    return jacket
 
 @app.route('/edit.html/<filename>',methods=["POST","GET"])
 def edit(filename):
@@ -672,6 +765,7 @@ def show_profile():
         return render_template ('profile.html', firstname = firstname, lastname = lastname, gender = gender, email = email, password = password)
     
     except:
+        conn.rollback()
         flash('Det gick inte att visa användarprofilen!')
         return wardrobe()
         

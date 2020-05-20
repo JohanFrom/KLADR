@@ -46,30 +46,27 @@
         </div>
         
         <div id=wardrobe-buttons>
-            {% if outfit == " "%}
-            <button id="add-article"><a href="{{url_for('save_outfit',outfit=outfit_articles)}}">SPARA OUTFIT</a></button>
-            {%else%}
-            <button id="add-article"><a href="{{url_for('edit_outfit',outfit=outfit)}}">REDIGERA OUTFIT</a></button>
-            {%endif%}
+
+            <button id="add-article"><a href="{{url_for('edit',filename=article)}}">REDIGERA ARTIKEL</a></button>
+            <button id="add-article"><a href="{{url_for('generate_from_article', filename = article)}}">GENERERA OUTFIT MED DENNA ARTIKEL</a></button>            
+      
         </div>
 
         <h2>{{outfit}} </h2>
 
-        <div id="wardrobe">
-            {% for article in outfit_articles %}
+        <div id="article">
             <div id="clothing-article">
-                <img src="{{url_for('send_image', filename=article)}}">
+                <img src="{{url_for('send_image', filename = article)}}">
             </div>
-            {% endfor %}
         </div>
-        <div id="comment">
+        <div id="comment-article">
             <p>
                 {{comment}}
             </p>
         </div>
 
         <div id="wardrobe-buttons">
-            <button id="list-outfit"><a href="{{url_for('list_outfits')}}">VISA OUTFITS</a></button>
+            <button id="list-outfit"><a href="{{url_for('wardrobe')}}">GARDEROB</a></button>
         </div>
         <footer>
             <p>KLÄDR © 2020</p>

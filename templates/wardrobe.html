@@ -143,7 +143,7 @@
         <div id="wardrobe">
             {% for name in articles %}
             <div id="clothing-article">
-                <a href="/edit.html/{{name}}"><img src="{{url_for('send_image', filename=name)}}"></a>
+                <a href="{{url_for('show_article', filename = name)}}"><img src="{{url_for('send_image', filename=name)}}"></a>
             </div>
             {% endfor %}
         </div>
