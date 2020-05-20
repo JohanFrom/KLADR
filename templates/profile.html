@@ -1,76 +1,84 @@
 <!Doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial scale 1.0, width=device-width">
-        <link href="/static/styles.css" rel=stylesheet>
-        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-        <title>KLÄDR</title>
-    </head>
-    <body>
-        <div id="content">
-            <header>
-                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
-            </header>
 
-            <nav>
-                <a href="#" class="mobile-only" id="menu-btn">Meny <img src="/static/menu-image.png" alt=""></a>
-                <div id="menu-options">
-                    <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                    <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
-                    <a class="navitem" href="{{url_for('about')}}">Om oss</a>
-                    {% if session['logged_in'] == True %}
-                        <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
-                        <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
-                    {% else %}
-                        <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
-                        <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
-                    {% endif %} 
-                </div>
-            </nav>
-            <div id="success-message">
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <div id=flashwrapper class="alert" role="alert">{{ message }}
-                </div>
-                {% endfor %}
+<head>
+    <meta name="author" content="Johan From, Alva Karlborg, Laura Barba, Rebecka Persson">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial scale 1.0, width=device-width">
+    <link href="/static/styles.css" rel=stylesheet>
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <title>KLÄDR</title>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+        </header>
+
+        <nav>
+            <a href="#" class="mobile-only" id="menu-btn">Meny <img src="/static/menu-image.png" alt=""></a>
+            <div id="menu-options">
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span
+                        class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
+                <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
+                {% else %}
+                <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span
+                        class="sr-only">(current)</span></a>
+                <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
-                {% endwith %}
             </div>
-            <div id="add-profile">
-                <form action="{{url_for('update_profile')}}" method="POST" enctype="multipart/form-data">
-                    <label for="first-name">Förnamn</label>
-                    <input type="text" id="first-name-placeholder" placeholder="Förnamn" name="first-name" value ="{{ firstname }}">
-                    <label for="last-name">Efternamn</label>
-                    <input type="text" id="last-name-placeholder" placeholder="Efternamn" name="last-name" value="{{ lastname }}">
-                    <label for="gender">Kön</label>
-                    <select name="gender" id="gender">
-                        <option value="{{ gender }}">{{ gender }}</option>
-                        <option value="Man">Man</option>
-                        <option value="Kvinna">Kvinna</option>
-                        <option value="Annat">Annat</option>
-                    </select>
-                    <label for="email-account">E-mail</label>
-                    <input type="email" placeholder="Email" name="email-account" value="{{ email }}">
-                    <label for="password-account">Lägg till lösenord</label>
-                    <input type="password" placeholder="Password" name="password-account" value="{{ password }}">
-                    <input id="register-btn" type="submit" value="UPPDATERA">
-                </form>
+        </nav>
+        <div id="success-message">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div id=flashwrapper class="alert" role="alert">{{ message }}
             </div>
-        
-            <footer>
-                <p>KLÄDR © 2020</p>
-            </footer>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </div>
-        
+        <div id="add-profile">
+            <form action="{{url_for('update_profile')}}" method="POST" enctype="multipart/form-data">
+                <label for="first-name">Förnamn</label>
+                <input type="text" id="first-name-placeholder" placeholder="Förnamn" name="first-name"
+                    value="{{ firstname }}">
+                <label for="last-name">Efternamn</label>
+                <input type="text" id="last-name-placeholder" placeholder="Efternamn" name="last-name"
+                    value="{{ lastname }}">
+                <label for="gender">Kön</label>
+                <select name="gender" id="gender">
+                    <option value="{{ gender }}">{{ gender }}</option>
+                    <option value="Man">Man</option>
+                    <option value="Kvinna">Kvinna</option>
+                    <option value="Annat">Annat</option>
+                </select>
+                <label for="email-account">E-mail</label>
+                <input type="email" placeholder="Email" name="email-account" value="{{ email }}">
+                <label for="password-account">Lägg till lösenord</label>
+                <input type="password" placeholder="Password" name="password-account" value="{{ password }}">
+                <input id="register-btn" type="submit" value="UPPDATERA">
+            </form>
+        </div>
+
+        <footer>
+            <p>KLÄDR © 2020</p>
+        </footer>
+    </div>
+
     <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
-    <span></span>
+        <span></span>
     </a>
     <!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript"></script>
     <script src="/static/script.js/"></script>
-    </body>
+</body>
+
 </html>

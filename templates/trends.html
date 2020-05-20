@@ -1,6 +1,8 @@
 <!Doctype html>
 <html>
+
 <head>
+    <meta name="author" content="Johan From, Alva Karlborg, Laura Barba, Rebecka Persson">
     <meta charset="utf-8">
     <meta name="viewport" content="initial scale 1.0, width=device-width">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -10,6 +12,7 @@
 
     <title>KLÄDR</title>
 </head>
+
 <body>
     <div id="content">
         <header>
@@ -22,12 +25,14 @@
                 <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
                 <a class="navitem" href="{{url_for('about')}}">Om oss</a>
                 {% if session['logged_in'] == True %}
-                    <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
-                    <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
+                <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span
+                        class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
+                <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
                 {% else %}
-                    <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
-                    <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
-                {% endif %} 
+                <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span
+                        class="sr-only">(current)</span></a>
+                <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
+                {% endif %}
             </div>
         </nav>
         <div id="trend-page">
@@ -90,18 +95,18 @@
                     <aside>
                         <div id="divright">
                             <h4 id="htips">Tips & tricks</h4>
-                            
+
                             <h6 class="tipsheader" onclick="toggle('jeans')">Laga jeans</h6>
 
                             <article id="jeans">
-                                                                      
-                                    <iframe class="video" src="https://www.youtube.com/embed/NM7qpwrlJ48"
-                                        frameborder="0"></iframe>
-                                    <p class="description">
-                                        Videon beskriver hur DU kan laga dina trasiga jeans - vilket både är bra för miljön
-                                        och plånboken!
-                                    </p>
-                                
+
+                                <iframe class="video" src="https://www.youtube.com/embed/NM7qpwrlJ48"
+                                    frameborder="0"></iframe>
+                                <p class="description">
+                                    Videon beskriver hur DU kan laga dina trasiga jeans - vilket både är bra för miljön
+                                    och plånboken!
+                                </p>
+
                             </article>
 
                             <h6 class="tipsheader" onclick="toggle('shorts')">Från jeans till shorts</h6>
@@ -219,13 +224,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
     <script src="/static/script.js" defer></script>
-      <!--JavaScript-->
-      <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
-    <span></span>
+    <!--JavaScript-->
+    <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
+        <span></span>
     </a>
-                        
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     <script type="text/javascript"></script>
+    <script type="text/javascript"></script>
     <script src="/static/script.js/"></script>
 </body>
+
 </html>

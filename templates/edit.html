@@ -1,136 +1,144 @@
 <!Doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial scale 1.0, width=device-width">
-        <link rel="stylesheet" href="/static/styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-        <title>KLÄDR</title>
-    </head>
-    <body>
-        <div id="content">
-            <header>
-                <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
-            </header>
-            <nav>
-                <a href="#" class="mobile-only" id="menu-btn">Meny <img src="/static/menu-image.png" alt=""></a>
-                <div id="menu-options">
-                    <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
-                    <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
-                    <a class="navitem" href="{{url_for('about')}}">Om oss</a>
-                    {% if session['logged_in'] == True %}
-                        <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
-                        <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
-                    {% else %}
-                        <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span class="sr-only">(current)</span></a>
-                        <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
-                    {% endif %} 
-                </div>
-            </nav>
-            <div id="success-message">
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <div id=flashwrapper class="alert" role="alert">{{ message }}
-                </div>
-                {% endfor %}
+
+<head>
+    <meta name="author" content="Johan From, Alva Karlborg, Laura Barba, Rebecka Persson">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial scale 1.0, width=device-width">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <title>KLÄDR</title>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <a id="mainlogo" href="{{url_for('index')}}">KLÄDR</a>
+        </header>
+        <nav>
+            <a href="#" class="mobile-only" id="menu-btn">Meny <img src="/static/menu-image.png" alt=""></a>
+            <div id="menu-options">
+                <a class="navitem" href="{{url_for('wardrobe')}}">Garderob</a>
+                <a class="navitem" href="{{url_for('trends')}}">Trender & tips</a>
+                <a class="navitem" href="{{url_for('about')}}">Om oss</a>
+                {% if session['logged_in'] == True %}
+                <a class="navitem-active" href="{{url_for('logout')}}">Logga ut <span
+                        class="sr-only">(current)</span><img src="/static/logout-image.png" alt="logout"></a>
+                <a class="navitem-active" href="{{url_for('show_profile')}}">Min profil</a>
+                {% else %}
+                <a class="navitem-login" href="{{url_for('login_page')}}">Logga in <span
+                        class="sr-only">(current)</span></a>
+                <a class="navitem-login" href="{{url_for('register')}}">Registrera</a>
                 {% endif %}
-                {% endwith %}
             </div>
-            <main>
-                <h2>Redigera artikel</h2>
-
-                <form id="upload-form" action="{{ url_for('edit', filename= image) }}" method="POST" enctype="multipart/form-data">
-                        
-                    <label for="file"> Bildfil:</label>
-                    <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple required>
-                    <label for="type">Välj en typ</label>
-                        <select id="type" name="type" required>
-                            <option value="{{ value }}">{{ value }}</option>
-                            <option value="other">Annat</option>
-
-                            <option value="Överdel" disabled>Överdel</option>
-
-                            <option value="T-shirt">T-shirts</option>
-                            <option value="Linne" >Linne</option>
-                            <option value="Skjorta">Skjorta</option>
-                            <option value="Stickat">Stickat</option>
-                            <option value="Hoodie">Hoodie</option>
-                            <option value="Kofta">Kofta</option>
-
-                            <option value="Nederdel" disabled>Nederdel</option>
-
-                            <option value="Byxor">Byxor</option>
-                            <option value="Jeans">Jeans</option>
-                            <option value="Shorts">Shorts</option>
-                            <option value="Sweatpants" >Sweatpants</option>
-                            <option value="Kjol">Kjol</option>
-                            <option value="Leggings">Leggings</option>
-
-
-                            <option value="Helkropp" disabled>Helkropp</option>
-
-                            <option value="Klänning">Klänning</option>
-                            <option value="Jumpsuit">Jumpsuit</option>
-                            <option value="Playsuit">Playsuit</option>
-                            
-                            <option value="Skor" disabled>Skor</option>
-
-                            <option value="Sneakers" >Sneakers</option>
-                            <option value="Klackar">Klackar</option>
-                            <option value="Kängor">Kängor</option>
-                            <option value="Stövlar" >Stövlar</option>
-                            <option value="Sandaler">Sandaler</option>
-                            
-                            <option value="Ytterplagg" disabled>Ytterplagg</option>
-
-                            <option value="Lång jacka" >Lång jacka</option>
-                            <option value="Kort jacka">Kort jacka</option>
-                            <option value="Kappa/Rock">Kappa/Rock</option>
-                            <option value="Regnjacka" >Regnjacka</option>
-                            <option value="Termobyxor">Termobyxor</option>
-                        </select>
-                    
-                        <label for="colour">Välj en färg</label>
-                        <select id="colour" name="colour" required>
-                            <option value="{{ colour }}">{{ colour }}</option>
-                            <option disabled>Välj en färg</option>                            
-                            <option value="Svart">Svart</option>
-                            <option value="Brun">Brun</option>
-                            <option value="Beige">Beige</option>
-                            <option value="Grå">Grå</option>
-                            <option value="Vit">Vit</option>
-                            <option value="Blå">Blå</option>
-                            <option value="Grön">Grön</option>
-                            <option value="Gul">Gul</option>
-                            <option value="Orange">Orange</option>
-                            <option value="Röd">Röd</option>
-                            <option value="Rosa">Rosa</option>
-                            <option value="Lila">Lila</option>
-                            <option value="Guld">Guld</option>
-                            <option value="Silver">Silver</option>
-                            <option value="Flerfärgad">Flerfärgad</option>
-                        </select>
-                        <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30" rows="10">{{ comment }}</textarea>
-                    <input type="submit" value="Uppdatera" id="upload-button">
-                </form>
-
-                <form id="remove-form" action="{{ url_for('remove', filename= image) }}" method="POST">
-                    <input type="submit" value="Ta bort" id="remove-button">
-                </form>
-            </main>    
-            <footer>
-                <p>KLÄDR © 2020</p>
-            </footer>
+        </nav>
+        <div id="success-message">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div id=flashwrapper class="alert" role="alert">{{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </div>
-    
+        <main>
+            <h2>Redigera artikel</h2>
+
+            <form id="upload-form" action="{{ url_for('edit', filename= image) }}" method="POST"
+                enctype="multipart/form-data">
+
+                <label for="file"> Bildfil:</label>
+                <input id="file-picker" value="{{ image }}" type="file" name="file" accept="image/*" multiple required>
+                <label for="type">Välj en typ</label>
+                <select id="type" name="type" required>
+                    <option value="{{ value }}">{{ value }}</option>
+                    <option value="other">Annat</option>
+
+                    <option value="Överdel" disabled>Överdel</option>
+
+                    <option value="T-shirt">T-shirts</option>
+                    <option value="Linne">Linne</option>
+                    <option value="Skjorta">Skjorta</option>
+                    <option value="Stickat">Stickat</option>
+                    <option value="Hoodie">Hoodie</option>
+                    <option value="Kofta">Kofta</option>
+
+                    <option value="Nederdel" disabled>Nederdel</option>
+
+                    <option value="Byxor">Byxor</option>
+                    <option value="Jeans">Jeans</option>
+                    <option value="Shorts">Shorts</option>
+                    <option value="Sweatpants">Sweatpants</option>
+                    <option value="Kjol">Kjol</option>
+                    <option value="Leggings">Leggings</option>
+
+
+                    <option value="Helkropp" disabled>Helkropp</option>
+
+                    <option value="Klänning">Klänning</option>
+                    <option value="Jumpsuit">Jumpsuit</option>
+                    <option value="Playsuit">Playsuit</option>
+
+                    <option value="Skor" disabled>Skor</option>
+
+                    <option value="Sneakers">Sneakers</option>
+                    <option value="Klackar">Klackar</option>
+                    <option value="Kängor">Kängor</option>
+                    <option value="Stövlar">Stövlar</option>
+                    <option value="Sandaler">Sandaler</option>
+
+                    <option value="Ytterplagg" disabled>Ytterplagg</option>
+
+                    <option value="Lång jacka">Lång jacka</option>
+                    <option value="Kort jacka">Kort jacka</option>
+                    <option value="Kappa/Rock">Kappa/Rock</option>
+                    <option value="Regnjacka">Regnjacka</option>
+                    <option value="Termobyxor">Termobyxor</option>
+                </select>
+
+                <label for="colour">Välj en färg</label>
+                <select id="colour" name="colour" required>
+                    <option value="{{ colour }}">{{ colour }}</option>
+                    <option disabled>Välj en färg</option>
+                    <option value="Svart">Svart</option>
+                    <option value="Brun">Brun</option>
+                    <option value="Beige">Beige</option>
+                    <option value="Grå">Grå</option>
+                    <option value="Vit">Vit</option>
+                    <option value="Blå">Blå</option>
+                    <option value="Grön">Grön</option>
+                    <option value="Gul">Gul</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Röd">Röd</option>
+                    <option value="Rosa">Rosa</option>
+                    <option value="Lila">Lila</option>
+                    <option value="Guld">Guld</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Flerfärgad">Flerfärgad</option>
+                </select>
+                <textarea placeholder="Kommentar" name="comment" id="comment-clothes" cols="30"
+                    rows="10">{{ comment }}</textarea>
+                <input type="submit" value="Uppdatera" id="upload-button">
+            </form>
+
+            <form id="remove-form" action="{{ url_for('remove', filename= image) }}" method="POST">
+                <input type="submit" value="Ta bort" id="remove-button">
+            </form>
+        </main>
+        <footer>
+            <p>KLÄDR © 2020</p>
+        </footer>
+    </div>
+
     <a href="javascript:void(0);" title="Go To Top" id="scroll" style="display:none;">
-    <span></span>
+        <span></span>
     </a>
-            
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript"></script>
     <script src="/static/script.js"></script>
-    </body>
+</body>
+
 </html>

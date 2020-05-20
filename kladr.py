@@ -1,3 +1,5 @@
+__author__ = "Johan From, Alva Karlborg, Laura Barba, Rebecka Persson" 
+
 from flask import Flask, session, render_template, request, send_from_directory, url_for, redirect, flash, g, escape
 from random import randint
 import psycopg2

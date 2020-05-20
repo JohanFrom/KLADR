@@ -1,3 +1,7 @@
+/**
+ * @author Johan From, Alva Karlborg, Laura Barba, Rebecka Persson
+ */
+
 //SCROLL UP
 $(document).ready(function () {
     $(window).scroll(function () {
@@ -16,7 +20,7 @@ $(document).ready(function () {
     });
 });
 
-$('#remove-form').submit(function() {
+$('#remove-form').submit(function () {
     var c = confirm("Vill du verkligen ta bort det här?");
     return c; //you can just return c because it will be true or false
 });
