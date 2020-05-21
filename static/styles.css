@@ -709,7 +709,7 @@ input[type=text]{
     }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
-@media screen and (min-width: 420px){
+@media screen and (max-width: 420px){
     .mobile-only{
         display: block;
     }
@@ -753,10 +753,6 @@ input[type=text]{
 
     #content > nav > #menu-options > .navitem{
         color: orangered;
-    }
-
-    #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 160px;
     }
 }
 /*Surfplattor*/
@@ -805,10 +801,11 @@ input[type=text]{
     #content > nav > #menu-options > .navitem{
         color: orangered;
     }
-
+    
     #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 160px;
+        height: 180px;
     }
+    
     #first-page > #first-section{
         width: 300px;
         font-size: 25px;

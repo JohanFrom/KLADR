@@ -48,6 +48,7 @@ function toggle(ID) {
         element.style.display = "none";
     }
 }
+
 // //Get the button:
 // mybutton = document.getElementById("my_btn");
 
@@ -77,4 +78,15 @@ setTimeout(function () {
     //myWindow = window.open("https://www.makemesmile.se/guider/kl%C3%A4dv%C3%A5rd-28064305", "", "width=1100, height=800");
 //}
 
-//Form validation
+function toggle(ID) {
+    var element = document.getElementById(ID);
+    if (element.style.display === "none" || element.style.display === "") {
+        if (ID == "filter-menu") {
+            element.style.display = "flex";
+        } else {
+            element.style.display = "block";
+        }
+    } else {
+        element.style.display = "none";
+    }
+}

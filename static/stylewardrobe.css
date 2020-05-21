@@ -507,7 +507,7 @@ footer > p{
     }
 }
 /*Större mobiltelefoner/mindre surfplattor*/
-@media screen and (min-width: 420px){
+@media screen and (max-width: 420px){
     .mobile-only{
         display: block;
     }
@@ -628,7 +628,8 @@ footer > p{
         overflow: hidden;
         transition: 0.5s all;
         border-style: none;
-        /* padding-bottom: 0px; */
+        padding-bottom: 0px;
+        padding-right: 190px;
         border-bottom-style: solid;
         border-color: dimgrey;
     }
@@ -636,7 +637,12 @@ footer > p{
     #content > nav > #menu-options > .navitem{
         color: orangered;
     }
+    
+    #menu-btn:focus + #menu-options, #menu-options:hover {
+        height: 160px;
+    }
 
+    
     /* #content > #wardrobe-buttons{
         display: flex;
         flex-direction: row;
@@ -658,12 +664,5 @@ footer > p{
     /* #content > #wardrobe-buttons > #generate-outfit > a{
         font-size: 20px;
     }
-
-    #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 350px;
-    }
-
-    #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 160px;
-    } */
+     */
 }
