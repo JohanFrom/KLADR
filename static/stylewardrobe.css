@@ -17,8 +17,7 @@ body{
     margin-left: 500px;
     margin-top: 20px;
     margin-bottom: 20px;
-    color: white;
-    background-color: orangered;
+    color: orangered;
     border-radius: 5px; 
     border: none; 
     font-size: 16px;
@@ -194,13 +193,12 @@ body{
 }
 
 #content > #wardrobe > #clothing-article img{
-    width: 400px;
-    max-height: 500px;
+    width: auto;
+    height: auto;
     margin: 1em;
     
 }
 #content > #article > #clothing-article img, #content > #comment-article{
-    
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -355,7 +353,7 @@ footer > p{
 /*Responvivitet endast för sidor som har med wardrobe att göra*/
 
 /* Mobiltelefoner*/
-@media screen and (max-width: 420px){
+@media screen and (max-width: 440px){
     .mobile-only{
         display: block;
     }
@@ -386,6 +384,7 @@ footer > p{
     #content > nav > #menu-options{
         display: flex;
         padding: 0px;
+        padding-right: 0px !important;
         flex-direction: column;
         overflow: hidden;
         transition: 0.5s all;
@@ -401,23 +400,7 @@ footer > p{
     }
 
     #content > nav > #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 180px;
-    }
-
-    #content > #wardrobe > #clothing-article img{
-        height: 180px;
-        width: 180px;
-        display: flex;
-        flex-direction: row; 
-    }
-
-    #content > #upload-form > #wardrobe img{
-        height: 180px;
-        width: 180px;
-        display: flex;
-        flex-direction: row; 
-        padding-top: 20px;
-        align-items: center;
+        height: 160px;
     }
 
     #content > #upload-form > #wardrobe{
@@ -506,83 +489,7 @@ footer > p{
         justify-content: center; 
     }
 }
-/*Större mobiltelefoner/mindre surfplattor*/
-@media screen and (max-width: 420px){
-    .mobile-only{
-        display: block;
-    }
 
-    #content > nav{
-        flex-direction: column;
-    }
-
-    #content > #menu-options{
-        display: flex;
-        flex-direction: column;
-    }
-
-    #menu-btn{
-        text-align: center;
-        color: dimgrey;
-        text-decoration: none;
-        font-size: 30px;
-        border-top-style: solid;
-        border-color: dimgrey;
-        border-width: thin;
-
-    }
-
-    #menu-btn:hover{
-        color: black;
-    }
-
-    #content > nav > #menu-options{
-        display: flex;
-        height: 0px;
-        flex-direction: column;
-        overflow: hidden;
-        transition: 0.5s all;
-        border-style: none;
-        padding-bottom: 0px;
-        padding-right: 190px;
-        border-bottom-style: solid;
-        border-color: dimgrey;
-    }
-
-    #content > nav > #menu-options > .navitem{
-        color: orangered;
-    }
-
-    #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 190px;
-    }
-    
-    #content > #wardrobe-buttons{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    #content > #wardrobe-buttons > #add-outfit > a{
-        font-size: 16px;
-    }
-
-    #content > #wardrobe-buttons > #add-article > a{
-        font-size: 16px;
-    }
-
-    #content > #wardrobe-buttons > #list-outfit > a{
-        font-size: 16px;
-    }
-
-    #content > #wardrobe-buttons > #generate-outfit > a{
-        font-size: 16px;
-    }
-
-    #menu-btn:focus + #menu-options, #menu-options:hover {
-        height: 350px;
-    }
-}
 /*Surfplattor*/
 @media screen and (max-width: 1024px){
     .mobile-only{
@@ -642,27 +549,18 @@ footer > p{
         height: 160px;
     }
 
-    
-    /* #content > #wardrobe-buttons{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    } */
-
-    /* #content > #wardrobe-buttons > #add-outfit > a{
-        font-size: 20px;
+    #content > #success-message{
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        margin-right: 500px;
+        margin-left: 500px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: orangered;
+        border-radius: 5px; 
+        border: none; 
+        font-size: 25px;
     }
-
-    #content > #wardrobe-buttons > #add-article > a{
-        font-size: 20px;
-    }
-
-    #content > #wardrobe-buttons > #list-outfit > a{
-        font-size: 20px;
-    } */
-
-    /* #content > #wardrobe-buttons > #generate-outfit > a{
-        font-size: 20px;
-    }
-     */
 }
