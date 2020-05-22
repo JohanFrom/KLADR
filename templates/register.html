@@ -48,9 +48,9 @@
         <div id="register">
             <form action="{{url_for('register_account')}}" method="POST">
                 <label for="first-name">Förnamn</label>
-                <input type="text" placeholder="Förnamn" name="first-name">
+                <input type="text" placeholder="Förnamn" name="first-name" id=first-name>
                 <label for="last-name">Efternamn</label>
-                <input type="text" placeholder="Efternamn" name="last-name">
+                <input type="text" placeholder="Efternamn" name="last-name" id=last-name>
                 <label for="gender">Kön</label>
                 <select name="gender" id="gender">
                     <option value="Man">Man</option>
@@ -58,9 +58,9 @@
                     <option value="Annat">Annat</option>
                 </select>
                 <label for="email-account">E-mail</label>
-                <input type="email" placeholder="E-mail" name="email-account">
+                <input type="email" placeholder="E-mail" name="email-account" id = email-account>
                 <label for="password-account">Lösenord</label>
-                <input type="password" placeholder="Lösenord" name="password-account">
+                <input type="password" placeholder="Lösenord" name="password-account" id=password-account>
                 <input id="register-btn" type="submit" value="REGISTRERA">
             </form>
         </div>
