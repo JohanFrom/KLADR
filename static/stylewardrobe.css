@@ -182,6 +182,7 @@ body{
     flex-grow: 1;
     object-fit: cover;
     margin: 5px;
+    justify-content: center;
 }
 
 #content > p{
@@ -196,6 +197,7 @@ body{
     width: auto;
     height: auto;
     margin: 1em;
+    align-items: center;
     
 }
 #content > #article > #clothing-article img, #content > #comment-article{
@@ -213,6 +215,8 @@ body{
 #outfit a {
     color: orangered;
     text-decoration: none;
+    align-items: center;
+    font-size: 30px;
 }
 
 #outfit a:hover{
@@ -220,8 +224,8 @@ body{
 }
 
 #outfit > img {
-    width: 400px;
-    max-height: 500px;
+    width: auto;
+    max-height: auto;
     margin: 1em;
 }
 
@@ -232,19 +236,22 @@ body{
     flex-wrap: wrap;
     flex-grow: 1;
     object-fit: cover;
-    align-items: center;
+    justify-content: center;
 }
 
-#content > #upload-form > #wardrobe img{
+#content > #upload-form > #wardrobe > div{
     margin: 5px;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: auto;
+    max-height: auto;
     margin: 1em;
-    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 #content > #upload-form{
     align-items: center;
+    text-align: center;
 }
 
 #content > form > #type, #season{
