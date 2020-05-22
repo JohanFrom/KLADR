@@ -711,6 +711,114 @@ input[type=text]{
         height: auto;
     }
 }
+@media screen and (max-width: 910px){
+    /*INDEX.HTML*/
+       #content > #first-page{
+           background-image: none;
+           height: 800px;
+       }
+       .mobile-only{
+           display: block;
+       }
+   
+       #content > nav{
+           flex-direction: column;
+       }
+   
+       #content > #menu-options{
+           display: flex;
+           flex-direction: column;
+       }
+   
+       #menu-btn{
+           text-align: center;
+           color: dimgrey;
+           text-decoration: none;
+           font-size: 30px;
+           border-top-style: solid;
+           border-color: dimgrey;
+           border-width: thin;
+   
+       }
+   
+       #menu-btn:hover{
+           color: black;
+       }
+   
+       #content > nav > #menu-options{
+           display: flex;
+           height: 0px;
+           padding-right: 0px !important;
+           flex-direction: column;
+           overflow: hidden;
+           transition: 0.5s all;
+           border-style: none;
+           padding-bottom: 0px;
+           padding: 0px;
+           border-bottom-style: solid;
+           border-color: dimgrey;
+       }
+   
+       #content > nav > #menu-options > .navitem{
+           color: orangered;
+       }
+   
+       #menu-btn:focus + #menu-options, #menu-options:hover {
+           height: 160px;
+       }
+       #content > #first-page > #first-section{
+           text-align: center;
+           margin: auto;
+           padding: 0px;
+           font-size: 20px;
+           
+       }
+       #content > #first-page > #second-section{
+           text-align: center;
+           margin: auto;
+           padding: 0px;
+           font-size: 20px;
+       }
+       #content > #first-page > #third-section{
+           text-align: center;
+           margin: auto;
+           padding: 0px;
+           font-size: 20px;
+           
+       }
+   /*ABOUT.HTML*/
+       #content > #about-info{
+           text-align: center;
+           padding-right: 0px !important;
+           padding-left: 0px !important;
+       }
+   
+       #content > #about-info > #about-picture > img{
+           width: 200px;
+           height: 160px;
+           align-items: center;
+       }
+       #content > #about-info > h4{
+           font-size: 30px;
+           margin: 0px;
+       }
+       #content > #about-info > p{
+           font-size: 15px;
+       }
+       #content > #about-info > #about-form > form > label{
+           font-size: 15px;
+       }
+   /*TRENDS.HTML*/
+       #content > #trend-page > #first-section-trend > #carouselExampleIndicators {
+           width: 70%
+       }
+       .carousel-item{
+           height: auto;
+       } 
+       .carousel-item img{
+           height: auto;
+       }
+   }
 
 /*Surfplattor*/
 @media screen and (max-width: 1024px){
