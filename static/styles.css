@@ -795,12 +795,17 @@ input[type=text]{
            font-size: 20px;
            
        }
-       #content > #first-page > #second-section{
+       #content > #first-page > #second-section > .second{
            text-align: center;
            margin: auto;
            padding: 0px;
            font-size: 20px;
        }
+
+       .second > a{
+         font-size: 40px;  
+       }
+
        #content > #first-page > #third-section{
            text-align: center;
            margin: auto;
