@@ -285,6 +285,10 @@ input[type=submit]{
     margin-top: 10px;
 }
 
+#remove-button{
+    margin-left: 910px;
+}
+
 input[type=submit]:hover{
     cursor: pointer;
     background-color: #666;
