@@ -44,12 +44,13 @@
             {% endif %}
             {% endwith %}
         </div>
-        
+
         <div id=wardrobe-buttons>
 
             <button id="add-article"><a href="{{url_for('edit',filename=article)}}">REDIGERA ARTIKEL</a></button>
-            <button id="add-article"><a href="{{url_for('generate_from_article', filename = article)}}">GENERERA OUTFIT MED DENNA ARTIKEL</a></button>            
-      
+            <button id="add-article"><a href="{{url_for('generate_from_article', filename = article)}}">GENERERA OUTFIT
+                    MED ARTIKEL</a></button>
+
         </div>
 
         <h2>{{outfit}} </h2>
