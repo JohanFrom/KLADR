@@ -101,12 +101,12 @@ body{
 }
 
 #first-page > #first-section{
-    width: 300px;
     font-size: 25px;
     margin-left: 200px;
     margin-top: 65px;
     padding-left: 10px;
     padding-right: 10px;
+    width: 300px;
     
 }
 #first-page > #first-section > h1 > a{
@@ -117,24 +117,40 @@ body{
     color: #666;
 }
 #first-page > #second-section{
-    width: 300px;
     font-size: 25px;
-    margin-top: 150px;
-    margin-left: 700px;
+    margin-top: 200px;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 20px;
 }
-#first-page > #second-section > h1 > a{
+#first-page > #second-section > a{
     text-decoration: none; 
     color: orangered;
 }
 #first-page > #second-section > h1 > a:hover{
     color: #666;
 }
-#first-page > #third-section{
+
+.first{
+    margin: 0;
+}
+
+.second{
+    margin-left: 900px;
+    font-size: 25px;
     width: 300px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.second > a{
+    text-decoration: none;
+    color: orangered;
+    font-size: 50px;
+}
+
+#first-page > #third-section{
     font-size: 25px;
     margin-left: 130px;
     margin-top: 130px;
@@ -148,6 +164,12 @@ body{
 }
 #first-page > #third-section > h1 > a:hover{
     color: #666;
+}
+
+.third{
+    width: 300px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /*FOOTER*/

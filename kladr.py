@@ -20,7 +20,6 @@ def index():
     '''metod som skicka tillbaka template index.html'''
     return render_template('index.html')
 
-
 @app.route('/wardrobe.html')
 def wardrobe():
     '''metod som visar upp garderoben med en specifik användares artiklar'''
@@ -47,7 +46,6 @@ def wardrobe():
         message = "Välkommen till KLÄDR! Logga in eller skapa ett konto för att se din garderob!"
         return render_template('wardrobe.html',articles = [], message = message)    
     
-
 @app.route('/insert.html',  methods=["POST","GET"])
 def insert():
     '''metod som lägger till en användares artikel i garderoben och i en mapp med användarens namn.'''
@@ -91,6 +89,7 @@ def insert():
 
     else:
         return wardrobe()
+
 
 @app.route('/remove/<filename>', methods=["POST","GET"])
 def remove(filename):
