@@ -102,7 +102,7 @@ body{
 
 #first-page > #first-section{
     font-size: 25px;
-    margin-left: 200px;
+    margin-left: 400px;
     margin-top: 65px;
     padding-left: 10px;
     padding-right: 10px;
@@ -132,15 +132,11 @@ body{
     color: #666;
 }
 
-.first{
-    margin: 0;
-}
-
 .second{
-    margin-left: 900px;
+    margin-left: 1000px;
     font-size: 25px;
     width: 300px;
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 0;
 }
 
@@ -170,6 +166,7 @@ body{
     width: 300px;
     margin-top: 0;
     margin-bottom: 0;
+    margin-left: 200px;
 }
 
 /*FOOTER*/
@@ -698,8 +695,12 @@ input[type=text]{
         margin: auto;
         padding: 0px;
         font-size: 20px;
-        
     }
+
+    .third{
+        margin: 0;
+    }
+
 /*ABOUT.HTML*/
     #content > #about-info{
         text-align: center;
