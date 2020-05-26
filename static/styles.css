@@ -761,7 +761,6 @@ input[type=text]{
            border-top-style: solid;
            border-color: dimgrey;
            border-width: thin;
-   
        }
    
        #menu-btn:hover{
@@ -794,8 +793,25 @@ input[type=text]{
            margin: auto;
            padding: 0px;
            font-size: 20px;
+           margin-bottom: 20px;
+           margin-top: 20px;
            
        }
+
+       #content > #first-page > #first-section > h1{
+           margin: 0;
+       }
+
+       #content > #first-page > #first-section > p{
+           margin: 0;
+       }
+
+       #content > #first-page > #second-section{
+           margin: auto;
+           padding-top: 0;
+           margin-bottom: 20px;
+       }
+
        #content > #first-page > #second-section > .second{
            text-align: center;
            margin: auto;
@@ -803,15 +819,17 @@ input[type=text]{
            font-size: 20px;
        }
 
-       .second > a{
-         font-size: 40px;  
-       }
+       #content > #first-page > #second-section > .second > a{
+        margin: 0;
+        font-size: 40px;
+        }
 
        #content > #first-page > #third-section{
            text-align: center;
            margin: auto;
            padding: 0px;
            font-size: 20px;
+           margin-bottom: 20px;
            
        }
    /*ABOUT.HTML*/
@@ -912,20 +930,29 @@ input[type=text]{
         width: 300px;
         font-size: 25px;
         margin-top: 200px;
-        margin-left: 580px;
-        padding-top: 5px;
+        padding-top: 20px;
         padding-left: 10px;
         padding-right: 10px;
         font-size: 20px;
+        margin-left: 420px;
     }
+
+    .second{
+        margin-left: 0;
+    }
+
     #first-page > #third-section{
         width: 300px;
         font-size: 25px;
-        margin-left: 5px;
+        margin-left: 1px;
         margin-top: 130px;
         padding-top: 100px;
         padding-left: 100px;
         padding-right: 10px;
+    }
+
+    .third{
+        margin: 0;
     }
 
     #content  > #about-info{
