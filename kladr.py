@@ -1,6 +1,6 @@
 __author__ = "Johan From, Alva Karlborg, Laura Barba, Rebecka Persson" 
 
-from flask import Flask, session, render_template, request, send_from_directory, url_for, redirect, flash, g, escape
+from flask import Flask, session, render_template, request, send_from_directory, url_for, redirect, flash, escape
 from random import randint
 import psycopg2
 import os
@@ -170,6 +170,7 @@ def filter(value):
         conn.rollback()      
         flash('Det gick inte att filtrera på vald typ eller färg!')
         return wardrobe()
+
 @app.route("/show_article/<filename>")
 def show_article(filename):
     '''metoden visar upp vald artikel med bild och kommentar'''
@@ -217,6 +218,9 @@ def add_outfit_page():
 @app.route("/list_outfits")
 def list_outfits():
     ''' metod som listar alla outfits'''
+
+    #Lägg till att det står "Inga outfits tillagda" ifall det inte finns några outfits att visa
+
     try:
 
         if 'username' in session:
@@ -412,6 +416,7 @@ def edit_outfit_form(outfit):
             SET name = '%s' , comment = '%s', type = '%s', season = '%s' 
             WHERE name = '%s'AND id = %s;
         """ % (updated_outfit_name, updated_comment, updated_type, updated_season, outfit, escape(session['username'])))
+        
         article_names = request.form.getlist("article")
 
         for name in article_names:
@@ -517,6 +522,8 @@ def generate():
 def generate_from_article(filename):
     '''metod som genererar en outfit utifrån en viss artikel'''
     
+    #Lägg till try-except
+    
     random = randint(1,2)
         
     bottoms = generate_bottoms()
@@ -552,7 +559,7 @@ def generate_from_article(filename):
             outfit = [filename,bottoms,jacket,top]
         else:
             outfit = [filename,body,jacket]
-    return render_template ('show_outfit.html',outfit_articles = outfit, outfit=" ")
+    return render_template ('show_outfit.html', outfit_articles = outfit, outfit=" ")
 
 
 def generate_shoes():
@@ -672,8 +679,6 @@ def edit(filename):
         flash('Artikeln kunde inte redigeras!')
         return wardrobe()
 
-
-    print(image, value, comment)
 
     return render_template('edit.html', image = image, value = value, comment = comment, colour = colour)
 
@@ -805,12 +810,15 @@ def update_profile():
 @app.route('/login.html')
 def login_page():
     '''metod för att returnera login.html'''
+
+    #Lägg till flash meddelanden, "kontot är skapat"
     return render_template('login.html')
 
 @app.route('/login.html', methods = ["GET", "POST"])
 def login():
     '''metod för att logga in'''
-    error = None
+    
+    message = None
     if request.method == 'POST':
 
         email = request.form['email-account']
@@ -823,18 +831,18 @@ def login():
         user_list = cursor.fetchone()
         if user_list is None:
             print("wrong email")
-            error = 'Fel mail eller lösenord'
+            message = 'Fel mail eller lösenord'
         else:
             print(user_list)            
             if (email != user_list[1]) \
                     or request.form['password-account'] != user_list[2]:
-                error = 'Fel mail eller lösenord'
+                message = 'Fel mail eller lösenord'
             else:
                 session["username"] = user_list[0]
                 session['logged_in'] = True
                 flash('Du är inloggad!')
                 return redirect(url_for('wardrobe'))
-        return render_template('login.html', error = error)
+        return render_template('login.html', message = message)
 
 @app.route('/logout')
 def logout():
