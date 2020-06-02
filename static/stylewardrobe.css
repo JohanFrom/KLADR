@@ -189,8 +189,12 @@ body{
     text-align: center;
 }
 
-#content > h2, #comment > p {
-    margin: 1em;
+#comment > p {
+    margin-top: 2em;
+}
+
+#content > h2{
+    margin-bottom: 2em;
 }
 
 #content > #wardrobe > #clothing-article img{
@@ -200,7 +204,7 @@ body{
     align-items: center;
     
 }
-#content > #article > #clothing-article img, #content > #comment-article{
+#content > #article > #clothing-article img, #content > #comment-article, #content > h2, #comment > p {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -249,9 +253,10 @@ body{
     justify-content: center;
 }
 
-#content > #upload-form{
+#content > #upload-form, #remove-form{
     align-items: center;
     text-align: center;
+    margin-top: 20px;
 }
 
 #content > form > #type, #season{
@@ -285,9 +290,6 @@ input[type=submit]{
     margin-top: 10px;
 }
 
-#remove-button{
-    margin-left: 910px;
-}
 
 input[type=submit]:hover{
     cursor: pointer;
@@ -423,9 +425,7 @@ footer > p{
         align-items: center;
     }
 
-    #content > #upload-form{
-        align-items: center;
-    }
+   
 
     #content > #wardrobe-buttons{
         display: flex;
