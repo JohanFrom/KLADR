@@ -164,8 +164,11 @@ def filter(value):
         articles=[]
         for data in cursor:
             articles.append(data[0])
+        message = ""
+        if len(articles) == 0:
+            message = "Inga artiklar matchade det du filtrerade på!"
 
-        return render_template('wardrobe.html',articles = articles)
+        return render_template('wardrobe.html',articles = articles, message = message)
     except:
         conn.rollback()      
         flash('Det gick inte att filtrera på vald typ eller färg!')
@@ -289,7 +292,10 @@ def filter_outfit(value):
                 all_outfits.append(temp)
             print(all_outfits)
             print(outfit_names)
-            return render_template("list_outfits.html", outfits = all_outfits, names=outfit_names)
+            message = ""
+            if len(all_outfits) == 0:
+                message = "Inga outfits matchade det du filtrerade på!"
+            return render_template("list_outfits.html", outfits = all_outfits, names=outfit_names, message = message)
         else:
             return wardrobe()
     except:
@@ -744,6 +750,7 @@ def register_account():
 
             conn.commit()
             
+            flash('Kontot har skapats!')
             return redirect(url_for("login_page"))
         else:
             flash('E-mailen används redan')

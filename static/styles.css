@@ -551,6 +551,10 @@ button:after{
     padding-bottom: 50px;
 }
 
+#message > p{
+    text-align: center;
+}
+
 #content > #label{
     font-size: 20px;
     color: orangered;

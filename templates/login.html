@@ -33,8 +33,20 @@
                 {% endif %}
             </div>
         </nav>
+        <div id="success-message">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div id=flashwrapper class="alert" role="alert">{{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
 
-        <p>{{ message }}</p>
+        <div id = "message">
+            <p>{{ message }}</p>
+        </div>
 
         <div id="login">
             <form action="{{url_for('login_page')}}" method="POST">
