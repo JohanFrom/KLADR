@@ -222,8 +222,6 @@ def add_outfit_page():
 def list_outfits():
     ''' metod som listar alla outfits'''
 
-    #Lägg till att det står "Inga outfits tillagda" ifall det inte finns några outfits att visa
-
     try:
 
         if 'username' in session:
@@ -527,45 +525,48 @@ def generate():
 @app.route("/generate/<filename>")
 def generate_from_article(filename):
     '''metod som genererar en outfit utifrån en viss artikel'''
-    
-    #Lägg till try-except
-    
-    random = randint(1,2)
-        
-    bottoms = generate_bottoms()
-    shoes = generate_shoes()
-    jacket = generate_jacket()
-    top = generate_top()
-    body = generate_full_body()
 
-    cursor.execute("""
-            SELECT type
-            FROM wardrobe
-            WHERE filename = '%s' AND id = %s
-        """ % (filename, escape(session['username'])))
-    for data in cursor:
-        article_type = data[0]
-        
-    if article_type == 'Playsuit' or article_type == 'Klänning' or article_type == 'Jumpsuit':
-        outfit = [filename,shoes,jacket]
-
-    elif article_type == 'Byxor' or article_type == 'Shorts' or article_type == 'Jeans' or article_type == 'Sweatpants' or article_type == 'Kjol' or article_type == 'Leggings':
-        outfit = [filename,top,shoes,jacket]
+    try:
+        random = randint(1,2)
             
-    elif article_type == 'T-shirt' or article_type == 'Linne' or article_type == 'Skjorta' or article_type == 'Stickat' or article_type == 'Hoodie' or article_type == 'Kofta':
-        outfit = [filename,bottoms,shoes,jacket]
+        bottoms = generate_bottoms()
+        shoes = generate_shoes()
+        jacket = generate_jacket()
+        top = generate_top()
+        body = generate_full_body()
 
-    elif article_type == 'Lång jacka' or article_type == 'Kort jacka' or article_type == 'Kappa-Rock' or article_type == 'Regnjacka':
-        if random == 1:
-            outfit = [filename,bottoms,shoes,top]
+        cursor.execute("""
+                SELECT type
+                FROM wardrobe
+                WHERE filename = '%s' AND id = %s
+            """ % (filename, escape(session['username'])))
+        for data in cursor:
+            article_type = data[0]
+            
+        if article_type == 'Playsuit' or article_type == 'Klänning' or article_type == 'Jumpsuit':
+            outfit = [filename,shoes,jacket]
+
+        elif article_type == 'Byxor' or article_type == 'Shorts' or article_type == 'Jeans' or article_type == 'Sweatpants' or article_type == 'Kjol' or article_type == 'Leggings':
+            outfit = [filename,top,shoes,jacket]
+                
+        elif article_type == 'T-shirt' or article_type == 'Linne' or article_type == 'Skjorta' or article_type == 'Stickat' or article_type == 'Hoodie' or article_type == 'Kofta':
+            outfit = [filename,bottoms,shoes,jacket]
+
+        elif article_type == 'Lång jacka' or article_type == 'Kort jacka' or article_type == 'Kappa-Rock' or article_type == 'Regnjacka':
+            if random == 1:
+                outfit = [filename,bottoms,shoes,top]
+            else:
+                outfit = [filename,body,shoes]
         else:
-            outfit = [filename,body,shoes]
-    else:
-        if random == 1:
-            outfit = [filename,bottoms,jacket,top]
-        else:
-            outfit = [filename,body,jacket]
-    return render_template ('show_outfit.html', outfit_articles = outfit, outfit=" ")
+            if random == 1:
+                outfit = [filename,bottoms,jacket,top]
+            else:
+                outfit = [filename,body,jacket]
+        return render_template ('show_outfit.html', outfit_articles = outfit, outfit=" ")
+    except:
+        conn.rollback()
+        flash("Outfit kunde inte genereras")
+        return wardrobe()
 
 
 def generate_shoes():
@@ -818,7 +819,6 @@ def update_profile():
 def login_page():
     '''metod för att returnera login.html'''
 
-    #Lägg till flash meddelanden, "kontot är skapat"
     return render_template('login.html')
 
 @app.route('/login.html', methods = ["GET", "POST"])

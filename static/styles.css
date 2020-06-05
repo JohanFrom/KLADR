@@ -102,7 +102,7 @@ body{
 
 #first-page > #first-section{
     font-size: 25px;
-    margin-left: 400px;
+    margin-left: 25%;
     margin-top: 65px;
     padding-left: 10px;
     padding-right: 10px;
@@ -133,7 +133,7 @@ body{
 }
 
 .second{
-    margin-left: 1000px;
+    margin-left: 50%;
     font-size: 25px;
     width: 300px;
     margin-top: 10px;
@@ -148,10 +148,10 @@ body{
 
 #first-page > #third-section{
     font-size: 25px;
-    margin-left: 130px;
+    margin-left: 20%;
     margin-top: 130px;
     padding-top: 100px;
-    padding-left: 100px;
+    padding-left: 130px;
     padding-right: 10px;
 }
 #first-page > #third-section > h1 > a{
@@ -166,7 +166,7 @@ body{
     width: 300px;
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: 200px;
+
 }
 
 /*FOOTER*/
@@ -626,7 +626,7 @@ input[type=text]{
 /*Responvivitet*/
 
 /* Mobiltelefoner*/
-@media screen and (max-width: 440px){
+@media screen and (max-width: 960px){
  /*INDEX.HTML*/
     #content > #first-page{
         background-image: none;
@@ -871,7 +871,7 @@ input[type=text]{
    }
 
 /*Surfplattor*/
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1524px){
     .mobile-only{
         display: block;
     }
@@ -924,8 +924,8 @@ input[type=text]{
     #first-page > #first-section{
         width: 300px;
         font-size: 25px;
-        margin-left: 80px;
-        margin-top: 30px;
+        margin-left: 10%;
+        margin-top: 60px;
         padding-left: 10px;
         padding-right: 10px;
         
@@ -938,7 +938,7 @@ input[type=text]{
         padding-left: 10px;
         padding-right: 10px;
         font-size: 20px;
-        margin-left: 420px;
+        margin-left: 50%;
     }
 
     .second{
@@ -948,10 +948,10 @@ input[type=text]{
     #first-page > #third-section{
         width: 300px;
         font-size: 25px;
-        margin-left: 1px;
+        margin-left: 10%;
         margin-top: 130px;
         padding-top: 100px;
-        padding-left: 100px;
+        padding-left: 10px;
         padding-right: 10px;
     }
 
