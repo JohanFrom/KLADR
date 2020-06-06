@@ -31,3 +31,5 @@ i terminalen
 Kör app.py. Vi använder Microsoft Visual Studio Code, så vi vet att det fungerar. Dock borde valfri programmeringsmiljö med utskriftsfönster fungera lika bra. When in doubt, använd terminalen. 
 
 När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till produkten! Alternativt öppna webbläsare och skriv in 127.0.0.1:5000
+
+Länk till github repository: https://github.com/JohanFrom/KLADR/tree/master
