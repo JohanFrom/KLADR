@@ -16,12 +16,18 @@ Projektet som skapas är en webbapplikation som lagrar bilder på kläder i en d
 <h3> Köra produkten </h3>
 
 För att köra produkten måste du ha installerat Python 3 eller högre samt ha Flask installerat. 
+Samt behöver du ha psycopg2 installerat
+
+Python installerar du ifrån https://www.python.org/downloads/ 
 
 Om Flask inte är installerat kör 
 "pip install Flask"
 i terminalen
 
+Om psycopg2 inte är installerat kör
+"pip install psycopg2"
+i terminalen
+
 Kör app.py. Vi använder Microsoft Visual Studio Code, så vi vet att det fungerar. Dock borde valfri programmeringsmiljö med utskriftsfönster fungera lika bra. When in doubt, använd terminalen. 
 
-När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till produkten!
-<b>För en mer uppdaterad version av koden, gå in på branchen login! Vi har inte riktigt hunnit merga ihop på ett snyggt sätt!</b>
+När app.py startats så kommer en länk visas i utskriftsfönstret, tryck på den så kommer du till produkten! Alternativt öppna webbläsare och skriv in 127.0.0.1:5000
